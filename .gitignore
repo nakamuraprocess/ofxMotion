@@ -27,7 +27,10 @@ x86/
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
 bld/
-[Bb]in/
+*.exe
+*.exp
+*.lib
+*.dll
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
