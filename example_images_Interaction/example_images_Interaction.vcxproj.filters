@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\ofApp.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxMotion\src\ofxMotion.cpp">
+      <Filter>addons\ofxMotion\src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons">
+      <UniqueIdentifier>{71834F65-F3A9-211E-73B8-DC85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxEasing">
+      <UniqueIdentifier>{CAD580FB-01DB-F456-F00B-7791}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxEasing\src">
+      <UniqueIdentifier>{59A6BD40-DCB3-8A98-B41B-1BA9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxMotion">
+      <UniqueIdentifier>{E8D5BCED-A211-1947-159D-7E82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxMotion\src">
+      <UniqueIdentifier>{E33BAC79-2580-AEB6-B837-F1BC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxMotion\src\motions">
+      <UniqueIdentifier>{E83C804A-EAE2-76A1-155E-0139}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxMotion\src\motions\base">
+      <UniqueIdentifier>{07435971-79B2-1EEE-A540-1A47}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\ofApp.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxEasing\src\easing_terms_of_use.html">
+      <Filter>addons\ofxEasing\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxEasing\src\ofxEasing.h">
+      <Filter>addons\ofxEasing\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxMotion\src\motions\base\MotionColorBase.h">
+      <Filter>addons\ofxMotion\src\motions\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxMotion\src\motions\base\MotionTransformBase.h">
+      <Filter>addons\ofxMotion\src\motions\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxMotion\src\motions\Bounce.h">
+      <Filter>addons\ofxMotion\src\motions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxMotion\src\motions\ColorGradation.h">
+      <Filter>addons\ofxMotion\src\motions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxMotion\src\motions\FadeInFadeOut.h">
+      <Filter>addons\ofxMotion\src\motions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\motions\RadialNoise.h">
+      <Filter>addons\ofxMotion\src\motions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxMotion\src\motions\MoveLiner.h">
+      <Filter>addons\ofxMotion\src\motions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxMotion\src\motions\NoColor.h">
+      <Filter>addons\ofxMotion\src\motions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxMotion\src\motions\NoTransform.h">
+      <Filter>addons\ofxMotion\src\motions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxMotion\src\motions\Rotate.h">
+      <Filter>addons\ofxMotion\src\motions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxMotion\src\motions\Scale.h">
+      <Filter>addons\ofxMotion\src\motions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxMotion\src\ofxMotion.h">
+      <Filter>addons\ofxMotion\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\motions\MoveCurve.h">
+      <Filter>addons\ofxMotion\src\motions</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="icon.rc" />
+  </ItemGroup>
+</Project>
