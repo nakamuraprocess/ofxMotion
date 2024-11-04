@@ -2,21 +2,9 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-	imageFish[0].load("akaei.png");
-	imageFish[1].load("amimehagi.png");
-	imageFish[2].load("gonzui.png");
-	imageFish[3].load("ishigarei.png");
-	imageFish[4].load("kagokidai.png");
-	imageFish[5].load("korodai.png");
-	imageFish[6].load("kurodai.png");
-	imageFish[7].load("kyuusen.png");
-	imageFish[8].load("maaji.png");
-	imageFish[9].load("nanyoutsubameuo.png");
-	imageFish[10].load("oyabiccha.png");
-	imageFish[11].load("shirogisu.png");
-	imageFish[12].load("soushihagi.png");
-	imageFish[13].load("togechouchouuo.png");
-	imageFish[14].load("tsubakuroei.png");
+	for (int i = 0; i < fishMaxSize; i++) {
+		imageFish[i].load("image_fx_"+ ofToString(i+1) + ".png");
+	}
 
 	posFish[0] = vec2(-200, 980);
 	posFish[1] = vec2(640, 980);
