@@ -29,7 +29,7 @@ class ofApp : public ofBaseApp{
 		ofxMotion motionColor;
 		ofxMotion motionRadialNoise[5];
 		ofxMotion motionMoveCurve[6];
-		ofxMotion motionRotate[3];
+		ofxMotion motionRotate[5];
 	
 		float timerLapTime = 0.0;
 		float timerSleepTime = 3.0;
