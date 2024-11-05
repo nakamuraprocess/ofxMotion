@@ -3,11 +3,6 @@
 
 class MoveLiner : public MotionTransformBase {
 public:
-
-	MoveLiner(string str) {
-		name = str;
-	}
-
 	void update(const float currentTime) {
 		if (parameter.state == RUNNING) {
 			float time = timer(parameter.durationTime, currentTime, parameter.startTime, [&]() {
@@ -19,7 +14,7 @@ public:
 		}
 	}
 
-	void start(vec2 distance, float duration, float delay, ofxeasing::function easing) {
+	void startMoveLiner(vec2 distance, float duration, float delay, ofxeasing::function easing) {
 		posStart = pos;
 		posEnd = pos + distance;
 		parameter.startTime = ofGetElapsedTimef() + delay;
@@ -28,7 +23,7 @@ public:
 		parameter.state = RUNNING;
 	}
 
-	void start(vec2 posStart, vec2 posEnd, float duration, float delay, ofxeasing::function easing) {
+	void startMoveLiner(vec2 posStart, vec2 posEnd, float duration, float delay, ofxeasing::function easing) {
 		posStart = posStart;
 		this->posEnd = posEnd;
 		parameter.startTime = ofGetElapsedTimef() + delay;

@@ -3,11 +3,6 @@
 
 class Rotate : public MotionTransformBase {
 public:
-
-	Rotate(string str) {
-		name = str;
-	}
-
 	void update(const float currentTime) {
 		if (parameter.state == RUNNING) {
 			float time = timer(parameter.durationTime, currentTime, parameter.startTime, [&]() {
@@ -16,20 +11,18 @@ public:
 
 			degrees = ofxeasing::map_clamp(time, 0.0, parameter.durationTime, degreesStart, degreesEnd, parameter.easing);
 		}
-		if (parameter.state == DONE && bLoop) {
-			reStart();
-		}
 	}
 
-	void start(float degreesEnd, float duration, ofxeasing::function easing) {
-		this->degreesEnd = degreesEnd;
+	void startRotate(float distance, float duration, ofxeasing::function easing) {
+		degreesStart = degrees;
+		degreesEnd = degrees + distance;
 		parameter.durationTime = duration;
 		parameter.startTime = ofGetElapsedTimef();
 		parameter.easing = easing;
 		parameter.state = RUNNING;
 	}
 
-	void start(float degreesStart, float degreesEnd, float duration, ofxeasing::function easing) {
+	void startRotate(float degreesStart, float degreesEnd, float duration, ofxeasing::function easing) {
 		this->degreesStart = degreesStart;
 		this->degreesEnd = degreesEnd;
 		parameter.durationTime = duration;
@@ -37,12 +30,4 @@ public:
 		parameter.easing = easing;
 		parameter.state = RUNNING;
 	}
-
-	void reStart() {
-		parameter.startTime = ofGetElapsedTimef();
-		parameter.state = RUNNING;
-	}
-
-private:
-	bool bLoop;
 };

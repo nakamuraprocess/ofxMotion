@@ -3,11 +3,6 @@
 
 class ColorGradation : public MotionColorBase {
 public:
-
-	ColorGradation(string str) {
-		name = str;
-	}
-
 	void update(const float currentTime) {
 		if (parameter.state == RUNNING) {
 			float time = timer(parameter.durationTime, currentTime, parameter.startTime, [&]() {
@@ -22,7 +17,7 @@ public:
 		}
 	}
 
-	void start(float duration, ofColor colorEnd, ofxeasing::function easing) {
+	void startColorGradation(float duration, ofColor colorEnd, ofxeasing::function easing) {
 		this->colorEnd = colorEnd;
 		colorStart = color;
 		parameter.durationTime = duration;
@@ -32,7 +27,7 @@ public:
 	}
 
 
-	void start(float duration, ofColor colorStart, ofColor colorEnd, ofxeasing::function easing) {
+	void startColorGradation(float duration, ofColor colorStart, ofColor colorEnd, ofxeasing::function easing) {
 		this->colorStart = colorStart;
 		this->colorEnd = colorEnd;
 		parameter.durationTime = duration;

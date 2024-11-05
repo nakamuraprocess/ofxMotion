@@ -8,11 +8,6 @@ private:
 	float durationfadeOut;
 
 public:
-	
-	FadeInFadeOut(string str) {
-		name = str;
-	}
-
 	void update(const float currentTime) {
 		if (parameter.state == RUNNING) {
 			float time = timer(parameter.durationTime, currentTime, parameter.startTime, [&]() {
@@ -35,7 +30,7 @@ public:
 		}
 	}
 
-	void start(int alphaStart, int alphaEnd, float durationFadeIn, float durationChroma, float durationfadeOut, ofxeasing::function easing) {
+	void startFadeInFadeOut(int alphaStart, int alphaEnd, float durationFadeIn, float durationChroma, float durationfadeOut, ofxeasing::function easing) {
 		parameter.durationTime = durationFadeIn + durationChroma + durationfadeOut;
 		parameter.startTime = ofGetElapsedTimef();
 		parameter.easing = easing;
@@ -47,7 +42,7 @@ public:
 		this->durationfadeOut = durationfadeOut + durationChroma + durationFadeIn;
 	}
 
-	void start(int alphaEnd, float durationfadeOut, ofxeasing::function easing) {
+	void startFadeOutForce(int alphaEnd, float durationfadeOut, ofxeasing::function easing) {
 		parameter.durationTime = durationfadeOut;
 		parameter.startTime = ofGetElapsedTimef();
 		parameter.easing = easing;

@@ -7,12 +7,7 @@ private:
 	float radius;
 	float radian = 0.0;
 
-
 public:
-	MoveCurve(string str) {
-		name = str;
-	}
-
 	void update(const float currentTime) {
 		if (parameter.state == RUNNING) {
 			float time = timer(parameter.durationTime, currentTime, parameter.startTime, [&]() {
@@ -31,7 +26,7 @@ public:
 		}
 	}
 
-	void start(vec2 distance, float radius, int direction, float duration, float delay, ofxeasing::function easing) {
+	void startMoveCurve(vec2 distance, float radius, int direction, float duration, float delay, ofxeasing::function easing) {
 		posStart = pos;
 		this->radius = radius;
 		this->direction = direction;
@@ -42,8 +37,8 @@ public:
 		parameter.state = RUNNING;
 	}
 
-	void start(vec2 posStart, vec2 posEnd, float radius, int direction, float duration, float delay, ofxeasing::function easing) {
-		posStart = posStart;
+	void startMoveCurve(vec2 posStart, vec2 posEnd, float radius, int direction, float duration, float delay, ofxeasing::function easing) {
+		this->posStart = posStart;
 		this->posEnd = posEnd;
 		this->radius = radius;
 		this->direction = direction;

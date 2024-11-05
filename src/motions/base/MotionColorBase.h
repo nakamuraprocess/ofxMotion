@@ -7,12 +7,12 @@ using namespace glm;
 class MotionColorBase {
 public:
 	// ColorGradation
-	virtual void start(float duration, ofColor colorEnd, ofxeasing::function easing) {}
-	virtual void start(float duration, ofColor colorStart, ofColor colorEnd, ofxeasing::function easing) {}
+	virtual void startColorGradation(float duration, ofColor colorEnd, ofxeasing::function easing) {}
+	virtual void startColorGradation(float duration, ofColor colorStart, ofColor colorEnd, ofxeasing::function easing) {}
 
 	// FadeInFadeOut
-	virtual void start(int startAlpha, int targetAlpha, float durationFadeIn, float durationChroma, float durationfadeOut, ofxeasing::function easing) {}
-	virtual void start(int alphaEnd, float durationfadeOut, ofxeasing::function easing) {}
+	virtual void startFadeInFadeOut(int startAlpha, int targetAlpha, float durationFadeIn, float durationChroma, float durationfadeOut, ofxeasing::function easing) {}
+	virtual void startFadeOutForce(int alphaEnd, float durationfadeOut, ofxeasing::function easing) {}
 
 	virtual void reset() {
 		color = colorStart;

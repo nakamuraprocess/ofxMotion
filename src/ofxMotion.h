@@ -22,12 +22,12 @@ public:
 	};
 
 	enum AnchorMode {
-		ANCOR_CENTER = 0,
-		ANCOR_BOTTOM_CENTER = 1,
-		ANCOR_TOP_LEFT = 2,
-		ANCOR_TOP_RIGHT = 3,
-		ANCOR_BOTTOM_LEFT = 4,
-		ANCOR_BOTTOM_RIGHT = 5,
+		ANCHOR_CENTER = 0,
+		ANCHOR_BOTTOM_CENTER = 1,
+		ANCHOR_TOP_LEFT = 2,
+		ANCHOR_TOP_RIGHT = 3,
+		ANCHOR_BOTTOM_LEFT = 4,
+		ANCHOR_BOTTOM_RIGHT = 5,
 	};
 
 	enum DirectionMode {
@@ -52,6 +52,8 @@ public:
 	DirectionMode getDirectionMode();
 	MotionTransformBase::MotionState getStateMotionTransform();
 	MotionColorBase::MotionState getStateMotionColor();
+	MotionTransformBase* getMotionTransform();
+	MotionColorBase* getMotionColor();
 
 	void setMotionTransformPtr(MotionTransformBase* ptr);
 	void setMotionColorPtr(MotionColorBase* ptr);
@@ -64,18 +66,6 @@ public:
 	bool collision(int x, int y);
 	void setStateInside(bool b);
 	void reset();
-
-	template <class... Args> void startMotion(string str, Args... args) {
-		if (motionTransform->getName() == str) {
-			motionTransform->start(args...);
-		}
-	}
-
-	template <class... Args> void startColor(string str, Args... args) {
-		if (motionColor->getName() == str) {
-			motionColor->start(args...);
-		}
-	}
 	
 
 private:
@@ -98,5 +88,8 @@ private:
 
 	vec2 getAnchor(float width, float height);
 	void setRect(float x, float y, float width, float height);
+	void drawNormal();
+	void drawTranslate();
+	void setScale();
 
 };

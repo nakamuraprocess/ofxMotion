@@ -7,25 +7,26 @@ using namespace glm;
 class MotionTransformBase {
 public:
 	// Bounce
-	virtual void start() {}
+	virtual void startBounce() {}
 
 	// MoveLiner
-	virtual void start(vec2 distance, float duration, float delay, ofxeasing::function easing) {}
-	virtual void start(vec2 posStart, vec2 posEnd, float duration, float delay, ofxeasing::function easing) {}
+	virtual void startMoveLiner(vec2 distance, float duration, float delay, ofxeasing::function easing) {}
+	virtual void startMoveLiner(vec2 posStart, vec2 posEnd, float duration, float delay, ofxeasing::function easing) {}
 
 	// MoveCurve
-	virtual void start(vec2 distance, float radius, int direction, float duration, float delay, ofxeasing::function easing) {}
-	virtual void start(vec2 posStart, vec2 posEnd, float radius, int direction, float duration, float delay, ofxeasing::function easing) {}
+	virtual void startMoveCurve(vec2 distance, float radius, int direction, float duration, float delay, ofxeasing::function easing) {}
+	virtual void startMoveCurve(vec2 posStart, vec2 posEnd, float radius, int direction, float duration, float delay, ofxeasing::function easing) {}
 
 	// RadialNoise
-	virtual void start(float radius, float velociry, vec2 posOffset, float duration) {}
+	virtual void startRadialNoise(float radius, float velociry, vec2 posOffset, float duration) {}
 
 	// Rotate
-	virtual void start(float start, float target, float duration, ofxeasing::function easing) {}
+	virtual void startRotate(float degreesEnd, float duration, ofxeasing::function easing) {}
+	virtual void startRotate(float start, float target, float duration, ofxeasing::function easing) {}
 
 	// Scale
-	virtual void start(vec2 scaleEnd, float duration, ofxeasing::function easing) {}
-	virtual void start(vec2 start, vec2 target, float duration, ofxeasing::function easing) {}
+	virtual void startScale(vec2 scaleEnd, float duration, ofxeasing::function easing) {}
+	virtual void startScale(vec2 start, vec2 target, float duration, ofxeasing::function easing) {}
 
 	virtual void reset() {
 		pos = posStart;

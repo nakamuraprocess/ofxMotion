@@ -55,32 +55,28 @@ void ofxMotion::draw() {
 	stateTransform = motionTransform->getState();
 	stateColor = motionColor->getState();
 	if (stateTransform == MotionTransformBase::RUNNING || stateColor == MotionColorBase::RUNNING || bStateDisplay) {
-		ofPushMatrix();
-		ofScale(motionTransform->getScale().x, motionTransform->getScale().y, 1.0);
-		ofRotateDeg(motionTransform->getDegrees());
-		ofPushStyle();
-		
-		ofSetColor(motionColor->getColor());
 
-		if (drawMode == RECT) {
-			ofDrawRectangle(rectangle);
-		}
-		else if (drawMode == CIRCLE) {
-			ofDrawCircle(motionTransform->getPos(), width + height);
-		}
-		else if (drawMode == TRIANGLE) {
-			ofDrawTriangle(motionTransform->getPos(), vec2(width, height), vec2(width, height));
-		}
-		else if (drawMode == TEXT) {
-			textureText.draw(motionTransform->getPos());
+		ofPushStyle();
+
+		if (drawMode == IMAGE) {
+			ofSetColor(255, motionColor->getColor().a);
 		}
 		else {
-			ofSetColor(255, motionColor->getColor().a);
-			image->draw(motionTransform->getPos(), width, height);
+			ofSetColor(motionColor->getColor());
+		}
+		
+		ofPushMatrix();
+		ofScale(motionTransform->getScale().x, motionTransform->getScale().y, 1.0);
+
+		if (motionTransform->getDegrees() != 0.0) {
+			drawTranslate();
+		}
+		else {
+			drawNormal();
 		}
 
-		ofPopStyle();
 		ofPopMatrix();
+		ofPopStyle();
 	}
 }
 
@@ -106,6 +102,16 @@ MotionColorBase::MotionState ofxMotion::getStateMotionColor() {
 
 ofRectangle ofxMotion::getRectangle() {
 	return rectangle;
+}
+
+
+MotionTransformBase* ofxMotion::getMotionTransform() {
+	return motionTransform;
+}
+
+
+MotionColorBase* ofxMotion::getMotionColor() {
+	return motionColor;
 }
 
 
@@ -139,8 +145,8 @@ void ofxMotion::setMirrorMode(bool vertical, bool horizon) {
 }
 
 
-void ofxMotion::setImage(ofImage* _image) {
-	image = _image;
+void ofxMotion::setImage(ofImage* image) {
+	this->image = image;
 }
 
 
@@ -167,45 +173,94 @@ void ofxMotion::reset() {
 
 
 void ofxMotion::setRect(float x, float y, float width, float height) {
-	if (anchor == ANCOR_CENTER) {
+	if (anchor == ANCHOR_CENTER) {
 		rectangle.set(x - width * 0.5, y - height * 0.5, width, height);
 	}
-	else if (anchor == ANCOR_BOTTOM_CENTER) {
+	else if (anchor == ANCHOR_BOTTOM_CENTER) {
 		rectangle.set(x - width * 0.5, y, width, -height);
 	}
-	else if (anchor == ANCOR_BOTTOM_LEFT) {
+	else if (anchor == ANCHOR_BOTTOM_LEFT) {
 		rectangle.set(x, y, width, -height);
 	}
-	else if (anchor == ANCOR_BOTTOM_RIGHT) {
+	else if (anchor == ANCHOR_BOTTOM_RIGHT) {
 		rectangle.set(x, y, -width, -height);
 	}
-	else if (anchor == ANCOR_TOP_LEFT) {
+	else if (anchor == ANCHOR_TOP_LEFT) {
 		rectangle.set(x, y, width, height);
 	}
-	else if (anchor == ANCOR_TOP_RIGHT) {
+	else if (anchor == ANCHOR_TOP_RIGHT) {
 		rectangle.set(x, y, -width, height);
 	}
 }
 
 
+void ofxMotion::drawNormal() {
+	if (drawMode == RECT) {
+		ofDrawRectangle(rectangle);
+	}
+	else if (drawMode == CIRCLE) {
+		ofDrawCircle(motionTransform->getPos(), width);
+	}
+	else if (drawMode == TRIANGLE) {
+		ofDrawTriangle(motionTransform->getPos(), vec2(width, height), vec2(width, height));
+	}
+	else if (drawMode == TEXT) {
+		textureText.draw(motionTransform->getPos());
+	}
+	else {
+		image->draw(motionTransform->getPos(), width, height);
+	}
+}
+
+
+
+void ofxMotion::drawTranslate() {
+	ofSetRectMode(OF_RECTMODE_CENTER);
+	ofTranslate(motionTransform->getPos());
+	ofRotateDeg(motionTransform->getDegrees());
+
+	if (drawMode == RECT) {
+		ofDrawRectangle(0, 0, rectangle.getWidth(), rectangle.getHeight());
+	}
+	else if (drawMode == CIRCLE) {
+		ofDrawCircle(motionTransform->getPos(), width);
+	}
+	else if (drawMode == TRIANGLE) {
+		ofDrawTriangle(vec2(0, 0), vec2(width, height), vec2(width, height));
+	}
+	else if (drawMode == TEXT) {
+		textureText.draw(0, 0,  width, height);
+	}
+	else {
+		image->draw(0, 0, width, height);
+	}
+}
+
+
+void ofxMotion::setScale() {
+
+
+}
+
+
 vec2 ofxMotion::getAnchor(float width, float height) {
 	vec2 anchorPos = vec2(0, 0);
-	if (anchor == ANCOR_CENTER) {
+	if (anchor == ANCHOR_CENTER) {
 		anchorPos = vec2(width * 0.5, height * 0.5);
 	}
-	else if (anchor == ANCOR_BOTTOM_CENTER) {
+	else if (anchor == ANCHOR_BOTTOM_CENTER) {
 		anchorPos = vec2(width * 0.5, height);
 	}
-	else if (anchor ==  ANCOR_BOTTOM_LEFT) {
+	else if (anchor ==  ANCHOR_BOTTOM_LEFT) {
 		anchorPos = vec2(0, height);
 	}
-	else if (anchor == ANCOR_BOTTOM_RIGHT) {
+	else if (anchor == ANCHOR_BOTTOM_RIGHT) {
 		anchorPos = vec2(width, height);
 	}
-	else if (anchor == ANCOR_TOP_LEFT) {
+	else if (anchor == ANCHOR_TOP_LEFT) {
 		anchorPos = vec2(0, 0);
 	}
-	else if (anchor == ANCOR_TOP_RIGHT) {
+	else if (anchor == ANCHOR_TOP_RIGHT) {
 		anchorPos = vec2(width, 0);
 	}
 	return anchorPos;

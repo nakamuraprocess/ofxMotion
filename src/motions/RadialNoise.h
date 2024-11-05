@@ -9,12 +9,7 @@ private:
 	vec2 posOffset;
 	vec2 posNoiseCursor;
 
-
 public:
-	RadialNoise(string str) {
-		name = str;
-	}
-
 	void update(const float currentTime) {
 		if (parameter.state == RUNNING) {
 			float time = timer(parameter.durationTime, currentTime, parameter.startTime, [&]() {
@@ -31,7 +26,7 @@ public:
 		}
 	}
 
-	void start(float radius, float velociry, vec2 posOffset, float duration) {
+	void startRadialNoise(float radius, float velociry, vec2 posOffset, float duration) {
 		posNoiseCursor = pos;
 		this->radius = radius;
 		velocity = velociry;

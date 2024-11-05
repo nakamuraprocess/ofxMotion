@@ -25,23 +25,23 @@ void ofApp::setup() {
 		imageItems[i].load("image_fx_" + ofToString(i + 1) + ".jpg");
 		imagePanels[i] = imageItems[i];
 		imageItems[i].resize(imageItems[i].getWidth() * sizeInit[i], imageItems[i].getHeight() * sizeInit[i]);
-		motions[i].setMotionTransformPtr(new MoveCurve("Move"));
-		motions[i].setMotionColorPtr(new NoColor("NoColor"));
-		motions[i].setup(ofxMotion::DrawMode::IMAGE, &imageItems[i], posInit[i], vec2(1.0, 1.0), imageItems[i].getWidth(), imageItems[i].getHeight(), 0.0f, ofxMotion::AnchorMode::ANCOR_CENTER, true);
+		motions[i].setMotionTransformPtr(new MoveCurve());
+		motions[i].setMotionColorPtr(new NoColor());
+		motions[i].setup(ofxMotion::DrawMode::IMAGE, &imageItems[i], posInit[i], vec2(1.0, 1.0), imageItems[i].getWidth(), imageItems[i].getHeight(), 0.0f, ofxMotion::AnchorMode::ANCHOR_CENTER, true);
 	}
 
-	motionPanel.setMotionTransformPtr(new NoTransform(""));
-	motionPanel.setMotionColorPtr(new FadeInFadeOut("Fade"));
-	motionPanel.setup(ofxMotion::DrawMode::IMAGE, &imagePanels[0], vec2(ofGetWidth() * 0.5, ofGetHeight() * 0.5), vec2(1.0, 1.0), imagePanels[0].getWidth() * 0.8, imagePanels[0].getHeight() * 0.8, 0.0f, ofxMotion::AnchorMode::ANCOR_CENTER);
+	motionPanel.setMotionTransformPtr(new NoTransform());
+	motionPanel.setMotionColorPtr(new FadeInFadeOut());
+	motionPanel.setup(ofxMotion::DrawMode::IMAGE, &imagePanels[0], vec2(ofGetWidth() * 0.5, ofGetHeight() * 0.5), vec2(1.0, 1.0), imagePanels[0].getWidth() * 0.8, imagePanels[0].getHeight() * 0.8, 0.0f, ofxMotion::AnchorMode::ANCHOR_CENTER);
 
-	motionModal.setMotionTransformPtr(new NoTransform(""));
-	motionModal.setMotionColorPtr(new FadeInFadeOut("Fade"));
-	motionModal.setup(ofxMotion::DrawMode::RECT, vec2(0, 0), vec2(1.0, 1.0), ofGetWidth(), ofGetHeight(), 0.0f, ofColor(0), ofxMotion::AnchorMode::ANCOR_TOP_LEFT);
+	motionModal.setMotionTransformPtr(new NoTransform());
+	motionModal.setMotionColorPtr(new FadeInFadeOut());
+	motionModal.setup(ofxMotion::DrawMode::RECT, vec2(0, 0), vec2(1.0, 1.0), ofGetWidth(), ofGetHeight(), 0.0f, ofColor(0), ofxMotion::AnchorMode::ANCHOR_TOP_LEFT);
 
 	imageClose.load("close.png");
-	motionClose.setMotionTransformPtr(new NoTransform(""));
-	motionClose.setMotionColorPtr(new FadeInFadeOut("Fade"));
-	motionClose.setup(ofxMotion::DrawMode::IMAGE, &imageClose, vec2(ofGetWidth() * 0.5 + 410, 130), vec2(1.0, 1.0), imageClose.getWidth(), imageClose.getHeight(), 0.0f, ofxMotion::AnchorMode::ANCOR_CENTER);
+	motionClose.setMotionTransformPtr(new NoTransform());
+	motionClose.setMotionColorPtr(new FadeInFadeOut());
+	motionClose.setup(ofxMotion::DrawMode::IMAGE, &imageClose, vec2(ofGetWidth() * 0.5 + 410, 130), vec2(1.0, 1.0), imageClose.getWidth(), imageClose.getHeight(), 0.0f, ofxMotion::AnchorMode::ANCHOR_CENTER);
 
 	for (int i = 0; i < itemMaxSize; i++) {
 		startMove(i, -1, 1, -1, 1);
@@ -133,7 +133,7 @@ void ofApp::draw(){
 void ofApp::startMove(int index, int xDirMin, int xDirMax, int yDirMin, int yDirMax) {
 	float x = ofRandom(xDirMin, xDirMax) * xCanMove;
 	float y = ofRandom(yDirMin, yDirMax) * yCanMove;
-	motions[index].startMotion("Move", vec2(x, y), 100, 1, 60.0, 0.0, ofxeasing::linear::easeNone);
+	motions[index].getMotionTransform()->startMoveCurve(vec2(x, y), 100, 1, 60.0, 0.0, ofxeasing::linear::easeNone);
 }
 
 //--------------------------------------------------------------
@@ -141,9 +141,9 @@ void ofApp::mouseReleased(int x, int y, int button){
 	if (bStateDisplayPanel) {
 		if (motionClose.inside(x, y)) {
 			bStateDisplayPanel = false;
-			motionPanel.startColor("Fade", 0, 0.5, ofxeasing::quart::easeOut);
-			motionModal.startColor("Fade", 0, 0.5, ofxeasing::quart::easeOut);
-			motionClose.startColor("Fade", 0, 0.5, ofxeasing::quart::easeOut);
+			motionPanel.getMotionColor()->startFadeOutForce(0, 0.5, ofxeasing::quart::easeOut);
+			motionModal.getMotionColor()->startFadeOutForce(0, 0.5, ofxeasing::quart::easeOut);
+			motionClose.getMotionColor()->startFadeOutForce(0, 0.5, ofxeasing::quart::easeOut);
 			for (int j = 0; j < itemMaxSize; j++){
 				motions[j].setStateInside(true);
 			}
@@ -154,9 +154,9 @@ void ofApp::mouseReleased(int x, int y, int button){
 			if (motions[i].inside(x, y)) {
 				bStateDisplayPanel = true;
 				motionPanel.setImage(&imagePanels[i]);
-				motionPanel.startColor("Fade", 0, 255, 0.5, 60, 0.5, ofxeasing::quart::easeOut);
-				motionModal.startColor("Fade", 0, 200, 0.5, 60, 0.5, ofxeasing::quart::easeOut);
-				motionClose.startColor("Fade", 0, 255, 0.5, 60, 0.5, ofxeasing::quart::easeOut);
+				motionPanel.getMotionColor()->startFadeInFadeOut(0, 255, 0.5, 60, 0.5, ofxeasing::quart::easeOut);
+				motionModal.getMotionColor()->startFadeInFadeOut(0, 200, 0.5, 60, 0.5, ofxeasing::quart::easeOut);
+				motionClose.getMotionColor()->startFadeInFadeOut(0, 255, 0.5, 60, 0.5, ofxeasing::quart::easeOut);
 				for (int j = 0; j < itemMaxSize; j++){
 					motions[j].setStateInside(false);
 				}

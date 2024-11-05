@@ -25,8 +25,8 @@ void ofApp::setup(){
 	int groupLeft[9] = { 0, 1, 2, 3, 4, 5, 9, 10, 11 };
 
 	for (int i = 0; i < fishMaxSize; i++) {
-		motion[i].setMotionTransformPtr(new MoveLiner("MoveLiner"));
-		motion[i].setMotionColorPtr(new NoColor("NoColor"));
+		motion[i].setMotionTransformPtr(new MoveLiner());
+		motion[i].setMotionColorPtr(new NoColor());
 		motion[i].setup(ofxMotion::DrawMode::IMAGE, &imageFish[i], posFish[i], vec2(1.0, 1.0), imageFish[i].getWidth(), imageFish[i].getHeight(), 0.0f, ofxMotion::AnchorMode::ANCOR_CENTER);
 		
 		auto itr = find(begin(groupLeft), end(groupLeft), i);
@@ -47,10 +47,10 @@ void ofApp::setup(){
 			delay = 1.5;
 		}
 		if (motion[i].getDirectionMode() == ofxMotion::DirectionMode::RIGHT) {
-			motion[i].startMotion("MoveLiner", vec2(100, 0), duration, delay, ofxeasing::quint::easeOut);
+			motion[i].getMotionTransform()->startMoveLiner(vec2(100, 0), duration, delay, ofxeasing::quint::easeOut);
 		}
 		else if (motion[i].getDirectionMode() == ofxMotion::DirectionMode::LEFT) {
-			motion[i].startMotion("MoveLiner", vec2(-100, 0), duration, delay, ofxeasing::quint::easeOut);
+			motion[i].getMotionTransform()->startMoveLiner(vec2(-100, 0), duration, delay, ofxeasing::quint::easeOut);
 		}
 	}
 
@@ -86,10 +86,10 @@ void ofApp::update(){
 				delay = 1.5;
 			}
 			if (motion[i].getDirectionMode() == ofxMotion::DirectionMode::RIGHT) {
-				motion[i].startMotion("MoveLiner", vec2(100, 0), duration, delay, ofxeasing::quint::easeOut);
+				motion[i].getMotionTransform()->startMoveLiner(vec2(100, 0), duration, delay, ofxeasing::quint::easeOut);
 			}
 			else if (motion[i].getDirectionMode() == ofxMotion::DirectionMode::LEFT) {
-				motion[i].startMotion("MoveLiner", vec2(-100, 0), duration, delay, ofxeasing::quint::easeOut);
+				motion[i].getMotionTransform()->startMoveLiner(vec2(-100, 0), duration, delay, ofxeasing::quint::easeOut);
 			}
 		}
 	}

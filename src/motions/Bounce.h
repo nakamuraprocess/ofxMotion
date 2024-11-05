@@ -3,11 +3,6 @@
 
 class Bounce : public MotionTransformBase {
 public:
-
-	Bounce(string str) {
-		name = str;
-	}
-
 	void update(const float currentTime) {
 		if (parameter.state == RUNNING) {
 			float time = timer(parameter.durationTime, currentTime, parameter.startTime, [&]() {
@@ -23,7 +18,7 @@ public:
 		}
 	}
 
-	void start() {
+	void startBounce() {
 		parameter.durationTime = 0.6;
 		parameter.startTime = ofGetElapsedTimef();
 		parameter.state = RUNNING;

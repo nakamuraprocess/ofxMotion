@@ -3,11 +3,6 @@
 
 class Scale : public MotionTransformBase {
 public:
-
-	Scale(string str) {
-		name = str;
-	}
-
 	void update(const float currentTime) {
 		if (parameter.state == RUNNING) {
 			float time = timer(parameter.durationTime, currentTime, parameter.startTime, [&]() {
@@ -19,7 +14,7 @@ public:
 		}
 	}
 
-	void start(vec2 scaleEnd, float duration, ofxeasing::function easing) {
+	void startScale(vec2 scaleEnd, float duration, ofxeasing::function easing) {
 		this->scaleEnd = scaleEnd;
 		parameter.durationTime = duration;
 		parameter.startTime = ofGetElapsedTimef();
@@ -27,7 +22,7 @@ public:
 		parameter.state = RUNNING;
 	}
 
-	void start(vec2 scaleStart, vec2 scaleEnd, float duration, ofxeasing::function easing) {
+	void startScale(vec2 scaleStart, vec2 scaleEnd, float duration, ofxeasing::function easing) {
 		this->scaleStart = scaleStart;
 		this->scaleEnd = scaleEnd;
 		parameter.durationTime = duration;
