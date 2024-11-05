@@ -55,9 +55,7 @@ void ofxMotion::draw() {
 	stateTransform = motionTransform->getState();
 	stateColor = motionColor->getState();
 	if (stateTransform == MotionTransformBase::RUNNING || stateColor == MotionColorBase::RUNNING || bStateDisplay) {
-
 		ofPushStyle();
-
 		if (drawMode == IMAGE) {
 			ofSetColor(255, motionColor->getColor().a);
 		}
@@ -157,6 +155,7 @@ bool ofxMotion::inside(int x, int y) {
 	return rectangle.inside(x, y);
 }
 
+
 bool ofxMotion::collision(int x, int y) {
 	return rectangle.inside(x, y);
 }
@@ -211,7 +210,6 @@ void ofxMotion::drawNormal() {
 		image->draw(motionTransform->getPos(), width, height);
 	}
 }
-
 
 
 void ofxMotion::drawTranslate() {
