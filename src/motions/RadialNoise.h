@@ -14,7 +14,7 @@ public:
 		if (parameter.state == RUNNING) {
 			float time = timer(parameter.durationTime, currentTime, parameter.startTime, [&]() {
 				parameter.state = DONE;
-			});
+				});
 
 			float timeDestination = currentTime - timeRecently;
 			timeDestination = ofClamp(timeDestination, 0.0, 0.1);

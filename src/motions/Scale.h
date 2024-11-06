@@ -7,14 +7,18 @@ public:
 		if (parameter.state == RUNNING) {
 			float time = timer(parameter.durationTime, currentTime, parameter.startTime, [&]() {
 				parameter.state = DONE;
-			});
+				});
 
 			scale.x = ofxeasing::map_clamp(time, 0.0, parameter.durationTime, scaleStart.x, scaleEnd.x, parameter.easing);
 			scale.y = ofxeasing::map_clamp(time, 0.0, parameter.durationTime, scaleStart.y, scaleEnd.y, parameter.easing);
+
+			width = widthInitial * scale.x;
+			height = heightInitial * scale.y;
 		}
 	}
 
 	void startScale(vec2 scaleEnd, float duration, ofxeasing::function easing) {
+		this->scaleStart = scale;
 		this->scaleEnd = scaleEnd;
 		parameter.durationTime = duration;
 		parameter.startTime = ofGetElapsedTimef();

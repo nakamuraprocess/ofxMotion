@@ -24,12 +24,17 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 
-
+		ofImage image;
+		ofTrueTypeFont font;
+		
 		ofxMotion motionMoveLiner[6];
+		ofxMotion motionMoveCurve[6];
 		ofxMotion motionColor;
 		ofxMotion motionRadialNoise[5];
-		ofxMotion motionMoveCurve[6];
 		ofxMotion motionRotate[5];
+		ofxMotion motionScale[3];
+		ofxMotion motionImage;
+		ofxMotion motionText[10];
 	
 		float timerLapTime = 0.0;
 		float timerSleepTime = 3.0;

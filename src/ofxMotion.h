@@ -4,12 +4,14 @@
 #include "Bounce.h"
 #include "ColorGradation.h"
 #include "FadeInFadeOut.h"
+#include "MoveCircle.h"
 #include "MoveLiner.h"
 #include "MoveCurve.h"
 #include "NoColor.h"
 #include "NoTransform.h"
 #include "RadialNoise.h"
 #include "Rotate.h"
+#include "Scale.h"
 
 class ofxMotion  {
 public:
@@ -43,7 +45,7 @@ public:
 
 	void setup(DrawMode drawMode, ofImage* image, vec2 pos, vec2 scale, float width, float height, float degrees, AnchorMode anchor, bool bStateDisplay = false);
 	void setup(DrawMode drawMode, vec2 pos, vec2 scale, float width, float height, float degrees, ofColor color, AnchorMode anchor, bool bStateDisplay = false);
-	void setup(DrawMode drawMode, ofTrueTypeFont* ttf, string _strText, vec2 pos, vec2 scale, float degrees, ofColor color, AnchorMode anchor, bool bStateDisplay = false);
+	void setup(DrawMode drawMode, ofTrueTypeFont* ttf, string strText, vec2 pos, vec2 scale, float degrees, ofColor color, AnchorMode anchor, bool bStateDisplay = false);
 	void update(const float currentTime);
 	void draw();
 
@@ -79,17 +81,14 @@ private:
 	ofRectangle rectangle;
 	AnchorMode anchor;
 	DirectionMode directionMode;
-	float width;
-	float height;
 	ofImage* image;
 	ofTrueTypeFont* ttf;
 	string strText;
 	ofTexture textureText;
 
-	vec2 getAnchor(float width, float height);
+	vec2 getAnchorPos(float width, float height) const;
 	void setRect(float x, float y, float width, float height);
 	void drawNormal();
 	void drawTranslate();
-	void setScale();
 
 };

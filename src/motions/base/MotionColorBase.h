@@ -48,10 +48,6 @@ public:
 
 	virtual void update(const float currentTime) {}
 
-	string getName() const {
-		return name;
-	}
-
 	ofColor getColor() const {
 		return color;
 	}
@@ -94,13 +90,11 @@ public:
 
 
 protected:
-	string name;
-
-	//color parameter
+	// color parameter
 	ofColor color;
 	ofColor colorStart;
 	ofColor colorEnd;
 
-	//for sub class.
+	// for sub class.
 	MotionParameter parameter;
 };

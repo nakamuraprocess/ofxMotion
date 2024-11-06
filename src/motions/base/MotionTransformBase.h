@@ -9,6 +9,9 @@ public:
 	// Bounce
 	virtual void startBounce() {}
 
+	// MoveCircle
+	virtual void startMoveCircle(float radian, vec2 radius, float duration, ofxeasing::function easing) {}
+
 	// MoveLiner
 	virtual void startMoveLiner(vec2 distance, float duration, float delay, ofxeasing::function easing) {}
 	virtual void startMoveLiner(vec2 posStart, vec2 posEnd, float duration, float delay, ofxeasing::function easing) {}
@@ -21,18 +24,18 @@ public:
 	virtual void startRadialNoise(float radius, float velociry, vec2 posOffset, float duration) {}
 
 	// Rotate
-	virtual void startRotate(float degreesEnd, float duration, ofxeasing::function easing) {}
-	virtual void startRotate(float start, float target, float duration, ofxeasing::function easing) {}
+	virtual void startRotate(float degreesEnd, float anchorPosForRotation, float duration, ofxeasing::function easing) {}
+	virtual void startRotate(float start, float target, float anchorPosForRotation, float duration, ofxeasing::function easing) {}
 
 	// Scale
 	virtual void startScale(vec2 scaleEnd, float duration, ofxeasing::function easing) {}
 	virtual void startScale(vec2 start, vec2 target, float duration, ofxeasing::function easing) {}
 
 	virtual void reset() {
-		pos = posStart;
-		scale = scaleStart;
-		degrees = degreesStart;
-		parameter.state = IDLING;
+		//pos = posStart;
+		//scale = scaleStart;
+		//degrees = degreesStart;
+		//parameter.state = IDLING;
 	}
 
 	enum MotionState {
@@ -58,19 +61,16 @@ public:
 	}
 
 	void setup(vec2 pos, vec2 scale, float width, float height, float degrees) {
-		this->pos = posStart = pos;
+		this->pos = posStart = posInitial = pos;
 		this->scale = scaleStart = scale;
 		this->width = width;
 		this->height = height;
+		widthInitial = width;
+		heightInitial = height;
 		this->degrees = degreesStart = degrees;
 	}
 
 	virtual void update(const float currentTime) {}
-
-
-	string getName() const {
-		return name;
-	}
 
 	vec2 getPos() {
 		return pos;
@@ -100,6 +100,10 @@ public:
 		return degrees;
 	}
 
+	float getAnchorPosForRotation() const {
+		return anchorPosForRotation;
+	}
+
 	MotionState getState() const {
 		return parameter.state;
 	}
@@ -108,15 +112,15 @@ public:
 		return parameter;
 	}
 
-	void setPos(vec2 _pos) {
-		pos = _pos;
+	void setPos(vec2 pos) {
+		this->pos = pos;
 	}
 
-	void setposStart(vec2 pos) {
+	void setPosStart(vec2 pos) {
 		posStart = pos;
 	}
 
-	void setposEnd(vec2 pos) {
+	void setPosEnd(vec2 pos) {
 		posEnd = pos;
 	}
 
@@ -124,31 +128,33 @@ public:
 		parameter.state = state;
 	}
 
-	void setParameter(MotionParameter _parameter) {
-		parameter = _parameter;
+	void setParameter(MotionParameter parameter) {
+		this->parameter = parameter;
 	}
 
 
 protected:
-	string name;
-
-	//translate parameter
+	// translate parameter
 	vec2 pos;
+	vec2 posInitial;
 	vec2 posStart;
 	vec2 posEnd;
 
-	//scale parameter
+	// scale parameter
 	float width;
 	float height;
+	float widthInitial;
+	float heightInitial;
 	vec2 scale;
 	vec2 scaleStart;
 	vec2 scaleEnd;
 
-	//rotate parameter
+	// rotate parameter
 	float degrees;
 	float degreesStart;
 	float degreesEnd;
+	float anchorPosForRotation;
 
-	//for sub class.
+	// for sub class.
 	MotionParameter parameter;
 };

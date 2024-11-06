@@ -7,7 +7,7 @@ public:
 		if (parameter.state == RUNNING) {
 			float time = timer(parameter.durationTime, currentTime, parameter.startTime, [&]() {
 				parameter.state = DONE;
-			});
+				});
 
 			unsigned short r = ofxeasing::map_clamp(time, 0.0, parameter.durationTime, colorStart.r, colorEnd.r, parameter.easing);
 			unsigned short g = ofxeasing::map_clamp(time, 0.0, parameter.durationTime, colorStart.g, colorEnd.g, parameter.easing);

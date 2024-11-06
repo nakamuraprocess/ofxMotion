@@ -7,7 +7,7 @@ public:
 		if (parameter.state == RUNNING) {
 			float time = timer(parameter.durationTime, currentTime, parameter.startTime, [&]() {
 				parameter.state = DONE;
-			});
+				});
 
 			pos.x = ofxeasing::map_clamp(time, 0.0, parameter.durationTime, posStart.x, posEnd.x, parameter.easing);
 			pos.y = ofxeasing::map_clamp(time, 0.0, parameter.durationTime, posStart.y, posEnd.y, parameter.easing);
