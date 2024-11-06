@@ -5,7 +5,8 @@ Motion graphics tools for openFrameworks.
 ## Prerequisites
 * openFrameworks v0.11.2
 * VisualStudio 2022 (Platform Toolset v141)
-Note: This code has not been tested on Xcode, iOS, Android, or RaspberryPi.
+
+**Note**: This code has not been tested on Xcode, iOS, Android, or RaspberryPi.
 
 ## Features
 
