@@ -27,7 +27,7 @@ void ofApp::setup(){
 	for (int i = 0; i < fishMaxSize; i++) {
 		motion[i].setMotionTransformPtr(new MoveLiner());
 		motion[i].setMotionColorPtr(new NoColor());
-		motion[i].setup(ofxMotion::DrawMode::IMAGE, &imageFish[i], posFish[i], vec2(1.0, 1.0), imageFish[i].getWidth(), imageFish[i].getHeight(), 0.0f, ofxMotion::AnchorMode::ANCOR_CENTER);
+		motion[i].setup(ofxMotion::DrawMode::IMAGE, &imageFish[i], posFish[i], vec2(1.0, 1.0), imageFish[i].getWidth(), imageFish[i].getHeight(), 0.0f, ofxMotion::AnchorMode::ANCHOR_CENTER);
 		
 		auto itr = find(begin(groupLeft), end(groupLeft), i);
 		if (itr != end(groupLeft)) {
