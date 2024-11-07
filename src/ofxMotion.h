@@ -88,7 +88,5 @@ private:
 
 	vec2 getAnchorPos(float width, float height) const;
 	void setRect(float x, float y, float width, float height);
-	void drawNormal();
-	void drawTranslate();
 
 };
