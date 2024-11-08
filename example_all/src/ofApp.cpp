@@ -74,7 +74,7 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	auto now = ofGetElapsedTimef();
+	float now = ofGetElapsedTimef();
 	timer(now);
 
 	for (int i = 0; i < 6; i++) {

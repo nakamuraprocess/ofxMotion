@@ -61,7 +61,7 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	auto now = ofGetElapsedTimef();
+	float now = ofGetElapsedTimef();
 
 	for (int i = 0; i < fishMaxSize; i++) {
 		motion[i].update(now);

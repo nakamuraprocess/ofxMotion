@@ -14,9 +14,8 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	auto now = ofGetElapsedTimef();
+	float now = ofGetElapsedTimef();
 	motion.update(now);
-
 	posHistory.push_back(motion.getPos());
 }
 
@@ -38,7 +37,6 @@ void ofApp::draw(){
 		ofDrawCircle(posHistory[i], 5);
 	}
 	
-
 	motion.draw();
 }
 
