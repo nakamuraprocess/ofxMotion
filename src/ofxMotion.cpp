@@ -17,13 +17,21 @@ void ofxMotion::setup(DrawMode drawMode, ofImage* image, vec2 pos, vec2 scale, f
 	motionColor->setup(ofColor(255), ofColor(255));
 }
 
+void ofxMotion::setup(DrawMode drawMode, ofTexture* texture, vec2 pos, vec2 scale, float width, float height, float degrees, AnchorMode anchor, bool bStateDisplay) {
+	this->drawMode = drawMode;
+	this->texture = texture;
+	this->anchor = anchor;
+	this->bStateDisplay = bStateDisplay;
+	motionTransform->setup(pos, scale, width, height, degrees);
+	motionColor->setup(ofColor(255), ofColor(255));
+}
+
 void ofxMotion::setup(DrawMode drawMode, ofTrueTypeFont* ttf, string strText, vec2 pos, vec2 scale, float degrees, ofColor color, AnchorMode anchor, bool bStateDisplay) {
 	this->drawMode = drawMode;
 	this->ttf = ttf;
 	this->strText = strText;
 	this->anchor = anchor;
 	this->bStateDisplay = bStateDisplay;
-	textureText = ttf->getStringTexture(strText);
 	rectangle = ttf->getStringBoundingBox(strText, 0, 0);
 	motionTransform->setup(pos, scale, rectangle.getWidth(), rectangle.getHeight(), degrees);
 	motionColor->setup(color, color);
@@ -38,8 +46,8 @@ void ofxMotion::update(const float currentTime) {
 	if (image != nullptr) {
 		image->setAnchorPoint(anchorPos.x, anchorPos.y);
 	}
-	if (textureText.isAllocated()) {
-		textureText.setAnchorPoint(anchorPos.x, anchorPos.y);
+	if (texture != nullptr) {
+		texture->setAnchorPoint(anchorPos.x, anchorPos.y);
 	}
 }
 
@@ -48,7 +56,7 @@ void ofxMotion::draw() {
 	stateColor = motionColor->getState();
 	if (stateTransform == MotionTransformBase::RUNNING || stateColor == MotionColorBase::RUNNING || bStateDisplay) {
 		ofPushStyle();
-		if (drawMode == IMAGE) {
+		if (drawMode == IMAGE || drawMode == TEXTURE) {
 			ofSetColor(255, motionColor->getColor().a);
 		}
 		else {
@@ -81,9 +89,12 @@ void ofxMotion::draw() {
 			ofDrawTriangle(x, y, x - width, y + height, x + width, y + height);
 		}
 		else if (drawMode == TEXT) {
-			textureText.draw(x, y, width, height);
+			ttf->drawString(strText, x, y);
 		}
-		else {
+		else if (drawMode == TEXTURE) {
+			texture->draw(x, y, width, height);
+		}
+		else if (drawMode == IMAGE) {
 			image->draw(x, y, width, height);
 		}
 

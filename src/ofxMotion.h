@@ -20,7 +20,8 @@ public:
 		CIRCLE = 1,
 		TRIANGLE = 2,
 		IMAGE = 3,
-		TEXT = 4
+		TEXTURE = 4,
+		TEXT = 5
 	};
 
 	enum AnchorMode {
@@ -43,8 +44,9 @@ public:
 		BOTTOM_RIGHT = 7,
 	};
 
-	void setup(DrawMode drawMode, ofImage* image, vec2 pos, vec2 scale, float width, float height, float degrees, AnchorMode anchor, bool bStateDisplay = false);
 	void setup(DrawMode drawMode, vec2 pos, vec2 scale, float width, float height, float degrees, ofColor color, AnchorMode anchor, bool bStateDisplay = false);
+	void setup(DrawMode drawMode, ofImage* image, vec2 pos, vec2 scale, float width, float height, float degrees, AnchorMode anchor, bool bStateDisplay = false);
+	void setup(DrawMode drawMode, ofTexture* texture, vec2 pos, vec2 scale, float width, float height, float degrees, AnchorMode anchor, bool bStateDisplay = false);
 	void setup(DrawMode drawMode, ofTrueTypeFont* ttf, string strText, vec2 pos, vec2 scale, float degrees, ofColor color, AnchorMode anchor, bool bStateDisplay = false);
 	void update(const float currentTime);
 	void draw();
@@ -82,11 +84,10 @@ private:
 	AnchorMode anchor;
 	DirectionMode directionMode;
 	ofImage* image;
+	ofTexture* texture;
 	ofTrueTypeFont* ttf;
 	string strText;
-	ofTexture textureText;
-
+	
 	vec2 getAnchorPos(float width, float height) const;
 	void setRect(float x, float y, float width, float height);
-
 };
