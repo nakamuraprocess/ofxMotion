@@ -35,11 +35,11 @@ void ofApp::setup(){
 
 	motionRotate[3].setMotionTransformPtr(new Rotate());
 	motionRotate[3].setMotionColorPtr(new NoColor());
-	motionRotate[3].setup(ofxMotion::DrawMode::TRIANGLE, vec2(1550, 170), vec2(1.0, 1.0), 15, 30, ofRandom(0.1, 180.0), ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_TOP_LEFT, true);
+	motionRotate[3].setup(ofxMotion::DrawMode::TRIANGLE, vec2(1550, 170), vec2(1.0, 1.0), 30, 30, ofRandom(0.1, 180.0), ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_TOP_LEFT, true);
 
 	motionRotate[4].setMotionTransformPtr(new Rotate());
 	motionRotate[4].setMotionColorPtr(new NoColor());
-	motionRotate[4].setup(ofxMotion::DrawMode::TRIANGLE, vec2(1550, 170), vec2(1.0, 1.0), 10, 22, ofRandom(0.1, 180.0), ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_TOP_LEFT, true);
+	motionRotate[4].setup(ofxMotion::DrawMode::TRIANGLE, vec2(1550, 170), vec2(1.0, 1.0), 22, 22, ofRandom(0.1, 180.0), ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_TOP_LEFT, true);
 
 	motionScale[0].setMotionTransformPtr(new Scale());
 	motionScale[1].setMotionTransformPtr(new Bounce());
@@ -47,9 +47,9 @@ void ofApp::setup(){
 	for (int i = 0; i < 3; i++) {
 		motionScale[i].setMotionColorPtr(new NoColor());
 	}
-	motionScale[0].setup(ofxMotion::DrawMode::CIRCLE, vec2(300, 600), vec2(1.0, 1.0), 49, 34, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_CENTER, true);
-	motionScale[1].setup(ofxMotion::DrawMode::CIRCLE, vec2(300, 600), vec2(1.0, 1.0), 50, 50, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_CENTER, true);
-	motionScale[2].setup(ofxMotion::DrawMode::CIRCLE, vec2(300, 600), vec2(1.0, 1.0), 30, 30, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_CENTER, true);
+	motionScale[0].setup(ofxMotion::DrawMode::CIRCLE, vec2(300, 600), vec2(1.0, 1.0), 99, 34, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_CENTER, true);
+	motionScale[1].setup(ofxMotion::DrawMode::CIRCLE, vec2(300, 600), vec2(1.0, 1.0), 100, 50, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_CENTER, true);
+	motionScale[2].setup(ofxMotion::DrawMode::CIRCLE, vec2(300, 600), vec2(1.0, 1.0), 60, 30, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_CENTER, true);
 
 
 	image.load("image_fx_1.jpg");
@@ -148,8 +148,8 @@ void ofApp::timer(float now) {
 		motionRotate[0].getMotionTransform()->startRotate(5.0, 0.0, 0.5, ofxeasing::quart::easeOut);
 		motionRotate[1].getMotionTransform()->startRotate(30.0, 0.0, 0.5, ofxeasing::quart::easeOut);
 		motionRotate[2].getMotionTransform()->startRotate(30.0, 0.0, 3.0, ofxeasing::linear::easeNone);
-		motionRotate[3].getMotionTransform()->startRotate(180.0, 100.0, 3.0, ofxeasing::linear::easeNone);
-		motionRotate[4].getMotionTransform()->startRotate(45.0, 150.0, 3.0, ofxeasing::linear::easeNone);
+		motionRotate[3].getMotionTransform()->startRotate(180.0, 90.0, 3.0, ofxeasing::linear::easeNone);
+		motionRotate[4].getMotionTransform()->startRotate(45.0, 140.0, 3.0, ofxeasing::linear::easeNone);
 
 		motionScale[0].getMotionTransform()->startScale(vec2(1.0, 1.0), vec2(4.0, 4.0), 0.5, ofxeasing::quart::easeOut);
 		motionScale[1].getMotionTransform()->startBounce();

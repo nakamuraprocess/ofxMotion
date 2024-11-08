@@ -83,13 +83,19 @@ void ofxMotion::draw() {
 			ofDrawRectangle(rectangle);
 		}
 		else if (drawMode == CIRCLE) {
-			ofDrawCircle(x, y, width * 0.5 + height * 0.5);
+			float radius = width * 0.25 + height * 0.25;
+			vec2 anchorPos = getAnchorPos(width * 0.5 + height * 0.5, width * 0.5 + height * 0.5);
+			ofDrawCircle(x + radius - anchorPos.x, y + radius - anchorPos.y, radius);
 		}
 		else if (drawMode == TRIANGLE) {
-			ofDrawTriangle(x, y, x - width, y + height, x + width, y + height);
+			float triBase = width * 0.5;
+			float triHeight = height;
+			vec2 anchorPos = getAnchorPos(width, height);
+			ofDrawTriangle(x + triBase - anchorPos.x, y - anchorPos.y, x - anchorPos.x, y + triHeight - anchorPos.y, x + triBase * 2 - anchorPos.x, y + triHeight - anchorPos.y);
 		}
 		else if (drawMode == TEXT) {
-			ttf->drawString(strText, x, y);
+			vec2 anchorPos = getAnchorPos(width, height);
+			ttf->drawString(strText, x - anchorPos.x, y + height - anchorPos.y);
 		}
 		else if (drawMode == TEXTURE) {
 			texture->draw(x, y, width, height);
@@ -176,6 +182,10 @@ void ofxMotion::setDirectionMode(DirectionMode mode) {
 
 void ofxMotion::setMirrorMode(bool vertical, bool horizon) {
 	image->mirror(vertical, horizon);
+}
+
+void ofxMotion::setAnchorMode(AnchorMode anchor) {
+	this->anchor = anchor;
 }
 
 void ofxMotion::setImage(ofImage* image) {

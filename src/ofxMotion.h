@@ -65,6 +65,7 @@ public:
 	void setPosMotionTransform(vec2 pos);
 	void setDirectionMode(DirectionMode mode);
 	void setMirrorMode(bool vertical, bool horizon);
+	void setAnchorMode(AnchorMode anchor);
 	void setImage(ofImage* image);
 	bool inside(int x, int y);
 	bool collision(int x, int y);
