@@ -67,7 +67,9 @@ public:
 	void setMirrorMode(bool vertical, bool horizon);
 	void setAnchorMode(AnchorMode anchor);
 	void setImage(ofImage* image);
-	bool inside(int x, int y);
+	void setDrawSubsection(float sx, float sy, float sw, float sh);
+	bool insideRect(int x, int y);
+	bool insideCircle(int x, int y);
 	bool collision(int x, int y);
 	void setStateInside(bool b);
 	void reset();
@@ -91,4 +93,10 @@ private:
 	
 	vec2 getAnchorPos(float width, float height) const;
 	void setRect(float x, float y, float width, float height);
+
+	bool bDrawSbsection;
+	float drawSubsectionX;
+	float drawSubsectionY;
+	float drawSubsectionWidth;
+	float drawSubsectionHeight;
 };

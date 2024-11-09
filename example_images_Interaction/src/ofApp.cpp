@@ -139,7 +139,7 @@ void ofApp::startMove(int index, int xDirMin, int xDirMax, int yDirMin, int yDir
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
 	if (bStateDisplayPanel) {
-		if (motionClose.inside(x, y)) {
+		if (motionClose.insideCircle(x, y)) {
 			bStateDisplayPanel = false;
 			motionPanel.getMotionColor()->startFadeOutForce(0, 0.5, ofxeasing::quart::easeOut);
 			motionModal.getMotionColor()->startFadeOutForce(0, 0.5, ofxeasing::quart::easeOut);
@@ -151,7 +151,7 @@ void ofApp::mouseReleased(int x, int y, int button){
 	}
 	else {
 		for (int i = 0; i < itemMaxSize; i++) {
-			if (motions[i].inside(x, y)) {
+			if (motions[i].insideRect(x, y)) {
 				bStateDisplayPanel = true;
 				motionPanel.setImage(&imagePanels[i]);
 				motionPanel.getMotionColor()->startFadeInFadeOut(0, 255, 0.5, 60, 0.5, ofxeasing::quart::easeOut);
