@@ -24,7 +24,7 @@ public:
 	}
 
 	void startMoveLiner(vec2 posStart, vec2 posEnd, float duration, float delay, ofxeasing::function easing) {
-		this->posStart = posStart;
+		this->posStart = pos = posStart;
 		this->posEnd = posEnd;
 		parameter.startTime = ofGetElapsedTimef() + delay;
 		parameter.durationTime = duration;

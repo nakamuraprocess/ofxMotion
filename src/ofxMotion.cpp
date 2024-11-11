@@ -203,6 +203,8 @@ void ofxMotion::setDrawSubsection(float sx, float sy, float sw, float sh) {
 	drawSubsectionY = sy;
 	drawSubsectionWidth = sw;
 	drawSubsectionHeight = sh;
+
+	motionTransform->setWidthHeight(sw, sh);
 }
 
 bool ofxMotion::insideRect(int x, int y) {
@@ -233,10 +235,6 @@ bool ofxMotion::collision(int x, int y) {
 
 void ofxMotion::setStateInside(bool b) {
 	bStateInside = b;
-}
-
-void ofxMotion::reset() {
-	motionTransform->reset();
 }
 
 void ofxMotion::setRect(float x, float y, float width, float height) {

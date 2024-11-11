@@ -31,13 +31,6 @@ public:
 	virtual void startScale(vec2 scaleEnd, float duration, ofxeasing::function easing) {}
 	virtual void startScale(vec2 start, vec2 target, float duration, ofxeasing::function easing) {}
 
-	virtual void reset() {
-		//pos = posStart;
-		//scale = scaleStart;
-		//degrees = degreesStart;
-		//parameter.state = IDLING;
-	}
-
 	enum MotionState {
 		IDLING = 0,
 		RUNNING = 1,
@@ -130,6 +123,11 @@ public:
 
 	void setParameter(MotionParameter parameter) {
 		this->parameter = parameter;
+	}
+
+	void setWidthHeight(float w, float h) {
+		width = w;
+		height = h;
 	}
 
 
