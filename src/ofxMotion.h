@@ -72,7 +72,6 @@ public:
 	bool insideCircle(int x, int y);
 	bool collision(int x, int y);
 	void setStateInside(bool b);
-	void reset();
 	
 
 private:

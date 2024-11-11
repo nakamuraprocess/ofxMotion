@@ -68,12 +68,6 @@
     <ClInclude Include="..\..\..\addons\ofxMotion\src\motions\MoveLiner.h">
       <Filter>addons\ofxMotion\src\motions</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxMotion\src\motions\NoColor.h">
-      <Filter>addons\ofxMotion\src\motions</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxMotion\src\motions\NoTransform.h">
-      <Filter>addons\ofxMotion\src\motions</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\addons\ofxMotion\src\motions\RadialNoise.h">
       <Filter>addons\ofxMotion\src\motions</Filter>
     </ClInclude>

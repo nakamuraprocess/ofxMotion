@@ -6,7 +6,7 @@ void ofApp::setup(){
 
 	for (int i = 0; i < 6; i++) {
 		motion[i].setMotionTransformPtr(new MoveLiner());
-		motion[i].setMotionColorPtr(new NoColor());
+		motion[i].setMotionColorPtr(new DefaultColor());
 	}
 
 	motion[0].setup(ofxMotion::DrawMode::RECT, vec2(200, 200), vec2(1.0, 1.0), 200, 200, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_CENTER, true);

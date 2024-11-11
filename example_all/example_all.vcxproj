@@ -196,8 +196,6 @@
     <ClInclude Include="..\..\..\addons\ofxMotion\src\motions\FadeInFadeOut.h" />
     <ClInclude Include="..\..\..\addons\ofxMotion\src\motions\MoveCurve.h" />
     <ClInclude Include="..\..\..\addons\ofxMotion\src\motions\MoveLiner.h" />
-    <ClInclude Include="..\..\..\addons\ofxMotion\src\motions\NoColor.h" />
-    <ClInclude Include="..\..\..\addons\ofxMotion\src\motions\NoTransform.h" />
     <ClInclude Include="..\..\..\addons\ofxMotion\src\motions\RadialNoise.h" />
     <ClInclude Include="..\..\..\addons\ofxMotion\src\motions\Rotate.h" />
     <ClInclude Include="..\..\..\addons\ofxMotion\src\motions\Scale.h" />

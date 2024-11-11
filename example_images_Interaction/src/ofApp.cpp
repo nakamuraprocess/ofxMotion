@@ -26,20 +26,20 @@ void ofApp::setup() {
 		imagePanels[i] = imageItems[i];
 		imageItems[i].resize(imageItems[i].getWidth() * sizeInit[i], imageItems[i].getHeight() * sizeInit[i]);
 		motions[i].setMotionTransformPtr(new MoveCurve());
-		motions[i].setMotionColorPtr(new NoColor());
+		motions[i].setMotionColorPtr(new DefaultColor());
 		motions[i].setup(ofxMotion::DrawMode::IMAGE, &imageItems[i], posInit[i], vec2(1.0, 1.0), imageItems[i].getWidth(), imageItems[i].getHeight(), 0.0f, ofxMotion::AnchorMode::ANCHOR_CENTER, true);
 	}
 
-	motionPanel.setMotionTransformPtr(new NoTransform());
+	motionPanel.setMotionTransformPtr(new DefaultTransform());
 	motionPanel.setMotionColorPtr(new FadeInFadeOut());
 	motionPanel.setup(ofxMotion::DrawMode::IMAGE, &imagePanels[0], vec2(ofGetWidth() * 0.5, ofGetHeight() * 0.5), vec2(1.0, 1.0), imagePanels[0].getWidth() * 0.8, imagePanels[0].getHeight() * 0.8, 0.0f, ofxMotion::AnchorMode::ANCHOR_CENTER);
 
-	motionModal.setMotionTransformPtr(new NoTransform());
+	motionModal.setMotionTransformPtr(new DefaultTransform());
 	motionModal.setMotionColorPtr(new FadeInFadeOut());
 	motionModal.setup(ofxMotion::DrawMode::RECT, vec2(0, 0), vec2(1.0, 1.0), ofGetWidth(), ofGetHeight(), 0.0f, ofColor(0), ofxMotion::AnchorMode::ANCHOR_TOP_LEFT);
 
 	imageClose.load("close.png");
-	motionClose.setMotionTransformPtr(new NoTransform());
+	motionClose.setMotionTransformPtr(new DefaultTransform());
 	motionClose.setMotionColorPtr(new FadeInFadeOut());
 	motionClose.setup(ofxMotion::DrawMode::IMAGE, &imageClose, vec2(ofGetWidth() * 0.5 + 410, 130), vec2(1.0, 1.0), imageClose.getWidth(), imageClose.getHeight(), 0.0f, ofxMotion::AnchorMode::ANCHOR_CENTER);
 

@@ -3,7 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 	motion.setMotionTransformPtr(new MoveCurve());
-	motion.setMotionColorPtr(new NoColor());
+	motion.setMotionColorPtr(new DefaultColor());
 	motion.setup(ofxMotion::DrawMode::CIRCLE, vec2(500, 500), vec2(1.0, 1.0), 4, 4, 0.0f, ofColor(19, 20, 192), ofxMotion::AnchorMode::ANCHOR_CENTER, true);
 	posHistory.push_back(vec2(500, 500));
 

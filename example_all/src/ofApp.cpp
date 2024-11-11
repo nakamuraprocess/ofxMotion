@@ -6,46 +6,46 @@ void ofApp::setup(){
 
 	for (int i = 0; i < 6; i++) {
 		motionMoveLiner[i].setMotionTransformPtr(new MoveLiner());
-		motionMoveLiner[i].setMotionColorPtr(new NoColor());
+		motionMoveLiner[i].setMotionColorPtr(new DefaultColor());
 		motionMoveLiner[i].setup(ofxMotion::DrawMode::RECT, vec2(100, i * 50 + 50), vec2(1.0, 1.0), 25, 25, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_CENTER, true);
 	}
 
 	for (int i = 0; i < 6; i++) {
 		motionMoveCurve[i].setMotionTransformPtr(new MoveCurve());
-		motionMoveCurve[i].setMotionColorPtr(new NoColor());
+		motionMoveCurve[i].setMotionColorPtr(new DefaultColor());
 		motionMoveCurve[i].setup(ofxMotion::DrawMode::CIRCLE, vec2(100, i * 50 + 50), vec2(1.0, 1.0), 10, 10, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_CENTER, true);
 	}
 
-	motionColor.setMotionTransformPtr(new NoTransform());
+	motionColor.setMotionTransformPtr(new DefaultTransform());
 	motionColor.setMotionColorPtr(new ColorGradation());
 	motionColor.setup(ofxMotion::DrawMode::RECT, vec2(560, 37), vec2(1.0, 1.0), 15, 275, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_TOP_LEFT, true);
 
 	for (int i = 0; i < 5; i++) {
 		motionRadialNoise[i].setMotionTransformPtr(new RadialNoise());
-		motionRadialNoise[i].setMotionColorPtr(new NoColor());
+		motionRadialNoise[i].setMotionColorPtr(new DefaultColor());
 		motionRadialNoise[i].setup(ofxMotion::DrawMode::RECT, vec2(ofRandom(0, 5), ofRandom(0, 5)), vec2(1.0, 1.0), 100, 10, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_CENTER);
 		motionRadialNoise[i].getMotionTransform()->startRadialNoise(275, 0.425, vec2(960, 200), 9999.0);
 	}
 
 	for (int i = 0; i < 3; i++) {
 		motionRotate[i].setMotionTransformPtr(new Rotate());
-		motionRotate[i].setMotionColorPtr(new NoColor());
+		motionRotate[i].setMotionColorPtr(new DefaultColor());
 		motionRotate[i].setup(ofxMotion::DrawMode::RECT, vec2(1550, 170), vec2(1.0, 1.0), 250, 10, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_CENTER, true);
 	}
 
 	motionRotate[3].setMotionTransformPtr(new Rotate());
-	motionRotate[3].setMotionColorPtr(new NoColor());
+	motionRotate[3].setMotionColorPtr(new DefaultColor());
 	motionRotate[3].setup(ofxMotion::DrawMode::TRIANGLE, vec2(1550, 170), vec2(1.0, 1.0), 30, 30, ofRandom(0.1, 180.0), ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_TOP_LEFT, true);
 
 	motionRotate[4].setMotionTransformPtr(new Rotate());
-	motionRotate[4].setMotionColorPtr(new NoColor());
+	motionRotate[4].setMotionColorPtr(new DefaultColor());
 	motionRotate[4].setup(ofxMotion::DrawMode::TRIANGLE, vec2(1550, 170), vec2(1.0, 1.0), 22, 22, ofRandom(0.1, 180.0), ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_TOP_LEFT, true);
 
 	motionScale[0].setMotionTransformPtr(new Scale());
 	motionScale[1].setMotionTransformPtr(new Bounce());
 	motionScale[2].setMotionTransformPtr(new Bounce());
 	for (int i = 0; i < 3; i++) {
-		motionScale[i].setMotionColorPtr(new NoColor());
+		motionScale[i].setMotionColorPtr(new DefaultColor());
 	}
 	motionScale[0].setup(ofxMotion::DrawMode::CIRCLE, vec2(300, 600), vec2(1.0, 1.0), 99, 34, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_CENTER, true);
 	motionScale[1].setup(ofxMotion::DrawMode::CIRCLE, vec2(300, 600), vec2(1.0, 1.0), 100, 50, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_CENTER, true);
@@ -53,14 +53,14 @@ void ofApp::setup(){
 
 
 	image.load("image_fx_1.jpg");
-	motionImage.setMotionTransformPtr(new NoTransform());
+	motionImage.setMotionTransformPtr(new DefaultTransform());
 	motionImage.setMotionColorPtr(new FadeInFadeOut());
 	motionImage.setup(ofxMotion::DrawMode::IMAGE, &image, vec2(960, 600), vec2(1.0, 1.0), image.getWidth() * 0.3, image.getHeight() * 0.3, 0.0f, ofxMotion::AnchorMode::ANCHOR_CENTER);
 
 	font.load("NotoSansCJKjp-Regular.otf", 20);
 	for (int i = 0; i < 10; i++) {
 		motionText[i].setMotionTransformPtr(new MoveCircle());
-		motionText[i].setMotionColorPtr(new NoColor());
+		motionText[i].setMotionColorPtr(new DefaultColor());
 		string text = ofToString(100001 + i);
 		motionText[i].setup(ofxMotion::DrawMode::TEXT, &font, text, vec2(1550, 600), vec2(1.0, 1.0), 0.0, ofColor(65, 56, 56, 200), ofxMotion::AnchorMode::ANCHOR_CENTER, true);
 		float radian = TWO_PI * (0.1 * i);
