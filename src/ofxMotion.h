@@ -44,6 +44,9 @@ public:
 		BOTTOM_RIGHT = 7,
 	};
 
+	void setMotionTransformPtr(MotionTransformBase* ptr);
+	void setMotionColorPtr(MotionColorBase* ptr);
+
 	void setup(DrawMode drawMode, vec2 pos, vec2 scale, float width, float height, float degrees, ofColor color, AnchorMode anchor, bool bStateDisplay = false);
 	void setup(DrawMode drawMode, ofImage* image, vec2 pos, vec2 scale, float width, float height, float degrees, AnchorMode anchor, bool bStateDisplay = false);
 	void setup(DrawMode drawMode, ofTexture* texture, vec2 pos, vec2 scale, float width, float height, float degrees, AnchorMode anchor, bool bStateDisplay = false);
@@ -59,8 +62,6 @@ public:
 	MotionTransformBase* getMotionTransform();
 	MotionColorBase* getMotionColor();
 
-	void setMotionTransformPtr(MotionTransformBase* ptr);
-	void setMotionColorPtr(MotionColorBase* ptr);
 	void setStateStateMotionTransform(MotionTransformBase::MotionState state);
 	void setPosMotionTransform(vec2 pos);
 	void setDirectionMode(DirectionMode mode);
@@ -75,8 +76,8 @@ public:
 	
 
 private:
-	MotionTransformBase* motionTransform;
-	MotionColorBase* motionColor;
+	MotionTransformBase* motionTransform = nullptr;
+	MotionColorBase* motionColor = nullptr;
 	MotionTransformBase::MotionState stateTransform;
 	MotionColorBase::MotionState stateColor;
 	bool bStateDisplay = false;
@@ -85,10 +86,10 @@ private:
 	ofRectangle rectangle;
 	AnchorMode anchor;
 	DirectionMode directionMode;
-	ofImage* image;
-	ofTexture* texture;
-	ofTrueTypeFont* ttf;
-	string strText;
+	ofImage* image = nullptr;
+	ofTexture* texture = nullptr;
+	ofTrueTypeFont* ttf = nullptr;
+	string strText = "";
 	
 	vec2 getAnchorPos(float width, float height) const;
 	void setRect(float x, float y, float width, float height);

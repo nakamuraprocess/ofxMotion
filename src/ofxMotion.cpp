@@ -1,5 +1,13 @@
 #include "ofxMotion.h"
 
+void ofxMotion::setMotionTransformPtr(MotionTransformBase* ptr) {
+	motionTransform = ptr;
+}
+
+void ofxMotion::setMotionColorPtr(MotionColorBase* ptr) {
+	motionColor = ptr;
+}
+
 void ofxMotion::setup(DrawMode drawMode, vec2 pos, vec2 scale, float width, float height, float degrees, ofColor color, AnchorMode anchor, bool bStateDisplay) {
 	this->drawMode = drawMode;
 	this->anchor = anchor;
@@ -165,13 +173,7 @@ MotionColorBase* ofxMotion::getMotionColor() {
 	return motionColor;
 }
 
-void ofxMotion::setMotionTransformPtr(MotionTransformBase* ptr) {
-	motionTransform = ptr;
-}
 
-void ofxMotion::setMotionColorPtr(MotionColorBase* ptr) {
-	motionColor = ptr;
-}
 
 void ofxMotion::setStateStateMotionTransform(MotionTransformBase::MotionState state) {
 	motionTransform->setState(state);

@@ -38,7 +38,7 @@ public:
 	}
 
 	void startMoveCurve(vec2 posStart, vec2 posEnd, float radius, int direction, float duration, float delay, ofxeasing::function easing) {
-		this->posStart = pos = posStart;
+		this->posStart = posStart;
 		this->posEnd = posEnd;
 		this->radius = radius;
 		this->direction = direction;
