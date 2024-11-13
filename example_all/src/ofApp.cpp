@@ -64,7 +64,7 @@ void ofApp::setup(){
 		string text = ofToString(100001 + i);
 		motionText[i].setup(ofxMotion::DrawMode::TEXT, &font, text, vec2(1550, 600), vec2(1.0, 1.0), 0.0, ofColor(65, 56, 56, 200), ofxMotion::AnchorMode::ANCHOR_CENTER, true);
 		float radian = TWO_PI * (0.1 * i);
-		motionText[i].getMotionTransform()->startMoveCircle(radian, vec2(100, 150), 3.0, ofxeasing::linear::easeNone);
+		motionText[i].getMotionTransform()->startMoveCircle(radian, vec2(100, 150), 3.0, 1, 0.0, ofxeasing::linear::easeNone, true);
 	}
 
 	ofBackground(255);
@@ -156,11 +156,6 @@ void ofApp::timer(float now) {
 		motionScale[2].getMotionTransform()->startBounce();
 
 		motionImage.getMotionColor()->startFadeInFadeOut(0, 255, 1.0, 1.0, 1.0, ofxeasing::quart::easeOut);
-
-		for (int i = 0; i < 10; i++) {
-			float radian = (TWO_PI / 10.0) * i;
-			motionText[i].getMotionTransform()->startMoveCircle(radian, vec2(100, 150), 3.0, ofxeasing::linear::easeNone);
-		}
 	}
 }
 
