@@ -1,7 +1,7 @@
 #pragma once
 #include "MotionTransformBase.h"
 
-class RadialNoise : public MotionTransformBase {
+class SignedNoise : public MotionTransformBase {
 private:
 	float timeRecently;
 	float radius;
@@ -26,7 +26,7 @@ public:
 		}
 	}
 
-	void startRadialNoise(float radius, float velociry, vec2 posOffset, float duration) {
+	void startSignedNoise(float radius, float velociry, vec2 posOffset, float duration) {
 		posNoiseCursor = pos;
 		this->radius = radius;
 		velocity = velociry;

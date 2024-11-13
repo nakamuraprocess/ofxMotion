@@ -21,10 +21,10 @@ void ofApp::setup(){
 	motionColor.setup(ofxMotion::DrawMode::RECT, vec2(560, 37), vec2(1.0, 1.0), 15, 275, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_TOP_LEFT, true);
 
 	for (int i = 0; i < 5; i++) {
-		motionRadialNoise[i].setMotionTransformPtr(new RadialNoise());
-		motionRadialNoise[i].setMotionColorPtr(new DefaultColor());
-		motionRadialNoise[i].setup(ofxMotion::DrawMode::RECT, vec2(ofRandom(0, 5), ofRandom(0, 5)), vec2(1.0, 1.0), 100, 10, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_CENTER);
-		motionRadialNoise[i].getMotionTransform()->startRadialNoise(275, 0.425, vec2(960, 200), 9999.0);
+		motionSignedNoise[i].setMotionTransformPtr(new SignedNoise());
+		motionSignedNoise[i].setMotionColorPtr(new DefaultColor());
+		motionSignedNoise[i].setup(ofxMotion::DrawMode::RECT, vec2(ofRandom(0, 5), ofRandom(0, 5)), vec2(1.0, 1.0), 100, 10, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_CENTER);
+		motionSignedNoise[i].getMotionTransform()->startSignedNoise(275, 0.425, vec2(960, 200), 9999.0);
 	}
 
 	for (int i = 0; i < 3; i++) {
@@ -51,6 +51,11 @@ void ofApp::setup(){
 	motionScale[1].setup(ofxMotion::DrawMode::CIRCLE, vec2(300, 600), vec2(1.0, 1.0), 100, 50, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_CENTER, true);
 	motionScale[2].setup(ofxMotion::DrawMode::CIRCLE, vec2(300, 600), vec2(1.0, 1.0), 60, 30, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_CENTER, true);
 
+	for (int i = 0; i < 10; i++) {
+		motionMoveRadial[i].setMotionTransformPtr(new MoveRadial());
+		motionMoveRadial[i].setMotionColorPtr(new DefaultColor());
+		motionMoveRadial[i].setup(ofxMotion::DrawMode::CIRCLE, vec2(300, 600), vec2(1.0, 1.0), 14, 14, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_CENTER, true);
+	}
 
 	image.load("image_fx_1.jpg");
 	motionImage.setMotionTransformPtr(new DefaultTransform());
@@ -63,9 +68,11 @@ void ofApp::setup(){
 		motionText[i].setMotionColorPtr(new DefaultColor());
 		string text = ofToString(100001 + i);
 		motionText[i].setup(ofxMotion::DrawMode::TEXT, &font, text, vec2(1550, 600), vec2(1.0, 1.0), 0.0, ofColor(65, 56, 56, 200), ofxMotion::AnchorMode::ANCHOR_CENTER, true);
-		float radian = TWO_PI * (0.1 * i);
+		float radian = (TWO_PI / 10) * i;
 		motionText[i].getMotionTransform()->startMoveCircle(radian, vec2(100, 150), 3.0, 1, 0.0, ofxeasing::linear::easeNone, true);
 	}
+
+
 
 	ofBackground(255);
 	ofSetFrameRate(60);
@@ -85,13 +92,16 @@ void ofApp::update(){
 	}
 	motionColor.update(now);
 	for (int i = 0; i < 5; i++) {
-		motionRadialNoise[i].update(now);
+		motionSignedNoise[i].update(now);
 	}
 	for (int i = 0; i < 5; i++) {
 		motionRotate[i].update(now);
 	}
 	for (int i = 0; i < 3; i++) {
 		motionScale[i].update(now);
+	}
+	for (int i = 0; i < 10; i++) {
+		motionMoveRadial[i].update(now);
 	}
 	motionImage.update(now);
 	for (int i = 0; i < 10; i++) {
@@ -109,13 +119,16 @@ void ofApp::draw(){
 	}
 	motionColor.draw();
 	for (int i = 0; i < 5; i++) {
-		motionRadialNoise[i].draw();
+		motionSignedNoise[i].draw();
 	}
 	for (int i = 0; i < 5; i++) {
 		motionRotate[i].draw();
 	}
 	for (int i = 0; i < 3; i++) {
 		motionScale[i].draw();
+	}
+	for (int i = 0; i < 10; i++) {
+		motionMoveRadial[i].draw();
 	}
 	motionImage.draw();
 	for (int i = 0; i < 10; i++) {
@@ -154,6 +167,11 @@ void ofApp::timer(float now) {
 		motionScale[0].getMotionTransform()->startScale(vec2(1.0, 1.0), vec2(4.0, 4.0), 0.5, ofxeasing::quart::easeOut);
 		motionScale[1].getMotionTransform()->startBounce();
 		motionScale[2].getMotionTransform()->startBounce();
+
+		for (int i = 0; i < 10; i++) {
+			float radian = (TWO_PI / 10) * i;
+			motionMoveRadial[i].getMotionTransform()->startMoveRadial(radian, vec2(0, 0), vec2(160, 160), 1.5, 0.1 * i, ofxeasing::quart::easeOut);
+		}
 
 		motionImage.getMotionColor()->startFadeInFadeOut(0, 255, 1.0, 1.0, 1.0, ofxeasing::quart::easeOut);
 	}

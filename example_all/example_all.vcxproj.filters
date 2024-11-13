@@ -68,7 +68,7 @@
     <ClInclude Include="..\..\..\addons\ofxMotion\src\motions\MoveLiner.h">
       <Filter>addons\ofxMotion\src\motions</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxMotion\src\motions\RadialNoise.h">
+    <ClInclude Include="..\src\motions\SignedNoise.h">
       <Filter>addons\ofxMotion\src\motions</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\addons\ofxMotion\src\motions\Rotate.h">
@@ -81,6 +81,15 @@
       <Filter>addons\ofxMotion\src</Filter>
     </ClInclude>
     <ClInclude Include="..\src\motions\MoveCircle.h">
+      <Filter>addons\ofxMotion\src\motions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\motions\DefaultColor.h">
+      <Filter>addons\ofxMotion\src\motions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\motions\DefaultTransform.h">
+      <Filter>addons\ofxMotion\src\motions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\motions\MoveRadial.h">
       <Filter>addons\ofxMotion\src\motions</Filter>
     </ClInclude>
   </ItemGroup>

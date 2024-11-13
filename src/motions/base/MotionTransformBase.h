@@ -17,12 +17,15 @@ public:
 	virtual void startMoveLiner(vec2 distance, float duration, float delay, ofxeasing::function easing) {}
 	virtual void startMoveLiner(vec2 posStart, vec2 posEnd, float duration, float delay, ofxeasing::function easing) {}
 
+	// MoveRadial
+	virtual void startMoveRadial(float radian, vec2 radiusStart, vec2 radiusEnd, float duration, float delay, ofxeasing::function easing) {}
+
 	// MoveCurve
 	virtual void startMoveCurve(vec2 distance, float radius, int direction, float duration, float delay, ofxeasing::function easing) {}
 	virtual void startMoveCurve(vec2 posStart, vec2 posEnd, float radius, int direction, float duration, float delay, ofxeasing::function easing) {}
 
 	// RadialNoise
-	virtual void startRadialNoise(float radius, float velociry, vec2 posOffset, float duration) {}
+	virtual void startSignedNoise(float radius, float velociry, vec2 posOffset, float duration) {}
 
 	// Rotate
 	virtual void startRotate(float degreesEnd, float anchorPosForRotation, float duration, ofxeasing::function easing) {}

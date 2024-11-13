@@ -30,9 +30,10 @@ class ofApp : public ofBaseApp{
 		ofxMotion motionMoveLiner[6];
 		ofxMotion motionMoveCurve[6];
 		ofxMotion motionColor;
-		ofxMotion motionRadialNoise[5];
+		ofxMotion motionSignedNoise[5];
 		ofxMotion motionRotate[5];
 		ofxMotion motionScale[3];
+		ofxMotion motionMoveRadial[10];
 		ofxMotion motionImage;
 		ofxMotion motionText[10];
 	

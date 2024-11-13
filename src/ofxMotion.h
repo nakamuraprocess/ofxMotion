@@ -7,9 +7,10 @@
 #include "MoveCircle.h"
 #include "MoveLiner.h"
 #include "MoveCurve.h"
+#include "MoveRadial.h"
 #include "DefaultColor.h"
 #include "DefaultTransform.h"
-#include "RadialNoise.h"
+#include "SignedNoise.h"
 #include "Rotate.h"
 #include "Scale.h"
 
