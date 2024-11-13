@@ -10,7 +10,8 @@ public:
 	virtual void startBounce() {}
 
 	// MoveCircle
-	virtual void startMoveCircle(float radian, vec2 radius, float duration, ofxeasing::function easing) {}
+	virtual void startMoveCircle(float radian, vec2 radius, float duration, int direction, float delay, ofxeasing::function easing, bool bEndlress) {}
+	virtual void startMoveCircle(vec2 pos, float radian, vec2 radius, float duration, int direction, float delay, ofxeasing::function easing, bool bEndlress) {}
 
 	// MoveLiner
 	virtual void startMoveLiner(vec2 distance, float duration, float delay, ofxeasing::function easing) {}

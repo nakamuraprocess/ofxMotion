@@ -73,6 +73,7 @@ public:
 	bool insideCircle(int x, int y);
 	bool collision(int x, int y);
 	void setStateInside(bool b);
+	void setStateDisplay(bool b);
 	
 
 private:
@@ -94,9 +95,12 @@ private:
 	vec2 getAnchorPos(float width, float height) const;
 	void setRect(float x, float y, float width, float height);
 
-	bool bDrawSbsection;
-	float drawSubsectionX;
-	float drawSubsectionY;
-	float drawSubsectionWidth;
-	float drawSubsectionHeight;
+	struct DrawSubsection {
+		bool bState;
+		float x;
+		float y;
+		float width;
+		float height;
+	}drawSubsection;
+
 };

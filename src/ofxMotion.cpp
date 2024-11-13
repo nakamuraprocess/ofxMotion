@@ -1,6 +1,9 @@
 #include "ofxMotion.h"
 
 void ofxMotion::setMotionTransformPtr(MotionTransformBase* ptr) {
+	if (motionTransform != nullptr) {
+		ptr->setup(motionTransform->getPos(), motionTransform->getScale(), motionTransform->getWidth(), motionTransform->getHeight(), motionTransform->getDegrees());
+	}
 	motionTransform = ptr;
 }
 
@@ -100,8 +103,8 @@ void ofxMotion::draw() {
 		else if (drawMode == TEXTURE) {
 			vec2 anchorPos = getAnchorPos(width, height);
 			texture->setAnchorPoint(anchorPos.x, anchorPos.y);
-			if (bDrawSbsection) {
-				texture->drawSubsection(x, y, drawSubsectionWidth, drawSubsectionHeight, drawSubsectionX, drawSubsectionY, drawSubsectionWidth, drawSubsectionHeight);
+			if (drawSubsection.bState) {
+				texture->drawSubsection(x, y, drawSubsection.width, drawSubsection.height, drawSubsection.x, drawSubsection.y, drawSubsection.width, drawSubsection.height);
 			}
 			else {
 				texture->draw(x, y, width, height);
@@ -110,8 +113,8 @@ void ofxMotion::draw() {
 		else if (drawMode == IMAGE) {
 			vec2 anchorPos = getAnchorPos(width, height);
 			image->setAnchorPoint(anchorPos.x, anchorPos.y);
-			if (bDrawSbsection) {
-				image->drawSubsection(x, y, drawSubsectionWidth, drawSubsectionHeight, drawSubsectionX, drawSubsectionY, drawSubsectionWidth, drawSubsectionHeight);
+			if (drawSubsection.bState) {
+				image->drawSubsection(x, y, drawSubsection.width, drawSubsection.height, drawSubsection.x, drawSubsection.y, drawSubsection.width, drawSubsection.height);
 			}
 			else {
 				image->draw(x, y, width, height);
@@ -200,12 +203,11 @@ void ofxMotion::setImage(ofImage* image) {
 }
 
 void ofxMotion::setDrawSubsection(float sx, float sy, float sw, float sh) {
-	bDrawSbsection = true;
-	drawSubsectionX = sx;
-	drawSubsectionY = sy;
-	drawSubsectionWidth = sw;
-	drawSubsectionHeight = sh;
-
+	drawSubsection.bState = true;
+	drawSubsection.x = sx;
+	drawSubsection.y = sy;
+	drawSubsection.width = sw;
+	drawSubsection.height = sh;
 	motionTransform->setWidthHeight(sw, sh);
 }
 
@@ -226,9 +228,7 @@ bool ofxMotion::insideCircle(int x, int y) {
 	if (radius > ofDist(motionTransform->getPos().x, motionTransform->getPos().y, x, y)) {
 		return true;
 	}
-	else {
-		return false;
-	}
+	return false;
 }
 
 bool ofxMotion::collision(int x, int y) {
@@ -237,6 +237,10 @@ bool ofxMotion::collision(int x, int y) {
 
 void ofxMotion::setStateInside(bool b) {
 	bStateInside = b;
+}
+
+void ofxMotion::setStateDisplay(bool b) {
+	bStateDisplay = b;
 }
 
 void ofxMotion::setRect(float x, float y, float width, float height) {
