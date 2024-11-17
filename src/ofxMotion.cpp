@@ -8,6 +8,9 @@ void ofxMotion::setMotionTransformPtr(MotionTransformBase* ptr) {
 }
 
 void ofxMotion::setMotionColorPtr(MotionColorBase* ptr) {
+	if (motionColor != nullptr) {
+		ptr->setup(motionColor->getColor());
+	}
 	motionColor = ptr;
 }
 
@@ -16,7 +19,7 @@ void ofxMotion::setup(DrawMode drawMode, vec2 pos, vec2 scale, float width, floa
 	this->anchor = anchor;
 	this->bStateDisplay = bStateDisplay;
 	motionTransform->setup(pos, scale, width, height, degrees);
-	motionColor->setup(color, color);
+	motionColor->setup(color);
 }
 
 void ofxMotion::setup(DrawMode drawMode, ofImage* image, vec2 pos, vec2 scale, float width, float height, float degrees, AnchorMode anchor, bool bStateDisplay) {
@@ -25,7 +28,7 @@ void ofxMotion::setup(DrawMode drawMode, ofImage* image, vec2 pos, vec2 scale, f
 	this->anchor = anchor;
 	this->bStateDisplay = bStateDisplay;
 	motionTransform->setup(pos, scale, width, height, degrees);
-	motionColor->setup(ofColor(255), ofColor(255));
+	motionColor->setup(ofColor(255));
 }
 
 void ofxMotion::setup(DrawMode drawMode, ofTexture* texture, vec2 pos, vec2 scale, float width, float height, float degrees, AnchorMode anchor, bool bStateDisplay) {
@@ -34,7 +37,7 @@ void ofxMotion::setup(DrawMode drawMode, ofTexture* texture, vec2 pos, vec2 scal
 	this->anchor = anchor;
 	this->bStateDisplay = bStateDisplay;
 	motionTransform->setup(pos, scale, width, height, degrees);
-	motionColor->setup(ofColor(255), ofColor(255));
+	motionColor->setup(ofColor(255));
 }
 
 void ofxMotion::setup(DrawMode drawMode, ofTrueTypeFont* ttf, string strText, vec2 pos, vec2 scale, float degrees, ofColor color, AnchorMode anchor, bool bStateDisplay) {
@@ -45,7 +48,7 @@ void ofxMotion::setup(DrawMode drawMode, ofTrueTypeFont* ttf, string strText, ve
 	this->bStateDisplay = bStateDisplay;
 	rectangle = ttf->getStringBoundingBox(strText, 0, 0);
 	motionTransform->setup(pos, scale, rectangle.getWidth(), rectangle.getHeight(), degrees);
-	motionColor->setup(color, color);
+	motionColor->setup(color);
 }
 
 void ofxMotion::update(const float currentTime) {
@@ -152,7 +155,40 @@ vec2 ofxMotion::getPos() {
 	return motionTransform->getPos();
 }
 
-ofxMotion::DirectionMode ofxMotion::getDirectionMode() {
+vec2 ofxMotion::getPos(PosMode posMode) {
+	float width = motionTransform->getWidth();
+	float height = motionTransform->getHeight();
+	vec2 anchorPos = getAnchorPos(width, height);
+
+	vec2 pos = vec2(0, 0);
+	if (posMode == POS_TOP_LEFT) {
+		pos = motionTransform->getPos() - anchorPos;
+	}
+	else if (posMode == POS_TOP_RIGHT) {
+		pos = motionTransform->getPos() - anchorPos + vec2(width, 0);
+	}
+	else if (posMode == POS_TOP_CENTER) {
+		pos = motionTransform->getPos() - anchorPos + vec2(width * 0.5, 0);
+	}
+	else if (posMode == POS_BOTTOM_LEFT) {
+		pos = motionTransform->getPos() - anchorPos + vec2(0, height);
+	}
+	else if (posMode == POS_BOTTOM_RIGHT) {
+		pos = motionTransform->getPos() - anchorPos + vec2(width, height);
+	}
+	else if (posMode == POS_BOTTOM_CENTER) {
+		pos = motionTransform->getPos() - anchorPos + vec2(width * 0.5, height);
+	}
+	else if (posMode == POS_LEFT_CENTER) {
+		pos = motionTransform->getPos() - anchorPos + vec2(0, height * 0.5);
+	}
+	else if (posMode == POS_RIGHT_CENTER) {
+		pos = motionTransform->getPos() - anchorPos + vec2(width, height * 0.5);
+	}
+	return pos;
+}
+
+ofxMotion::DirectionMode ofxMotion::getDirectionMode() const {
 	return directionMode;
 }
 
@@ -231,8 +267,8 @@ bool ofxMotion::insideCircle(int x, int y) {
 	return false;
 }
 
-bool ofxMotion::collision(int x, int y) {
-	return rectangle.inside(x, y);
+bool ofxMotion::collision(vec2 pos) {
+	return rectangle.inside(pos.x, pos.y);
 }
 
 void ofxMotion::setStateInside(bool b) {

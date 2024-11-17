@@ -32,8 +32,8 @@ public:
 	virtual void startRotate(float start, float target, float anchorPosForRotation, float duration, ofxeasing::function easing) {}
 
 	// Scale
-	virtual void startScale(vec2 scaleEnd, float duration, ofxeasing::function easing) {}
-	virtual void startScale(vec2 start, vec2 target, float duration, ofxeasing::function easing) {}
+	virtual void startScale(vec2 scaleEnd, float duration, float delay, ofxeasing::function easing) {}
+	virtual void startScale(vec2 start, vec2 target, float duration, float delay, ofxeasing::function easing) {}
 
 	enum MotionState {
 		IDLING = 0,

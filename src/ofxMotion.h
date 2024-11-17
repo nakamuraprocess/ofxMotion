@@ -45,6 +45,17 @@ public:
 		BOTTOM_RIGHT = 7,
 	};
 
+	enum PosMode {
+		POS_TOP_LEFT = 0,
+		POS_TOP_RIGHT = 1,
+		POS_TOP_CENTER = 2,
+		POS_BOTTOM_LEFT = 3,
+		POS_BOTTOM_RIGHT = 4,
+		POS_BOTTOM_CENTER = 5,
+		POS_LEFT_CENTER = 6,
+		POS_RIGHT_CENTER = 7
+	};
+
 	void setMotionTransformPtr(MotionTransformBase* ptr);
 	void setMotionColorPtr(MotionColorBase* ptr);
 
@@ -56,8 +67,9 @@ public:
 	void draw();
 
 	vec2 getPos();
+	vec2 getPos(PosMode posMode);
 	ofRectangle getRectangle();
-	DirectionMode getDirectionMode();
+	DirectionMode getDirectionMode() const;
 	MotionTransformBase::MotionState getStateMotionTransform();
 	MotionColorBase::MotionState getStateMotionColor();
 	MotionTransformBase* getMotionTransform();
@@ -72,7 +84,7 @@ public:
 	void setDrawSubsection(float sx, float sy, float sw, float sh);
 	bool insideRect(int x, int y);
 	bool insideCircle(int x, int y);
-	bool collision(int x, int y);
+	bool collision(vec2 pos);
 	void setStateInside(bool b);
 	void setStateDisplay(bool b);
 	

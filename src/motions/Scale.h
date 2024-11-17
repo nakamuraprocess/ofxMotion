@@ -17,20 +17,20 @@ public:
 		}
 	}
 
-	void startScale(vec2 scaleEnd, float duration, ofxeasing::function easing) {
-		this->scaleStart = scale;
-		this->scaleEnd = scaleEnd;
+	void startScale(vec2 scaleEnd, float duration, float delay, ofxeasing::function easing) {
+		scaleStart = scale;
+		this->scaleEnd = scale + scaleEnd;
 		parameter.durationTime = duration;
-		parameter.startTime = ofGetElapsedTimef();
+		parameter.startTime = ofGetElapsedTimef() + delay;
 		parameter.easing = easing;
 		parameter.state = RUNNING;
 	}
 
-	void startScale(vec2 scaleStart, vec2 scaleEnd, float duration, ofxeasing::function easing) {
+	void startScale(vec2 scaleStart, vec2 scaleEnd, float duration, float delay, ofxeasing::function easing) {
 		this->scaleStart = scaleStart;
 		this->scaleEnd = scaleEnd;
 		parameter.durationTime = duration;
-		parameter.startTime = ofGetElapsedTimef();
+		parameter.startTime = ofGetElapsedTimef() + delay;
 		parameter.easing = easing;
 		parameter.state = RUNNING;
 	}

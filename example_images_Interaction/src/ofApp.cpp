@@ -65,35 +65,35 @@ void ofApp::update() {
 
 	for (int i = 0; i < itemMaxSize; i++) {
 		for (int k = i + 1; k < itemMaxSize; k++) {
-			if (motions[k].collision(motions[i].getRectangle().x + motions[i].getRectangle().width, motions[i].getRectangle().y + motions[i].getRectangle().height)) {
+			if (motions[k].collision(motions[i].getPos(ofxMotion::POS_BOTTOM_RIGHT))) {
 				startMove(i, -1, 0, -1, 0);
 				startMove(k, 0, 1, 0, 1);
 			}
-			else if (motions[k].collision(motions[i].getRectangle().x + motions[i].getRectangle().width, motions[i].getRectangle().y + motions[i].getRectangle().height * 0.5)) {
+			else if (motions[k].collision(motions[i].getPos(ofxMotion::POS_RIGHT_CENTER))) {
 				startMove(i, -1, 0, 0, 0);
 				startMove(k, 0, 1, 0, 0);
 			}
-			else if (motions[k].collision(motions[i].getRectangle().x + motions[i].getRectangle().width, motions[i].getRectangle().y)) {
+			else if (motions[k].collision(motions[i].getPos(ofxMotion::POS_TOP_RIGHT))) {
 				startMove(i, -1, 0, 0, 1);
 				startMove(k, 0, 1, -1, 0);
 			}
-			else if (motions[k].collision(motions[i].getRectangle().x + motions[i].getRectangle().width * 0.5, motions[i].getRectangle().y)) {
+			else if (motions[k].collision(motions[i].getPos(ofxMotion::POS_TOP_CENTER))) {
 				startMove(i, 0, 0, 0, 1);
 				startMove(k, 0, 0, -1, 0);
 			}
-			else if (motions[k].collision(motions[i].getRectangle().x, motions[i].getRectangle().y)) {
+			else if (motions[k].collision(motions[i].getPos(ofxMotion::POS_TOP_LEFT))) {
 				startMove(i, 0, 1, 0, 1);
 				startMove(k, -1, 0, -1, 0);
 			}
-			else if (motions[k].collision(motions[i].getRectangle().x, motions[i].getRectangle().y + motions[i].getRectangle().height * 0.5)) {
+			else if (motions[k].collision(motions[i].getPos(ofxMotion::POS_LEFT_CENTER))) {
 				startMove(i, 0, 1, 0, 0);
 				startMove(k, -1, 0, 0, 0);
 			}
-			else if (motions[k].collision(motions[i].getRectangle().x, motions[i].getRectangle().y + motions[i].getRectangle().height)) {
+			else if (motions[k].collision(motions[i].getPos(ofxMotion::POS_BOTTOM_LEFT))) {
 				startMove(i, 0, 1, -1, 0);
 				startMove(k, -1, 0, 0, 1);
 			}
-			else if (motions[k].collision(motions[i].getRectangle().x + motions[i].getRectangle().width * 0.5, motions[i].getRectangle().y + motions[i].getRectangle().height)){
+			else if (motions[k].collision(motions[i].getPos(ofxMotion::POS_BOTTOM_CENTER))) {
 				startMove(i, 0, 0, -1, 0);
 				startMove(k, 0, 0, 0, 1);
 			}
@@ -101,16 +101,16 @@ void ofApp::update() {
 	}
 
 	for (int i = 0; i < itemMaxSize; i++) {
-		if (motions[i].getRectangle().x + motions[i].getRectangle().width > rectMoveArea.getX() + rectMoveArea.getWidth()) {
+		if (motions[i].getPos(ofxMotion::POS_BOTTOM_RIGHT).x > rectMoveArea.getX() + rectMoveArea.getWidth()) {
 			startMove(i, -1, 0, -1, 1);
 		}
-		else if (motions[i].getRectangle().y + motions[i].getRectangle().height > rectMoveArea.getY() + rectMoveArea.getHeight()) {
+		else if (motions[i].getPos(ofxMotion::POS_BOTTOM_RIGHT).y > rectMoveArea.getY() + rectMoveArea.getHeight()) {
 			startMove(i, -1, 1, -1, 0);
 		}
-		else if (motions[i].getRectangle().x < rectMoveArea.getX()) {
+		else if (motions[i].getPos(ofxMotion::POS_TOP_LEFT).x < rectMoveArea.getX()) {
 			startMove(i, 0, 1, -1, 1);
 		}
-		else if (motions[i].getRectangle().y < rectMoveArea.getY()) {
+		else if (motions[i].getPos(ofxMotion::POS_TOP_LEFT).y < rectMoveArea.getY()) {
 			startMove(i, -1, 1, 0, 1);
 		}
 	}

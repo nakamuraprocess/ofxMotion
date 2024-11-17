@@ -41,9 +41,8 @@ public:
 		return time;
 	}
 
-	void setup(ofColor colorStart, ofColor colorEnd) {
-		this->colorStart = this->color = colorStart;
-		this->colorEnd = colorEnd;
+	void setup(ofColor color) {
+		this->colorStart = this->color = color;
 	}
 
 	virtual void update(const float currentTime) {}
