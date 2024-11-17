@@ -4,7 +4,7 @@
 class SignedNoise : public MotionTransformBase {
 private:
 	float timeRecently;
-	float radius;
+	vec2 radius;
 	float velocity;
 	vec2 posOffset;
 	vec2 posNoiseCursor;
@@ -21,12 +21,12 @@ public:
 			timeRecently = currentTime;
 
 			posNoiseCursor += velocity * timeDestination;
-			pos.x = ofSignedNoise(posNoiseCursor.x) * radius + posOffset.x;
-			pos.y = ofSignedNoise(posNoiseCursor.y) * radius + posOffset.y;
+			pos.x = ofSignedNoise(posNoiseCursor.x) * radius.x + posOffset.x;
+			pos.y = ofSignedNoise(posNoiseCursor.y) * radius.y + posOffset.y;
 		}
 	}
 
-	void startSignedNoise(float radius, float velociry, vec2 posOffset, float duration) {
+	void startSignedNoise(vec2 radius, float velociry, vec2 posOffset, float duration) {
 		posNoiseCursor = pos;
 		this->radius = radius;
 		velocity = velociry;

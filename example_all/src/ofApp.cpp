@@ -24,7 +24,7 @@ void ofApp::setup(){
 		motionSignedNoise[i].setMotionTransformPtr(new SignedNoise());
 		motionSignedNoise[i].setMotionColorPtr(new DefaultColor());
 		motionSignedNoise[i].setup(ofxMotion::DrawMode::RECT, vec2(ofRandom(0, 5), ofRandom(0, 5)), vec2(1.0, 1.0), 100, 10, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_CENTER);
-		motionSignedNoise[i].getMotionTransform()->startSignedNoise(275, 0.425, vec2(960, 200), 9999.0);
+		motionSignedNoise[i].getMotionTransform()->startSignedNoise(vec2(275, 275), 0.425, vec2(960, 200), 9999.0);
 	}
 
 	for (int i = 0; i < 3; i++) {
@@ -71,8 +71,6 @@ void ofApp::setup(){
 		float radian = (TWO_PI / 10) * i;
 		motionText[i].getMotionTransform()->startMoveCircle(radian, vec2(100, 150), 3.0, 1, 0.0, ofxeasing::linear::easeNone, true);
 	}
-
-
 
 	ofBackground(255);
 	ofSetFrameRate(60);
@@ -164,7 +162,7 @@ void ofApp::timer(float now) {
 		motionRotate[3].getMotionTransform()->startRotate(180.0, 90.0, 3.0, ofxeasing::linear::easeNone);
 		motionRotate[4].getMotionTransform()->startRotate(45.0, 140.0, 3.0, ofxeasing::linear::easeNone);
 
-		motionScale[0].getMotionTransform()->startScale(vec2(1.0, 1.0), vec2(4.0, 4.0), 0.5, ofxeasing::quart::easeOut);
+		motionScale[0].getMotionTransform()->startScale(vec2(1.0, 1.0), vec2(4.0, 4.0), 0.5, 0.0, ofxeasing::quart::easeOut);
 		motionScale[1].getMotionTransform()->startBounce();
 		motionScale[2].getMotionTransform()->startBounce();
 

@@ -25,7 +25,7 @@ public:
 	virtual void startMoveCurve(vec2 posStart, vec2 posEnd, float radius, int direction, float duration, float delay, ofxeasing::function easing) {}
 
 	// RadialNoise
-	virtual void startSignedNoise(float radius, float velociry, vec2 posOffset, float duration) {}
+	virtual void startSignedNoise(vec2 radius, float velociry, vec2 posOffset, float duration) {}
 
 	// Rotate
 	virtual void startRotate(float degreesEnd, float anchorPosForRotation, float duration, ofxeasing::function easing) {}
