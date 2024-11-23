@@ -133,7 +133,7 @@ void ofApp::draw(){
 void ofApp::startMove(int index, int xDirMin, int xDirMax, int yDirMin, int yDirMax) {
 	float x = ofRandom(xDirMin, xDirMax) * xCanMove;
 	float y = ofRandom(yDirMin, yDirMax) * yCanMove;
-	motions[index].getMotionTransform()->startMoveCurve(vec2(x, y), 100, 1, 60.0, 0.0, ofxeasing::linear::easeNone);
+	motions[index].getMotionTransform()->startMoveCurve(vec2(x, y), 100, 60.0, 0.0, ofxeasing::linear::easeNone);
 }
 
 //--------------------------------------------------------------

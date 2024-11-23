@@ -189,6 +189,7 @@
     <ClInclude Include="..\src\motions\DefaultTransform.h" />
     <ClInclude Include="..\src\motions\MoveCircle.h" />
     <ClInclude Include="..\src\motions\MoveRadial.h" />
+    <ClInclude Include="..\src\motions\SignWaveNoise.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="..\..\..\addons\ofxEasing\src\easing_terms_of_use.html" />
     <ClInclude Include="..\..\..\addons\ofxEasing\src\ofxEasing.h" />
@@ -199,7 +200,6 @@
     <ClInclude Include="..\..\..\addons\ofxMotion\src\motions\FadeInFadeOut.h" />
     <ClInclude Include="..\..\..\addons\ofxMotion\src\motions\MoveCurve.h" />
     <ClInclude Include="..\..\..\addons\ofxMotion\src\motions\MoveLiner.h" />
-    <ClInclude Include="..\src\motions\SignedNoise.h" />
     <ClInclude Include="..\..\..\addons\ofxMotion\src\motions\Rotate.h" />
     <ClInclude Include="..\..\..\addons\ofxMotion\src\motions\Scale.h" />
     <ClInclude Include="..\..\..\addons\ofxMotion\src\ofxMotion.h" />

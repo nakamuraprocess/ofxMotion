@@ -51,6 +51,12 @@ void ofxMotion::setup(DrawMode drawMode, ofTrueTypeFont* ttf, string strText, ve
 	motionColor->setup(color);
 }
 
+void ofxMotion::setup(vec2 pos, vec2 scale, float width, float height) {
+	this->drawMode = NONE;
+	motionTransform->setup(pos, scale, width, height, 0.0);
+	motionColor->setup(ofColor(0,0));
+}
+
 void ofxMotion::update(const float currentTime) {
 	motionTransform->update(currentTime);
 	motionColor->update(currentTime);
@@ -122,6 +128,11 @@ void ofxMotion::draw() {
 			else {
 				image->draw(x, y, width, height);
 			}
+		}
+		else if (drawMode == FBO) {
+			vec2 anchorPos = getAnchorPos(width, height);
+			fbo->setAnchorPoint(anchorPos.x, anchorPos.y);
+			fbo->draw(x, y, width, height);
 		}
 		ofPopMatrix();
 		ofPopStyle();
@@ -212,6 +223,10 @@ MotionColorBase* ofxMotion::getMotionColor() {
 	return motionColor;
 }
 
+string ofxMotion::getText() {
+	return strText;
+}
+
 
 
 void ofxMotion::setStateStateMotionTransform(MotionTransformBase::MotionState state) {
@@ -298,4 +313,8 @@ void ofxMotion::setRect(float x, float y, float width, float height) {
 	else if (anchor == ANCHOR_TOP_RIGHT) {
 		rectangle.set(x, y, -width, height);
 	}
+}
+
+void ofxMotion::setText(string text) {
+	strText = text;
 }

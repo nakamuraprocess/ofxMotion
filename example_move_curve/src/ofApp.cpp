@@ -48,16 +48,16 @@ void ofApp::keyPressed(int key){
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
 	if (key == '1') {
-		motion.getMotionTransform()->startMoveCurve(vec2(500, 500), vec2(1000, 500), 100, 1, 1.0, 0.0, ofxeasing::quart::easeOut);
+		motion.getMotionTransform()->startMoveCurve(vec2(500, 500), vec2(1000, 500), 100, 1.0, 0.0, ofxeasing::quart::easeOut);
 	}
 	else if (key == '2') {
-		motion.getMotionTransform()->startMoveCurve(vec2(500, 500), vec2(500, 0), 100, 1, 1.0, 0.0, ofxeasing::quart::easeOut);
+		motion.getMotionTransform()->startMoveCurve(vec2(500, 500), vec2(500, 0), 100, 1.0, 0.0, ofxeasing::quart::easeOut);
 	}
 	else if (key == '3') {
-		motion.getMotionTransform()->startMoveCurve(vec2(500, 500), vec2(0, 500), 100, 1, 1.0, 0.0, ofxeasing::quart::easeOut);
+		motion.getMotionTransform()->startMoveCurve(vec2(500, 500), vec2(0, 500), 100, 1.0, 0.0, ofxeasing::quart::easeOut);
 	}
 	else if (key == '4') {
-		motion.getMotionTransform()->startMoveCurve(vec2(500, 500), vec2(500, 1000), 100, 1, 1.0, 0.0, ofxeasing::quart::easeOut);
+		motion.getMotionTransform()->startMoveCurve(vec2(500, 500), vec2(500, 1000), 100, 1.0, 0.0, ofxeasing::quart::easeOut);
 	}
 }
 

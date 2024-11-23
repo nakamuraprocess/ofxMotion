@@ -21,10 +21,10 @@ void ofApp::setup(){
 	motionColor.setup(ofxMotion::DrawMode::RECT, vec2(560, 37), vec2(1.0, 1.0), 15, 275, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_TOP_LEFT, true);
 
 	for (int i = 0; i < 5; i++) {
-		motionSignedNoise[i].setMotionTransformPtr(new SignedNoise());
+		motionSignedNoise[i].setMotionTransformPtr(new SignWaveNoise());
 		motionSignedNoise[i].setMotionColorPtr(new DefaultColor());
 		motionSignedNoise[i].setup(ofxMotion::DrawMode::RECT, vec2(ofRandom(0, 5), ofRandom(0, 5)), vec2(1.0, 1.0), 100, 10, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_CENTER);
-		motionSignedNoise[i].getMotionTransform()->startSignedNoise(vec2(275, 275), 0.425, vec2(960, 200), 9999.0);
+		motionSignedNoise[i].getMotionTransform()->startSignWaveNoise(vec2(275, 275), 0.425, vec2(960, 200), 9999.0);
 	}
 
 	for (int i = 0; i < 3; i++) {
@@ -147,12 +147,12 @@ void ofApp::timer(float now) {
 		motionMoveLiner[4].getMotionTransform()->startMoveLiner(vec2(100, 250), vec2(500, 250), 1.0, 0, ofxeasing::exp::easeIn);
 		motionMoveLiner[5].getMotionTransform()->startMoveLiner(vec2(100, 300), vec2(500, 300), 1.0, 0, ofxeasing::back::easeIn);
 
-		motionMoveCurve[0].getMotionTransform()->startMoveCurve(vec2(100, 50), vec2(500, 50), 100, -1, 1.0, 0, ofxeasing::quart::easeOut);
-		motionMoveCurve[1].getMotionTransform()->startMoveCurve(vec2(100, 100), vec2(500, 100), 100, -1, 1.0, 0, ofxeasing::quad::easeOut);
-		motionMoveCurve[2].getMotionTransform()->startMoveCurve(vec2(100, 150), vec2(500, 150), 100, -1, 1.0, 0, ofxeasing::linear::easeNone);
-		motionMoveCurve[3].getMotionTransform()->startMoveCurve(vec2(100, 200), vec2(500, 200), 100, 1, 1.0, 0, ofxeasing::quart::easeIn);
-		motionMoveCurve[4].getMotionTransform()->startMoveCurve(vec2(100, 250), vec2(500, 250), 100, 1, 1.0, 0, ofxeasing::exp::easeIn);
-		motionMoveCurve[5].getMotionTransform()->startMoveCurve(vec2(100, 300), vec2(500, 300), 100, 1, 1.0, 0, ofxeasing::back::easeIn);
+		motionMoveCurve[0].getMotionTransform()->startMoveCurve(vec2(100, 50), vec2(500, 50), -100, 1.0, 0, ofxeasing::quart::easeOut);
+		motionMoveCurve[1].getMotionTransform()->startMoveCurve(vec2(100, 100), vec2(500, 100), -100, 1.0, 0, ofxeasing::quad::easeOut);
+		motionMoveCurve[2].getMotionTransform()->startMoveCurve(vec2(100, 150), vec2(500, 150), -100, 1.0, 0, ofxeasing::linear::easeNone);
+		motionMoveCurve[3].getMotionTransform()->startMoveCurve(vec2(100, 200), vec2(500, 200), 100, 1.0, 0, ofxeasing::quart::easeIn);
+		motionMoveCurve[4].getMotionTransform()->startMoveCurve(vec2(100, 250), vec2(500, 250), 100, 1.0, 0, ofxeasing::exp::easeIn);
+		motionMoveCurve[5].getMotionTransform()->startMoveCurve(vec2(100, 300), vec2(500, 300), 100, 1.0, 0, ofxeasing::back::easeIn);
 
 		motionColor.getMotionColor()->startColorGradation(1.0, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxeasing::quart::easeOut);
 

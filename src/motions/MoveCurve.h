@@ -3,7 +3,6 @@
 
 class MoveCurve : public MotionTransformBase {
 private:
-	int direction = 1;
 	float radius;
 	float radian = 0.0;
 
@@ -22,14 +21,13 @@ public:
 			vec2 targetDirection = normalize(posEnd - posStart);
 			vec2 normalizeDirection = vec2(targetDirection.x * cos(theta) - targetDirection.y * sin(theta), targetDirection.x * sin(theta) + targetDirection.y * cos(theta));
 			normalizeDirection = normalize(normalizeDirection);
-			pos += sin(radian) * radius * normalizeDirection * direction;
+			pos += sin(radian) * radius * normalizeDirection;
 		}
 	}
 
-	void startMoveCurve(vec2 distance, float radius, int direction, float duration, float delay, ofxeasing::function easing) {
+	void startMoveCurve(vec2 distance, float radius, float duration, float delay, ofxeasing::function easing) {
 		posStart = pos;
 		this->radius = radius;
-		this->direction = direction;
 		posEnd = pos + distance;
 		parameter.startTime = ofGetElapsedTimef() + delay;
 		parameter.durationTime = duration;
@@ -37,11 +35,10 @@ public:
 		parameter.state = RUNNING;
 	}
 
-	void startMoveCurve(vec2 posStart, vec2 posEnd, float radius, int direction, float duration, float delay, ofxeasing::function easing) {
+	void startMoveCurve(vec2 posStart, vec2 posEnd, float radius, float duration, float delay, ofxeasing::function easing) {
 		this->posStart = posStart;
 		this->posEnd = posEnd;
 		this->radius = radius;
-		this->direction = direction;
 		parameter.startTime = ofGetElapsedTimef() + delay;
 		parameter.durationTime = duration;
 		parameter.easing = easing;

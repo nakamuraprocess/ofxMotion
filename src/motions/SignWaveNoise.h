@@ -1,7 +1,7 @@
 #pragma once
 #include "MotionTransformBase.h"
 
-class SignedNoise : public MotionTransformBase {
+class SignWaveNoise : public MotionTransformBase {
 private:
 	float timeRecently;
 	vec2 radius;
@@ -26,7 +26,7 @@ public:
 		}
 	}
 
-	void startSignedNoise(vec2 radius, float velociry, vec2 posOffset, float duration) {
+	void startSignWaveNoise(vec2 radius, float velociry, vec2 posOffset, float duration) {
 		posNoiseCursor = pos;
 		this->radius = radius;
 		velocity = velociry;

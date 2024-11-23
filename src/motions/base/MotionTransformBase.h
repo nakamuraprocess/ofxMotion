@@ -21,11 +21,11 @@ public:
 	virtual void startMoveRadial(float radian, vec2 radiusStart, vec2 radiusEnd, float duration, float delay, ofxeasing::function easing) {}
 
 	// MoveCurve
-	virtual void startMoveCurve(vec2 distance, float radius, int direction, float duration, float delay, ofxeasing::function easing) {}
-	virtual void startMoveCurve(vec2 posStart, vec2 posEnd, float radius, int direction, float duration, float delay, ofxeasing::function easing) {}
+	virtual void startMoveCurve(vec2 distance, float radius, float duration, float delay, ofxeasing::function easing) {}
+	virtual void startMoveCurve(vec2 posStart, vec2 posEnd, float radius, float duration, float delay, ofxeasing::function easing) {}
 
-	// RadialNoise
-	virtual void startSignedNoise(vec2 radius, float velociry, vec2 posOffset, float duration) {}
+	// SignWaveNoise
+	virtual void startSignWaveNoise(vec2 radius, float velociry, vec2 posOffset, float duration) {}
 
 	// Rotate
 	virtual void startRotate(float degreesEnd, float anchorPosForRotation, float duration, ofxeasing::function easing) {}
@@ -60,10 +60,10 @@ public:
 	void setup(vec2 pos, vec2 scale, float width, float height, float degrees) {
 		this->pos = posStart = posInitial = pos;
 		this->scale = scaleStart = scale;
-		this->width = width;
-		this->height = height;
-		widthInitial = width;
-		heightInitial = height;
+		this->width = width * scale.x;
+		this->height = height * scale.y;
+		widthInitial = width * scale.x;
+		heightInitial = height * scale.y;
 		this->degrees = degreesStart = degrees;
 	}
 

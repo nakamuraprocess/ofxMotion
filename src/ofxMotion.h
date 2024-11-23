@@ -10,7 +10,7 @@
 #include "MoveRadial.h"
 #include "DefaultColor.h"
 #include "DefaultTransform.h"
-#include "SignedNoise.h"
+#include "SignWaveNoise.h"
 #include "Rotate.h"
 #include "Scale.h"
 
@@ -22,7 +22,9 @@ public:
 		TRIANGLE = 2,
 		IMAGE = 3,
 		TEXTURE = 4,
-		TEXT = 5
+		TEXT = 5,
+		FBO = 6,
+		NONE =7
 	};
 
 	enum AnchorMode {
@@ -63,6 +65,7 @@ public:
 	void setup(DrawMode drawMode, ofImage* image, vec2 pos, vec2 scale, float width, float height, float degrees, AnchorMode anchor, bool bStateDisplay = false);
 	void setup(DrawMode drawMode, ofTexture* texture, vec2 pos, vec2 scale, float width, float height, float degrees, AnchorMode anchor, bool bStateDisplay = false);
 	void setup(DrawMode drawMode, ofTrueTypeFont* ttf, string strText, vec2 pos, vec2 scale, float degrees, ofColor color, AnchorMode anchor, bool bStateDisplay = false);
+	void setup(vec2 pos, vec2 scale, float width, float height);
 	void update(const float currentTime);
 	void draw();
 
@@ -74,6 +77,7 @@ public:
 	MotionColorBase::MotionState getStateMotionColor();
 	MotionTransformBase* getMotionTransform();
 	MotionColorBase* getMotionColor();
+	string getText();
 
 	void setStateStateMotionTransform(MotionTransformBase::MotionState state);
 	void setPosMotionTransform(vec2 pos);
@@ -87,6 +91,7 @@ public:
 	bool collision(vec2 pos);
 	void setStateInside(bool b);
 	void setStateDisplay(bool b);
+	void setText(string text);
 	
 
 private:
@@ -104,6 +109,7 @@ private:
 	ofTexture* texture = nullptr;
 	ofTrueTypeFont* ttf = nullptr;
 	string strText = "";
+	ofFbo* fbo = nullptr;
 	
 	vec2 getAnchorPos(float width, float height) const;
 	void setRect(float x, float y, float width, float height);
