@@ -41,14 +41,19 @@ public:
 		return time;
 	}
 
-	void setup(ofColor color) {
+	void setup(ofColor color, ofColor colorInitial) {
 		this->colorStart = this->color = color;
+		this->colorInitial = colorInitial;
 	}
 
 	virtual void update(const float currentTime) {}
 
 	ofColor getColor() const {
 		return color;
+	}
+
+	ofColor getColorInitial() const {
+		return colorInitial;
 	}
 
 	ofColor getcolorStart() const {
@@ -91,6 +96,7 @@ public:
 protected:
 	// color parameter
 	ofColor color;
+	ofColor colorInitial;
 	ofColor colorStart;
 	ofColor colorEnd;
 

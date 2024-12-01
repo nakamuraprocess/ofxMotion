@@ -2,14 +2,15 @@
 
 void ofxMotion::setMotionTransformPtr(MotionTransformBase* ptr) {
 	if (motionTransform != nullptr) {
-		ptr->setup(motionTransform->getPos(), motionTransform->getScale(), motionTransform->getWidth(), motionTransform->getHeight(), motionTransform->getDegrees());
+		ptr->setup(motionTransform->getPos(), motionTransform->getPosInitial(), motionTransform->getScale(), 
+			motionTransform->getWidth(), motionTransform->getHeight(), motionTransform->getWidthInitial(), motionTransform->getHeightInitial(), motionTransform->getDegrees());
 	}
 	motionTransform = ptr;
 }
 
 void ofxMotion::setMotionColorPtr(MotionColorBase* ptr) {
 	if (motionColor != nullptr) {
-		ptr->setup(motionColor->getColor());
+		ptr->setup(motionColor->getColor(), motionColor->getColorInitial());
 	}
 	motionColor = ptr;
 }
@@ -18,8 +19,8 @@ void ofxMotion::setup(DrawMode drawMode, vec2 pos, vec2 scale, float width, floa
 	this->drawMode = drawMode;
 	this->anchor = anchor;
 	this->bStateDisplay = bStateDisplay;
-	motionTransform->setup(pos, scale, width, height, degrees);
-	motionColor->setup(color);
+	motionTransform->setup(pos, pos, scale, width, height, width, height, degrees);
+	motionColor->setup(color, color);
 }
 
 void ofxMotion::setup(DrawMode drawMode, ofImage* image, vec2 pos, vec2 scale, float width, float height, float degrees, AnchorMode anchor, bool bStateDisplay) {
@@ -27,8 +28,8 @@ void ofxMotion::setup(DrawMode drawMode, ofImage* image, vec2 pos, vec2 scale, f
 	this->image = image;
 	this->anchor = anchor;
 	this->bStateDisplay = bStateDisplay;
-	motionTransform->setup(pos, scale, width, height, degrees);
-	motionColor->setup(ofColor(255));
+	motionTransform->setup(pos, pos, scale, width, height, width, height, degrees);
+	motionColor->setup(ofColor(255), ofColor(255));
 }
 
 void ofxMotion::setup(DrawMode drawMode, ofTexture* texture, vec2 pos, vec2 scale, float width, float height, float degrees, AnchorMode anchor, bool bStateDisplay) {
@@ -36,8 +37,8 @@ void ofxMotion::setup(DrawMode drawMode, ofTexture* texture, vec2 pos, vec2 scal
 	this->texture = texture;
 	this->anchor = anchor;
 	this->bStateDisplay = bStateDisplay;
-	motionTransform->setup(pos, scale, width, height, degrees);
-	motionColor->setup(ofColor(255));
+	motionTransform->setup(pos, pos, scale, width, height, width, height, degrees);
+	motionColor->setup(ofColor(255), ofColor(255));
 }
 
 void ofxMotion::setup(DrawMode drawMode, ofTrueTypeFont* ttf, string strText, vec2 pos, vec2 scale, float degrees, ofColor color, AnchorMode anchor, bool bStateDisplay) {
@@ -47,14 +48,14 @@ void ofxMotion::setup(DrawMode drawMode, ofTrueTypeFont* ttf, string strText, ve
 	this->anchor = anchor;
 	this->bStateDisplay = bStateDisplay;
 	rectangle = ttf->getStringBoundingBox(strText, 0, 0);
-	motionTransform->setup(pos, scale, rectangle.getWidth(), rectangle.getHeight(), degrees);
-	motionColor->setup(color);
+	motionTransform->setup(pos, pos, scale, rectangle.getWidth(), rectangle.getHeight(), rectangle.getWidth(), rectangle.getHeight(), degrees);
+	motionColor->setup(color, color);
 }
 
 void ofxMotion::setup(vec2 pos, vec2 scale, float width, float height) {
 	this->drawMode = NONE;
-	motionTransform->setup(pos, scale, width, height, 0.0);
-	motionColor->setup(ofColor(0,0));
+	motionTransform->setup(pos, pos, scale, width, height, width, height, 0.0);
+	motionColor->setup(ofColor(0,0), ofColor(0, 0));
 }
 
 void ofxMotion::update(const float currentTime) {
@@ -68,7 +69,7 @@ void ofxMotion::draw() {
 	stateColor = motionColor->getState();
 	if (stateTransform == MotionTransformBase::RUNNING || stateColor == MotionColorBase::RUNNING || bStateDisplay) {
 		ofPushStyle();
-		if (drawMode == IMAGE || drawMode == TEXTURE) {
+		if (drawMode == IMAGE || drawMode == TEXTURE || drawMode == FBO) {
 			ofSetColor(255, motionColor->getColor().a);
 		}
 		else {
@@ -82,13 +83,17 @@ void ofxMotion::draw() {
 		float height = motionTransform->getHeight();
 
 		if (motionTransform->getDegrees() != 0.0) {
-			ofSetRectMode(OF_RECTMODE_CENTER);
+			if (drawMode == IMAGE || drawMode == TEXTURE || drawMode == FBO) {
+				ofSetRectMode(OF_RECTMODE_CORNER);
+			}
+			else {
+				ofSetRectMode(OF_RECTMODE_CENTER);
+			}
 			ofTranslate(motionTransform->getPos());
 			ofRotateDeg(motionTransform->getDegrees());
 			x = motionTransform->getAnchorPosForRotation();
 			y = motionTransform->getAnchorPosForRotation();
-			rectangle.setX(x);
-			rectangle.setY(y);
+			rectangle.set(x, y, width, height);
 		}
 
 		if (drawMode == RECT) {
@@ -233,7 +238,7 @@ void ofxMotion::setStateStateMotionTransform(MotionTransformBase::MotionState st
 	motionTransform->setState(state);
 }
 
-void ofxMotion::setPosMotionTransform(vec2 pos) {
+void ofxMotion::setPos(vec2 pos) {
 	motionTransform->setPos(pos);
 }
 

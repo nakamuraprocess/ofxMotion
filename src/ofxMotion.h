@@ -24,7 +24,7 @@ public:
 		TEXTURE = 4,
 		TEXT = 5,
 		FBO = 6,
-		NONE =7
+		NONE = 7
 	};
 
 	enum AnchorMode {
@@ -55,7 +55,8 @@ public:
 		POS_BOTTOM_RIGHT = 4,
 		POS_BOTTOM_CENTER = 5,
 		POS_LEFT_CENTER = 6,
-		POS_RIGHT_CENTER = 7
+		POS_RIGHT_CENTER = 7,
+		POS_MAX_SIZE = 8
 	};
 
 	void setMotionTransformPtr(MotionTransformBase* ptr);
@@ -80,7 +81,7 @@ public:
 	string getText();
 
 	void setStateStateMotionTransform(MotionTransformBase::MotionState state);
-	void setPosMotionTransform(vec2 pos);
+	void setPos(vec2 pos);
 	void setDirectionMode(DirectionMode mode);
 	void setMirrorMode(bool vertical, bool horizon);
 	void setAnchorMode(AnchorMode anchor);

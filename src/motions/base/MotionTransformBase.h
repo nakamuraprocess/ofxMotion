@@ -10,14 +10,15 @@ public:
 	virtual void startBounce() {}
 
 	// MoveCircle
-	virtual void startMoveCircle(float radian, vec2 radius, float duration, int direction, float delay, ofxeasing::function easing, bool bEndlress) {}
-	virtual void startMoveCircle(vec2 pos, float radian, vec2 radius, float duration, int direction, float delay, ofxeasing::function easing, bool bEndlress) {}
+	virtual void startMoveCircle(float radian, vec2 radius, float duration, float delay, ofxeasing::function easing) {}
+	virtual void startMoveCircle(vec2 pos, float radian, vec2 radius, float duration, float delay, ofxeasing::function easing) {}
 
 	// MoveLiner
 	virtual void startMoveLiner(vec2 distance, float duration, float delay, ofxeasing::function easing) {}
 	virtual void startMoveLiner(vec2 posStart, vec2 posEnd, float duration, float delay, ofxeasing::function easing) {}
 
 	// MoveRadial
+	virtual void startMoveRadial(float radian, vec2 radiusEnd, float duration, float delay, ofxeasing::function easing) {}
 	virtual void startMoveRadial(float radian, vec2 radiusStart, vec2 radiusEnd, float duration, float delay, ofxeasing::function easing) {}
 
 	// MoveCurve
@@ -57,20 +58,26 @@ public:
 		return time;
 	}
 
-	void setup(vec2 pos, vec2 scale, float width, float height, float degrees) {
-		this->pos = posStart = posInitial = pos;
+	void setup(vec2 pos, vec2 posInitial, vec2 scale, float width, float height, float widthInitial, float heightInitial, float degrees) {
+		this->pos = posStart = pos;
+		this->posInitial = posInitial;
 		this->scale = scaleStart = scale;
 		this->width = width * scale.x;
 		this->height = height * scale.y;
-		widthInitial = width * scale.x;
-		heightInitial = height * scale.y;
+		this->widthInitial = widthInitial;
+		this->heightInitial = heightInitial;
 		this->degrees = degreesStart = degrees;
+		if (degrees != 0.0f) this->bRotate = true;
 	}
 
 	virtual void update(const float currentTime) {}
 
 	vec2 getPos() {
 		return pos;
+	}
+
+	vec2 getPosInitial() {
+		return posInitial;
 	}
 
 	vec2 getposStart() {
@@ -89,8 +96,20 @@ public:
 		return height;
 	}
 
+	float getWidthInitial() const {
+		return widthInitial;
+	}
+
+	float getHeightInitial() const {
+		return heightInitial;
+	}
+
 	vec2 getScale() const {
 		return scale;
+	}
+
+	bool isRotate() const {
+		return bRotate;
 	}
 
 	float getDegrees() const {
@@ -152,6 +171,7 @@ protected:
 	vec2 scaleEnd;
 
 	// rotate parameter
+	bool bRotate = false;
 	float degrees;
 	float degreesStart;
 	float degreesEnd;

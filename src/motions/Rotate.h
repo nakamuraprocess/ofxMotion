@@ -20,6 +20,7 @@ public:
 		parameter.durationTime = duration;
 		parameter.startTime = ofGetElapsedTimef();
 		parameter.easing = easing;
+		bRotate = true;
 		parameter.state = RUNNING;
 	}
 
@@ -30,6 +31,7 @@ public:
 		parameter.durationTime = duration;
 		parameter.startTime = ofGetElapsedTimef();
 		parameter.easing = easing;
+		bRotate = true;
 		parameter.state = RUNNING;
 	}
 };
