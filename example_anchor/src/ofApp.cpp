@@ -9,12 +9,12 @@ void ofApp::setup(){
 		motion[i].setMotionColorPtr(new DefaultColor());
 	}
 
-	motion[0].setup(ofxMotion::DrawMode::RECT, vec2(200, 200), vec2(1.0, 1.0), 200, 200, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_CENTER, true);
-	motion[1].setup(ofxMotion::DrawMode::CIRCLE, vec2(200 + 200, 200), vec2(1.0, 1.0), 200, 200, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_CENTER, true);
-	motion[2].setup(ofxMotion::DrawMode::TRIANGLE, vec2(200 + 400, 200), vec2(1.0, 1.0), 200, 200, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_CENTER, true);
+	motion[0].setup(ofxMotion::DrawMode::RECT, vec2(200, 200), vec2(1.0, 1.0), 200, 200, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_CENTER, 0, true);
+	motion[1].setup(ofxMotion::DrawMode::CIRCLE, vec2(200 + 200, 200), vec2(1.0, 1.0), 200, 200, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_CENTER, 0, true);
+	motion[2].setup(ofxMotion::DrawMode::TRIANGLE, vec2(200 + 400, 200), vec2(1.0, 1.0), 200, 200, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_CENTER, 0, true);
 
 	image.load("image_fx_1.jpg");
-	motion[3].setup(ofxMotion::DrawMode::IMAGE, &image, vec2(200, 400), vec2(1.0, 1.0), image.getWidth(), image.getHeight(), 0.0f, ofxMotion::AnchorMode::ANCHOR_CENTER, true);
+	motion[3].setup(ofxMotion::DrawMode::IMAGE, &image, vec2(200, 400), vec2(1.0, 1.0), image.getWidth(), image.getHeight(), 0.0f, ofxMotion::AnchorMode::ANCHOR_CENTER, 0, true);
 
 	pixels.allocate(200, 200, OF_PIXELS_RGB);
 	for (int y = 0; y < 200; y++) {
@@ -23,10 +23,10 @@ void ofApp::setup(){
 		}
 	}
 	texture.allocate(pixels);
-	motion[4].setup(ofxMotion::DrawMode::TEXTURE, &texture, vec2(200 + 200, 400), vec2(1.0, 1.0), texture.getWidth(), texture.getHeight(), 0.0f, ofxMotion::AnchorMode::ANCHOR_CENTER, true);
+	motion[4].setup(ofxMotion::DrawMode::TEXTURE, &texture, vec2(200 + 200, 400), vec2(1.0, 1.0), texture.getWidth(), texture.getHeight(), 0.0f, ofxMotion::AnchorMode::ANCHOR_CENTER, 0, true);
 
 	font.load("NotoSansCJKjp-Regular.otf", 20);
-	motion[5].setup(ofxMotion::DrawMode::TEXT, &font, "ABCDEFG", vec2(200 + 200, 400), vec2(1.0, 1.0), 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_CENTER, true);
+	motion[5].setup(ofxMotion::DrawMode::TEXT, &font, "ABCDEFG", vec2(200 + 200, 400), vec2(1.0, 1.0), 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_CENTER, 0, true);
 
 	ofBackground(255);
 	ofSetFrameRate(60);
@@ -47,10 +47,6 @@ void ofApp::draw(){
 		motion[i].draw();
 	}
 
-	for (int i = 0; i < 6; i++) {
-		ofSetColor(0, 100);
-		ofDrawRectangle(motion[i].getRectangle());
-	}
 
 	ofSetColor(255, 0, 0);
 	ofDrawLine(0, 200, ofGetWidth(), 200);

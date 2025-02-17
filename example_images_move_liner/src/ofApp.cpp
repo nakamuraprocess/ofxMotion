@@ -27,16 +27,14 @@ void ofApp::setup(){
 	for (int i = 0; i < fishMaxSize; i++) {
 		motion[i].setMotionTransformPtr(new MoveLiner());
 		motion[i].setMotionColorPtr(new DefaultColor());
-		motion[i].setup(ofxMotion::DrawMode::IMAGE, &imageFish[i], posFish[i], vec2(1.0, 1.0), imageFish[i].getWidth(), imageFish[i].getHeight(), 0.0f, ofxMotion::AnchorMode::ANCHOR_CENTER);
+		motion[i].setup(ofxMotion::DrawMode::IMAGE, &imageFish[i], posFish[i], vec2(1.0, 1.0), imageFish[i].getWidth(), imageFish[i].getHeight(), 0.0f, ofxMotion::AnchorMode::ANCHOR_CENTER, 0);
 		
 		auto itr = find(begin(groupLeft), end(groupLeft), i);
 		if (itr != end(groupLeft)) {
 			motion[i].setMirrorMode(false, false);
-			motion[i].setDirectionMode(ofxMotion::DirectionMode::LEFT);
 		}
 		else {
 			motion[i].setMirrorMode(false, true);
-			motion[i].setDirectionMode(ofxMotion::DirectionMode::RIGHT);
 		}
 	}
 
@@ -46,12 +44,9 @@ void ofApp::setup(){
 		if (duration < 3.5) {
 			delay = 1.5;
 		}
-		if (motion[i].getDirectionMode() == ofxMotion::DirectionMode::RIGHT) {
-			motion[i].getMotionTransform()->startMoveLiner(vec2(100, 0), duration, delay, ofxeasing::quint::easeOut);
-		}
-		else if (motion[i].getDirectionMode() == ofxMotion::DirectionMode::LEFT) {
-			motion[i].getMotionTransform()->startMoveLiner(vec2(-100, 0), duration, delay, ofxeasing::quint::easeOut);
-		}
+
+		motion[i].getMotionTransform()->startMoveLiner(vec2(100, 0), duration, delay, ofxeasing::quint::easeOut);
+		motion[i].getMotionTransform()->startMoveLiner(vec2(-100, 0), duration, delay, ofxeasing::quint::easeOut);
 	}
 
 
