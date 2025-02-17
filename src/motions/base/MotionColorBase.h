@@ -94,6 +94,8 @@ public:
 
 
 protected:
+	float currentTime = 0.0;
+
 	// color parameter
 	ofColor color;
 	ofColor colorInitial;

@@ -8,6 +8,7 @@ private:
 
 public:
 	void update(const float currentTime) {
+		this->currentTime = currentTime;
 		if (parameter.state == RUNNING) {
 			float time = timer(parameter.durationTime, currentTime, parameter.startTime, [&]() {
 					parameter.state = DONE;
@@ -23,7 +24,7 @@ public:
 	void startMoveCircle(float radian, vec2 radius, float duration, float delay, ofxeasing::function easing) {
 		radianInit = radian;
 		this->radius = radius;
-		parameter.startTime = ofGetElapsedTimef() + delay;
+		parameter.startTime = currentTime + delay;
 		parameter.durationTime = duration;
 		parameter.easing = easing;
 		parameter.state = RUNNING;
@@ -33,7 +34,7 @@ public:
 		this->posInitial = pos;
 		radianInit = radian;
 		this->radius = radius;
-		parameter.startTime = ofGetElapsedTimef() + delay;
+		parameter.startTime = currentTime + delay;
 		parameter.durationTime = duration;
 		parameter.easing = easing;
 		parameter.state = RUNNING;

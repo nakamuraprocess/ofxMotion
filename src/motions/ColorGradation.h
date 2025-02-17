@@ -4,6 +4,7 @@
 class ColorGradation : public MotionColorBase {
 public:
 	void update(const float currentTime) {
+		this->currentTime = currentTime;
 		if (parameter.state == RUNNING) {
 			float time = timer(parameter.durationTime, currentTime, parameter.startTime, [&]() {
 				parameter.state = DONE;
@@ -21,7 +22,7 @@ public:
 		this->colorEnd = colorEnd;
 		colorStart = color;
 		parameter.durationTime = duration;
-		parameter.startTime = ofGetElapsedTimef();
+		parameter.startTime = currentTime;
 		parameter.easing = easing;
 		parameter.state = RUNNING;
 	}
@@ -31,7 +32,7 @@ public:
 		this->colorStart = colorStart;
 		this->colorEnd = colorEnd;
 		parameter.durationTime = duration;
-		parameter.startTime = ofGetElapsedTimef();
+		parameter.startTime = currentTime;
 		parameter.easing = easing;
 		parameter.state = RUNNING;
 	}

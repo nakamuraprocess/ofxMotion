@@ -11,6 +11,7 @@ private:
 
 public:
 	void update(const float currentTime) {
+		this->currentTime = currentTime;
 		if (parameter.state == RUNNING) {
 			float time = timer(parameter.durationTime, currentTime, parameter.startTime, [&]() {
 				parameter.state = DONE;
@@ -31,7 +32,7 @@ public:
 		this->radius = radius;
 		velocity = velociry;
 		this->posOffset = posOffset;
-		parameter.startTime = ofGetElapsedTimef();
+		parameter.startTime = currentTime;
 		parameter.durationTime = duration;
 		parameter.state = RUNNING;
 	}

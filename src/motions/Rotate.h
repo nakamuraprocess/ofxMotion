@@ -4,6 +4,7 @@
 class Rotate : public MotionTransformBase {
 public:
 	void update(const float currentTime) {
+		this->currentTime = currentTime;
 		if (parameter.state == RUNNING) {
 			float time = timer(parameter.durationTime, currentTime, parameter.startTime, [&]() {
 				parameter.state = DONE;
@@ -18,7 +19,7 @@ public:
 		this->anchorPosForRotation = anchorPosForRotation;
 		degreesEnd = degrees + distance;
 		parameter.durationTime = duration;
-		parameter.startTime = ofGetElapsedTimef();
+		parameter.startTime = currentTime;
 		parameter.easing = easing;
 		bRotate = true;
 		parameter.state = RUNNING;
@@ -29,7 +30,7 @@ public:
 		this->degreesEnd = degreesEnd;
 		this->anchorPosForRotation = anchorPosForRotation;
 		parameter.durationTime = duration;
-		parameter.startTime = ofGetElapsedTimef();
+		parameter.startTime = currentTime;
 		parameter.easing = easing;
 		bRotate = true;
 		parameter.state = RUNNING;

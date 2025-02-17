@@ -8,6 +8,7 @@ private:
 
 public:
 	void update(const float currentTime) {
+		this->currentTime = currentTime;
 		if (parameter.state == RUNNING) {
 			float time = timer(parameter.durationTime, currentTime, parameter.startTime, [&]() {
 				parameter.state = DONE;
@@ -29,7 +30,7 @@ public:
 		posStart = pos;
 		this->radius = radius;
 		posEnd = pos + distance;
-		parameter.startTime = ofGetElapsedTimef() + delay;
+		parameter.startTime = currentTime + delay;
 		parameter.durationTime = duration;
 		parameter.easing = easing;
 		parameter.state = RUNNING;
@@ -39,7 +40,7 @@ public:
 		this->posStart = posStart;
 		this->posEnd = posEnd;
 		this->radius = radius;
-		parameter.startTime = ofGetElapsedTimef() + delay;
+		parameter.startTime = currentTime + delay;
 		parameter.durationTime = duration;
 		parameter.easing = easing;
 		parameter.state = RUNNING;

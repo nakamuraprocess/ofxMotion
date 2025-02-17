@@ -4,6 +4,7 @@
 class Scale : public MotionTransformBase {
 public:
 	void update(const float currentTime) {
+		this->currentTime = currentTime;
 		if (parameter.state == RUNNING) {
 			float time = timer(parameter.durationTime, currentTime, parameter.startTime, [&]() {
 				parameter.state = DONE;
@@ -21,7 +22,7 @@ public:
 		scaleStart = scale;
 		this->scaleEnd = scale + scaleEnd;
 		parameter.durationTime = duration;
-		parameter.startTime = ofGetElapsedTimef() + delay;
+		parameter.startTime = currentTime + delay;
 		parameter.easing = easing;
 		parameter.state = RUNNING;
 	}
@@ -30,7 +31,7 @@ public:
 		this->scaleStart = scaleStart;
 		this->scaleEnd = scaleEnd;
 		parameter.durationTime = duration;
-		parameter.startTime = ofGetElapsedTimef() + delay;
+		parameter.startTime = currentTime + delay;
 		parameter.easing = easing;
 		parameter.state = RUNNING;
 	}

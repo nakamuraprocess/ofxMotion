@@ -59,16 +59,18 @@ public:
 	}
 
 	void setup(vec2 pos, vec2 posInitial, vec2 scale, float width, float height, float widthInitial, float heightInitial, float degrees) {
-		this->pos = posStart = pos;
+		this->pos = pos;
 		this->posInitial = posInitial;
-		this->scale = scaleStart = scale;
-		this->width = width * scale.x;
-		this->height = height * scale.y;
+		this->scale = scale;
+		this->width = widthInitial * scale.x;
+		this->height = heightInitial * scale.y;
 		this->widthInitial = widthInitial;
 		this->heightInitial = heightInitial;
 		this->degrees = degreesStart = degrees;
 		if (degrees != 0.0f) this->bRotate = true;
 	}
+
+	virtual void setup() {}
 
 	virtual void update(const float currentTime) {}
 
@@ -153,8 +155,14 @@ public:
 		height = h;
 	}
 
+	void setPosInitial() {
+		pos = posInitial;
+	}
+
 
 protected:
+	float currentTime = 0.0;
+
 	// translate parameter
 	vec2 pos;
 	vec2 posInitial;

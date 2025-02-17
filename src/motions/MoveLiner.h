@@ -4,6 +4,7 @@
 class MoveLiner : public MotionTransformBase {
 public:
 	void update(const float currentTime) {
+		this->currentTime = currentTime;
 		if (parameter.state == RUNNING) {
 			float time = timer(parameter.durationTime, currentTime, parameter.startTime, [&]() {
 				parameter.state = DONE;
@@ -17,7 +18,7 @@ public:
 	void startMoveLiner(vec2 distance, float duration, float delay, ofxeasing::function easing) {
 		posStart = pos;
 		posEnd = pos + distance;
-		parameter.startTime = ofGetElapsedTimef() + delay;
+		parameter.startTime = currentTime + delay;
 		parameter.durationTime = duration;
 		parameter.easing = easing;
 		parameter.state = RUNNING;
@@ -26,7 +27,7 @@ public:
 	void startMoveLiner(vec2 posStart, vec2 posEnd, float duration, float delay, ofxeasing::function easing) {
 		this->posStart = posStart;
 		this->posEnd = posEnd;
-		parameter.startTime = ofGetElapsedTimef() + delay;
+		parameter.startTime = currentTime + delay;
 		parameter.durationTime = duration;
 		parameter.easing = easing;
 		parameter.state = RUNNING;

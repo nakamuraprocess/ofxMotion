@@ -1,67 +1,69 @@
 #include "ofxMotion.h"
 
 void ofxMotion::setMotionTransformPtr(MotionTransformBase* ptr) {
-	if (motionTransform != nullptr) {
-		ptr->setup(motionTransform->getPos(), motionTransform->getPosInitial(), motionTransform->getScale(), 
-			motionTransform->getWidth(), motionTransform->getHeight(), motionTransform->getWidthInitial(), motionTransform->getHeightInitial(), motionTransform->getDegrees());
-	}
 	motionTransform = ptr;
 }
 
 void ofxMotion::setMotionColorPtr(MotionColorBase* ptr) {
-	if (motionColor != nullptr) {
-		ptr->setup(motionColor->getColor(), motionColor->getColorInitial());
-	}
 	motionColor = ptr;
 }
 
-void ofxMotion::setup(DrawMode drawMode, vec2 pos, vec2 scale, float width, float height, float degrees, ofColor color, AnchorMode anchor, bool bStateDisplay) {
+void ofxMotion::setup(DrawMode drawMode, vec2 pos, vec2 scale, float width, float height, float degrees, ofColor color, AnchorMode anchor, int pointsInterpolatedMaxSize, bool bStateDisplay) {
 	this->drawMode = drawMode;
 	this->anchor = anchor;
 	this->bStateDisplay = bStateDisplay;
+	setPointsInterpolatedSize(pointsInterpolatedMaxSize);
 	motionTransform->setup(pos, pos, scale, width, height, width, height, degrees);
+	motionTransform->setup();
 	motionColor->setup(color, color);
 }
 
-void ofxMotion::setup(DrawMode drawMode, ofImage* image, vec2 pos, vec2 scale, float width, float height, float degrees, AnchorMode anchor, bool bStateDisplay) {
+void ofxMotion::setup(DrawMode drawMode, ofImage* image, vec2 pos, vec2 scale, float width, float height, float degrees, AnchorMode anchor, int pointsInterpolatedMaxSize, bool bStateDisplay) {
 	this->drawMode = drawMode;
 	this->image = image;
 	this->anchor = anchor;
 	this->bStateDisplay = bStateDisplay;
+	setPointsInterpolatedSize(pointsInterpolatedMaxSize);
 	motionTransform->setup(pos, pos, scale, width, height, width, height, degrees);
+	motionTransform->setup();
 	motionColor->setup(ofColor(255), ofColor(255));
 }
 
-void ofxMotion::setup(DrawMode drawMode, ofTexture* texture, vec2 pos, vec2 scale, float width, float height, float degrees, AnchorMode anchor, bool bStateDisplay) {
+void ofxMotion::setup(DrawMode drawMode, ofTexture* texture, vec2 pos, vec2 scale, float width, float height, float degrees, AnchorMode anchor, int pointsInterpolatedMaxSize, bool bStateDisplay) {
 	this->drawMode = drawMode;
 	this->texture = texture;
 	this->anchor = anchor;
 	this->bStateDisplay = bStateDisplay;
+	setPointsInterpolatedSize(pointsInterpolatedMaxSize);
 	motionTransform->setup(pos, pos, scale, width, height, width, height, degrees);
+	motionTransform->setup();
 	motionColor->setup(ofColor(255), ofColor(255));
 }
 
-void ofxMotion::setup(DrawMode drawMode, ofTrueTypeFont* ttf, string strText, vec2 pos, vec2 scale, float degrees, ofColor color, AnchorMode anchor, bool bStateDisplay) {
+void ofxMotion::setup(DrawMode drawMode, ofTrueTypeFont* ttf, string strText, vec2 pos, vec2 scale, float degrees, ofColor color, AnchorMode anchor, int pointsInterpolatedMaxSize, bool bStateDisplay) {
 	this->drawMode = drawMode;
 	this->ttf = ttf;
 	this->strText = strText;
 	this->anchor = anchor;
 	this->bStateDisplay = bStateDisplay;
-	rectangle = ttf->getStringBoundingBox(strText, 0, 0);
+	setPointsInterpolatedSize(pointsInterpolatedMaxSize);
+	ofRectangle rectangle = ttf->getStringBoundingBox(strText, 0, 0);
 	motionTransform->setup(pos, pos, scale, rectangle.getWidth(), rectangle.getHeight(), rectangle.getWidth(), rectangle.getHeight(), degrees);
+	motionTransform->setup();
 	motionColor->setup(color, color);
 }
 
 void ofxMotion::setup(vec2 pos, vec2 scale, float width, float height) {
 	this->drawMode = NONE;
 	motionTransform->setup(pos, pos, scale, width, height, width, height, 0.0);
-	motionColor->setup(ofColor(0,0), ofColor(0, 0));
+	motionTransform->setup();
+	motionColor->setup(ofColor(0, 0), ofColor(0, 0));
 }
 
 void ofxMotion::update(const float currentTime) {
 	motionTransform->update(currentTime);
 	motionColor->update(currentTime);
-	setRect(motionTransform->getPos().x, motionTransform->getPos().y, motionTransform->getWidth(), motionTransform->getHeight());
+	updateInterpolatedPoints();
 }
 
 void ofxMotion::draw() {
@@ -79,10 +81,12 @@ void ofxMotion::draw() {
 		ofPushMatrix();
 		float x = motionTransform->getPos().x;
 		float y = motionTransform->getPos().y;
+		float drawRectangleX = getPoint(POINT_TOP_LEFT).x;
+		float drawRectangleY = getPoint(POINT_TOP_LEFT).y;
 		float width = motionTransform->getWidth();
 		float height = motionTransform->getHeight();
 
-		if (motionTransform->getDegrees() != 0.0) {
+		if (motionTransform->isRotate()) {
 			if (drawMode == IMAGE || drawMode == TEXTURE || drawMode == FBO) {
 				ofSetRectMode(OF_RECTMODE_CORNER);
 			}
@@ -91,13 +95,12 @@ void ofxMotion::draw() {
 			}
 			ofTranslate(motionTransform->getPos());
 			ofRotateDeg(motionTransform->getDegrees());
-			x = motionTransform->getAnchorPosForRotation();
-			y = motionTransform->getAnchorPosForRotation();
-			rectangle.set(x, y, width, height);
+			x = drawRectangleX = motionTransform->getAnchorPosForRotation();
+			y = drawRectangleY = motionTransform->getAnchorPosForRotation();
 		}
 
 		if (drawMode == RECT) {
-			ofDrawRectangle(rectangle);
+			ofDrawRectangle(drawRectangleX, drawRectangleY, width, height);
 		}
 		else if (drawMode == CIRCLE) {
 			float radius = width * 0.25 + height * 0.25;
@@ -171,41 +174,25 @@ vec2 ofxMotion::getPos() {
 	return motionTransform->getPos();
 }
 
-vec2 ofxMotion::getPos(PosMode posMode) {
+vec2 ofxMotion::getPoint(PointLocation pointLocation) {
 	float width = motionTransform->getWidth();
 	float height = motionTransform->getHeight();
 	vec2 anchorPos = getAnchorPos(width, height);
 
-	vec2 pos = vec2(0, 0);
-	if (posMode == POS_TOP_LEFT) {
-		pos = motionTransform->getPos() - anchorPos;
+	vec2 point = vec2(0, 0);
+	if (pointLocation == POINT_TOP_LEFT) {
+		point = motionTransform->getPos() - anchorPos;
 	}
-	else if (posMode == POS_TOP_RIGHT) {
-		pos = motionTransform->getPos() - anchorPos + vec2(width, 0);
+	else if (pointLocation == POINT_TOP_RIGHT) {
+		point = motionTransform->getPos() - anchorPos + vec2(width, 0);
 	}
-	else if (posMode == POS_TOP_CENTER) {
-		pos = motionTransform->getPos() - anchorPos + vec2(width * 0.5, 0);
+	else if (pointLocation == POINT_BOTTOM_LEFT) {
+		point = motionTransform->getPos() - anchorPos + vec2(0, height);
 	}
-	else if (posMode == POS_BOTTOM_LEFT) {
-		pos = motionTransform->getPos() - anchorPos + vec2(0, height);
+	else if (pointLocation == POINT_BOTTOM_RIGHT) {
+		point = motionTransform->getPos() - anchorPos + vec2(width, height);
 	}
-	else if (posMode == POS_BOTTOM_RIGHT) {
-		pos = motionTransform->getPos() - anchorPos + vec2(width, height);
-	}
-	else if (posMode == POS_BOTTOM_CENTER) {
-		pos = motionTransform->getPos() - anchorPos + vec2(width * 0.5, height);
-	}
-	else if (posMode == POS_LEFT_CENTER) {
-		pos = motionTransform->getPos() - anchorPos + vec2(0, height * 0.5);
-	}
-	else if (posMode == POS_RIGHT_CENTER) {
-		pos = motionTransform->getPos() - anchorPos + vec2(width, height * 0.5);
-	}
-	return pos;
-}
-
-ofxMotion::DirectionMode ofxMotion::getDirectionMode() const {
-	return directionMode;
+	return point;
 }
 
 MotionTransformBase::MotionState ofxMotion::getStateMotionTransform() {
@@ -214,10 +201,6 @@ MotionTransformBase::MotionState ofxMotion::getStateMotionTransform() {
 
 MotionColorBase::MotionState ofxMotion::getStateMotionColor() {
 	return motionColor->getState();
-}
-
-ofRectangle ofxMotion::getRectangle() {
-	return rectangle;
 }
 
 MotionTransformBase* ofxMotion::getMotionTransform() {
@@ -232,18 +215,16 @@ string ofxMotion::getText() {
 	return strText;
 }
 
+vector <vec2> ofxMotion::getPointsInterpolated() {
+	return pointsInterpolated;
+}
 
-
-void ofxMotion::setStateStateMotionTransform(MotionTransformBase::MotionState state) {
+void ofxMotion::setStateMotionTransform(MotionTransformBase::MotionState state) {
 	motionTransform->setState(state);
 }
 
 void ofxMotion::setPos(vec2 pos) {
 	motionTransform->setPos(pos);
-}
-
-void ofxMotion::setDirectionMode(DirectionMode mode) {
-	directionMode = mode;
 }
 
 void ofxMotion::setMirrorMode(bool vertical, bool horizon) {
@@ -268,10 +249,7 @@ void ofxMotion::setDrawSubsection(float sx, float sy, float sw, float sh) {
 }
 
 bool ofxMotion::insideRect(int x, int y) {
-	if (!bStateInside) {
-		return false;
-	}
-	return rectangle.inside(x, y);
+	return polyline.inside(x, y);
 }
 
 bool ofxMotion::insideCircle(int x, int y) {
@@ -288,7 +266,7 @@ bool ofxMotion::insideCircle(int x, int y) {
 }
 
 bool ofxMotion::collision(vec2 pos) {
-	return rectangle.inside(pos.x, pos.y);
+	return polyline.inside(pos.x, pos.y);;
 }
 
 void ofxMotion::setStateInside(bool b) {
@@ -299,27 +277,33 @@ void ofxMotion::setStateDisplay(bool b) {
 	bStateDisplay = b;
 }
 
-void ofxMotion::setRect(float x, float y, float width, float height) {
-	if (anchor == ANCHOR_CENTER) {
-		rectangle.set(x - width * 0.5, y - height * 0.5, width, height);
+void ofxMotion::updateInterpolatedPoints() {
+	polyline.clear();
+	for (int i = 0; i < POINT_MAX_SIZE; i++) {
+		PointLocation pointLocation = PointLocation(i);
+		vec2 tmpPos;
+		float radianInit = atan2(getPoint(pointLocation).y - getPos().y, getPoint(pointLocation).x - getPos().x);
+		float radianRotate = radians(motionTransform->getDegrees()) + radianInit;
+		float radius = distance(getPos(), getPoint(pointLocation));
+		tmpPos.x = cos(radianRotate) * radius;
+		tmpPos.y = sin(radianRotate) * radius;
+		pointsRotated[i] = tmpPos + getPos();
+		polyline.addVertex(pointsRotated[i].x, pointsRotated[i].y);
+		pointsInterpolated[i] = pointsRotated[i];
 	}
-	else if (anchor == ANCHOR_BOTTOM_CENTER) {
-		rectangle.set(x - width * 0.5, y, width, -height);
-	}
-	else if (anchor == ANCHOR_BOTTOM_LEFT) {
-		rectangle.set(x, y, width, -height);
-	}
-	else if (anchor == ANCHOR_BOTTOM_RIGHT) {
-		rectangle.set(x, y, -width, -height);
-	}
-	else if (anchor == ANCHOR_TOP_LEFT) {
-		rectangle.set(x, y, width, height);
-	}
-	else if (anchor == ANCHOR_TOP_RIGHT) {
-		rectangle.set(x, y, -width, height);
+	polyline.close();
+
+	for (int i = 4; i < pointsInterpolated.size(); i++) {
+		float percent = float(i) / (pointsInterpolated.size() - 1);
+		pointsInterpolated[i] = polyline.getPointAtPercent(percent);
 	}
 }
 
 void ofxMotion::setText(string text) {
 	strText = text;
+}
+
+void ofxMotion::setPointsInterpolatedSize(int size) {
+	int maxSize = size + (int)POINT_MAX_SIZE;
+	pointsInterpolated.assign(maxSize, vec2(0, 0));
 }

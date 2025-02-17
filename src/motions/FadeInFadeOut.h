@@ -9,12 +9,13 @@ private:
 
 public:
 	void update(const float currentTime) {
+		this->currentTime = currentTime;
 		if (parameter.state == RUNNING) {
 			float time = timer(parameter.durationTime, currentTime, parameter.startTime, [&]() {
 				parameter.state = DONE;
 				});
 
-			unsigned short a;
+			unsigned short a = 0;
 
 			if (time < durationFadeIn) {
 				a = ofxeasing::map_clamp(time, 0.0, durationFadeIn, colorStart.a, colorEnd.a, parameter.easing);
@@ -32,7 +33,7 @@ public:
 
 	void startFadeInFadeOut(int alphaStart, int alphaEnd, float durationFadeIn, float durationChroma, float durationfadeOut, ofxeasing::function easing) {
 		parameter.durationTime = durationFadeIn + durationChroma + durationfadeOut;
-		parameter.startTime = ofGetElapsedTimef();
+		parameter.startTime = currentTime;
 		parameter.easing = easing;
 		parameter.state = RUNNING;
 		colorStart.a = alphaStart;
@@ -44,7 +45,7 @@ public:
 
 	void startFadeOutForce(int alphaEnd, float durationfadeOut, ofxeasing::function easing) {
 		parameter.durationTime = durationfadeOut;
-		parameter.startTime = ofGetElapsedTimef();
+		parameter.startTime = currentTime;
 		parameter.easing = easing;
 		parameter.state = RUNNING;
 		colorStart.a = color.a;
