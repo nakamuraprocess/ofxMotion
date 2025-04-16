@@ -32,9 +32,11 @@ void ofApp::setup(){
 		auto itr = find(begin(groupLeft), end(groupLeft), i);
 		if (itr != end(groupLeft)) {
 			motion[i].setMirrorMode(false, false);
+			moveDirection[i] = LEFT;
 		}
 		else {
 			motion[i].setMirrorMode(false, true);
+			moveDirection[i] = RIGHT;
 		}
 	}
 
@@ -64,14 +66,14 @@ void ofApp::update(){
 
 	for (int i = 0; i < fishMaxSize; i++) {
 		if (motion[i].getStateMotionTransform() == MotionTransformBase::MotionState::DONE) {
-			if (motion[i].getDirectionMode() == ofxMotion::DirectionMode::RIGHT) {
+			if (moveDirection[i] == RIGHT) {
 				if (motion[i].getPos().x > ofGetWidth() + imageFish[i].getWidth() * 0.5) {
-					motion[i].setPosMotionTransform(vec2(-imageFish[i].getWidth() * 0.5, motion[i].getPos().y));
+					motion[i].setPos(vec2(-imageFish[i].getWidth() * 0.5, motion[i].getPos().y));
 				}
 			}
-			if (motion[i].getDirectionMode() == ofxMotion::DirectionMode::LEFT) {
+			if (moveDirection[i] == LEFT) {
 				if (motion[i].getPos().x < 0 -imageFish[i].getWidth() * 0.5) {
-					motion[i].setPosMotionTransform(vec2(ofGetWidth() + imageFish[i].getWidth() * 0.5, motion[i].getPos().y));
+					motion[i].setPos(vec2(ofGetWidth() + imageFish[i].getWidth() * 0.5, motion[i].getPos().y));
 				}
 			}
 			
@@ -80,10 +82,10 @@ void ofApp::update(){
 			if (duration < 3.5) {
 				delay = 1.5;
 			}
-			if (motion[i].getDirectionMode() == ofxMotion::DirectionMode::RIGHT) {
+			if (moveDirection[i] == RIGHT) {
 				motion[i].getMotionTransform()->startMoveLiner(vec2(100, 0), duration, delay, ofxeasing::quint::easeOut);
 			}
-			else if (motion[i].getDirectionMode() == ofxMotion::DirectionMode::LEFT) {
+			else if (moveDirection[i] == LEFT) {
 				motion[i].getMotionTransform()->startMoveLiner(vec2(-100, 0), duration, delay, ofxeasing::quint::easeOut);
 			}
 		}
