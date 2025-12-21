@@ -16,6 +16,8 @@ class ofApp : public ofBaseApp{
 			NONE = 2
 		};
 
+		float now, delta, fps;
+
 		static const int fishMaxSize = 15;
 		ofImage imageFish[fishMaxSize];
 		ofxMotion motion[fishMaxSize];

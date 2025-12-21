@@ -2,6 +2,11 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+	fps = 60;
+	ofSetFrameRate(fps);
+	ofSetVerticalSync(true);
+	delta = 1.0f / fps;
+	ofSetBackgroundColor(255, 255, 255);
 	ofSetCircleResolution(48);
 
 	for (int i = 0; i < 6; i++) {
@@ -71,15 +76,11 @@ void ofApp::setup(){
 		float radian = (TWO_PI / 10) * i;
 		motionText[i].getMotionTransform()->startMoveCircle(radian, vec2(100, 150), 3.0, 0.0, ofxeasing::cubic::easeOut);
 	}
-
-	ofBackground(255);
-	ofSetFrameRate(60);
-	ofSetVerticalSync(true);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	float now = ofGetElapsedTimef();
+	now += delta;
 	timer(now);
 
 	for (int i = 0; i < 6; i++) {

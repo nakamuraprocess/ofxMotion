@@ -37,6 +37,7 @@ class ofApp : public ofBaseApp{
 		ofxMotion motionImage;
 		ofxMotion motionText[10];
 	
+		float now, delta, fps;
 		float timerLapTime = 0.0;
 		float timerSleepTime = 3.0;
 };

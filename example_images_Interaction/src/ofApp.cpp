@@ -2,6 +2,12 @@
 
 //--------------------------------------------------------------
 void ofApp::setup() {
+	fps = 60;
+	ofSetFrameRate(fps);
+	ofSetVerticalSync(true);
+	delta = 1.0f / fps;
+	ofBackground(200);
+
 	margin = 50;
 	rectMoveArea.set(0 + margin, 0 + margin, ofGetWidth() - margin * 2, ofGetHeight() - margin * 2);
 
@@ -46,15 +52,11 @@ void ofApp::setup() {
 	for (int i = 0; i < itemMaxSize; i++) {
 		startMove(i, -1, 1, -1, 1);
 	}
-
-	ofBackground(200);
-	ofSetFrameRate(60);
-	ofSetVerticalSync(true);
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
-	float now = ofGetElapsedTimef();
+	now += delta;
 
 	for (int i = 0; i < itemMaxSize; i++) {
 		motions[i].update(now);
@@ -64,27 +66,30 @@ void ofApp::update() {
 	}
 
 	for (int i = 0; i < itemMaxSize; i++) {
-		for (int k = i + 1; k < itemMaxSize; k++) {
+		for (int k = 0; k < itemMaxSize; k++) {
+			if (i == k) continue;
 			if (motions[k].collision(motions[i].getPoint(ofxMotion::POINT_BOTTOM_RIGHT))) {
 				startMove(i, -1, 0, -1, 0);
 				startMove(k, 0, 1, 0, 1);
+				break;
 			}
 			else if (motions[k].collision(motions[i].getPoint(ofxMotion::POINT_TOP_RIGHT))) {
 				startMove(i, -1, 0, 0, 1);
 				startMove(k, 0, 1, -1, 0);
+				break;
 			}
 			else if (motions[k].collision(motions[i].getPoint(ofxMotion::POINT_TOP_LEFT))) {
 				startMove(i, 0, 1, 0, 1);
 				startMove(k, -1, 0, -1, 0);
+				break;
 			}
 			else if (motions[k].collision(motions[i].getPoint(ofxMotion::POINT_BOTTOM_LEFT))) {
 				startMove(i, 0, 1, -1, 0);
 				startMove(k, -1, 0, 0, 1);
+				break;
 			}
 		}
-	}
 
-	for (int i = 0; i < itemMaxSize; i++) {
 		if (motions[i].getPoint(ofxMotion::POINT_BOTTOM_RIGHT).x > rectMoveArea.getX() + rectMoveArea.getWidth()) {
 			startMove(i, -1, 0, -1, 1);
 		}

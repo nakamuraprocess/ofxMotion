@@ -29,4 +29,6 @@ class ofApp : public ofBaseApp{
 		float yCanMove;
 
 		bool bStateDisplayPanel = false;
+
+		float now, delta, fps;
 };

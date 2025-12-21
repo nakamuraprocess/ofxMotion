@@ -22,12 +22,11 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 
-
 		ofImage image;
 		ofTrueTypeFont font;
 		ofPixels pixels;
 		ofTexture texture;
 
 		ofxMotion motion[6];
-		
+		float now, delta, fps;
 };

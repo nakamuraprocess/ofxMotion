@@ -2,6 +2,11 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+	fps = 60;
+	ofSetFrameRate(fps);
+	ofSetVerticalSync(true);
+	delta = 1.0f / fps;
+	ofSetBackgroundColor(255, 255, 255);
 	ofSetCircleResolution(48);
 
 	for (int i = 0; i < 6; i++) {
@@ -27,15 +32,11 @@ void ofApp::setup(){
 
 	font.load("NotoSansCJKjp-Regular.otf", 20);
 	motion[5].setup(ofxMotion::DrawMode::TEXT, &font, "ABCDEFG", vec2(200 + 200, 400), vec2(1.0, 1.0), 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion::AnchorMode::ANCHOR_CENTER, 0, true);
-
-	ofBackground(255);
-	ofSetFrameRate(60);
-	ofSetVerticalSync(true);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	float now = ofGetElapsedTimef();
+	now += delta;
 	for (int i = 0; i < 6; i++) {
 		motion[i].update(now);
 	}
@@ -46,7 +47,6 @@ void ofApp::draw(){
 	for (int i = 0; i < 6; i++) {
 		motion[i].draw();
 	}
-
 
 	ofSetColor(255, 0, 0);
 	ofDrawLine(0, 200, ofGetWidth(), 200);

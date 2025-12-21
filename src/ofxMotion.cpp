@@ -55,6 +55,7 @@ void ofxMotion::setup(DrawMode drawMode, ofTrueTypeFont* ttf, string strText, ve
 
 void ofxMotion::setup(vec2 pos, vec2 scale, float width, float height) {
 	this->drawMode = NONE;
+	setPointsInterpolatedSize(0);
 	motionTransform->setup(pos, pos, scale, width, height, width, height, 0.0);
 	motionTransform->setup();
 	motionColor->setup(ofColor(0, 0), ofColor(0, 0));

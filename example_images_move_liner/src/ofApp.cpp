@@ -2,6 +2,11 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+	fps = 60;
+	ofSetFrameRate(fps);
+	ofSetVerticalSync(true);
+	delta = 1.0f / fps;
+
 	for (int i = 0; i < fishMaxSize; i++) {
 		imageFish[i].load("image_fx_"+ ofToString(i+1) + ".png");
 	}
@@ -46,19 +51,18 @@ void ofApp::setup(){
 		if (duration < 3.5) {
 			delay = 1.5;
 		}
-
-		motion[i].getMotionTransform()->startMoveLiner(vec2(100, 0), duration, delay, ofxeasing::quint::easeOut);
-		motion[i].getMotionTransform()->startMoveLiner(vec2(-100, 0), duration, delay, ofxeasing::quint::easeOut);
+		if (moveDirection[i] == RIGHT) {
+			motion[i].getMotionTransform()->startMoveLiner(vec2(100, 0), duration, delay, ofxeasing::quint::easeOut);
+		}
+		if (moveDirection[i] == LEFT) {
+			motion[i].getMotionTransform()->startMoveLiner(vec2(-100, 0), duration, delay, ofxeasing::quint::easeOut);
+		}
 	}
-
-
-	ofSetFrameRate(60);
-	ofSetVerticalSync(true);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	float now = ofGetElapsedTimef();
+	now += delta;
 
 	for (int i = 0; i < fishMaxSize; i++) {
 		motion[i].update(now);

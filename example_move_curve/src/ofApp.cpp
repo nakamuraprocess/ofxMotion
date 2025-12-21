@@ -2,19 +2,21 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+	fps = 60;
+	ofSetFrameRate(fps);
+	ofSetVerticalSync(true);
+	delta = 1.0f / fps;
+	ofBackground(255);
+
 	motion.setMotionTransformPtr(new MoveCurve());
 	motion.setMotionColorPtr(new DefaultColor());
 	motion.setup(ofxMotion::DrawMode::CIRCLE, vec2(500, 500), vec2(1.0, 1.0), 4, 4, 0.0f, ofColor(19, 20, 192), ofxMotion::AnchorMode::ANCHOR_CENTER, 0, true);
 	posHistory.push_back(vec2(500, 500));
-
-	ofBackground(255);
-	ofSetFrameRate(60);
-	ofSetVerticalSync(true);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	float now = ofGetElapsedTimef();
+	now += delta;
 	motion.update(now);
 	posHistory.push_back(motion.getPos());
 }

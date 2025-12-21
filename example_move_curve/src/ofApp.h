@@ -24,4 +24,6 @@ class ofApp : public ofBaseApp{
 
 		ofxMotion motion;
 		vector <vec2> posHistory;
+
+		float now, delta, fps;
 };
