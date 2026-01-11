@@ -47,6 +47,7 @@ public:
 
 
 class ofxMotion {
+
 public:
 	enum DrawMode {
 		RECT = 0,
@@ -79,32 +80,32 @@ public:
 	void setMotionTransformPtr(MotionTransformBase* ptr);
 	void setMotionColorPtr(MotionColorBase* ptr);
 
-	void setup(DrawMode drawMode, vec2 pos, vec2 scale, float width, float height, float degrees, ofColor color, AnchorMode anchor, int pointsInterpolatedMaxSize = 0, bool bStateDisplay = false);
-	void setup(DrawMode drawMode, ofImage* image, vec2 pos, vec2 scale, float width, float height, float degrees, AnchorMode anchor, int pointsInterpolatedMaxSize = 0, bool bStateDisplay = false);
-	void setup(DrawMode drawMode, ofTexture* texture, vec2 pos, vec2 scale, float width, float height, float degrees, AnchorMode anchor, int pointsInterpolatedMaxSize = 0, bool bStateDisplay = false);
-	void setup(DrawMode drawMode, ofTrueTypeFont* ttf, string strText, vec2 pos, vec2 scale, float degrees, ofColor color, AnchorMode anchor, int pointsInterpolatedMaxSize = 0, bool bStateDisplay = false);
-	void setup(vec2 pos, vec2 scale, float width, float height);
+	void setup(DrawMode drawMode, glm::vec2 pos, glm::vec2 scale, float width, float height, float degrees, ofColor color, AnchorMode anchor, int pointsInterpolatedMaxSize = 0, bool bStateDisplay = false);
+	void setup(DrawMode drawMode, ofImage* image, glm::vec2 pos, glm::vec2 scale, float width, float height, float degrees, AnchorMode anchor, int pointsInterpolatedMaxSize = 0, bool bStateDisplay = false);
+	void setup(DrawMode drawMode, ofTexture* texture, glm::vec2 pos, glm::vec2 scale, float width, float height, float degrees, AnchorMode anchor, int pointsInterpolatedMaxSize = 0, bool bStateDisplay = false);
+	void setup(DrawMode drawMode, ofTrueTypeFont* ttf, string strText, glm::vec2 pos, glm::vec2 scale, float degrees, ofColor color, AnchorMode anchor, int pointsInterpolatedMaxSize = 0, bool bStateDisplay = false);
+	void setup(glm::vec2 pos, glm::vec2 scale, float width, float height);
 	void update(const float currentTime);
 	void draw();
 
-	vec2 getPos();
-	vec2 getPoint(PointLocation point);
+	glm::vec2 getPos();
+	glm::vec2 getPoint(PointLocation point);
 	MotionTransformBase::MotionState getStateMotionTransform();
 	MotionColorBase::MotionState getStateMotionColor();
 	MotionTransformBase* getMotionTransform();
 	MotionColorBase* getMotionColor();
 	string getText();
-	vector <vec2> getPointsInterpolated();
+	vector <glm::vec2> getPointsInterpolated();
 	
 	void setStateMotionTransform(MotionTransformBase::MotionState state);
-	void setPos(vec2 pos);
+	void setPos(glm::vec2 pos);
 	void setMirrorMode(bool vertical, bool horizon);
 	void setAnchorMode(AnchorMode anchor);
 	void setImage(ofImage* image);
 	void setDrawSubsection(float sx, float sy, float sw, float sh);
 	bool insideRect(int x, int y);
 	bool insideCircle(int x, int y);
-	bool collision(vec2 pos);
+	bool collision(glm::vec2 pos);
 	void setStateInside(bool b);
 	void setStateDisplay(bool b);
 	void setText(string text);
@@ -116,8 +117,8 @@ private:
 	bool bStateDisplay = false;
 	bool bStateInside = true;
 	DrawMode drawMode;
-	vec2 pointsRotated[POINT_MAX_SIZE];
-	vector <vec2> pointsInterpolated;
+	glm::vec2 pointsRotated[POINT_MAX_SIZE];
+	vector <glm::vec2> pointsInterpolated;
 	ofPolyline polyline;
 	AnchorMode anchor;
 	ofImage* image = nullptr;
@@ -125,7 +126,7 @@ private:
 	ofTrueTypeFont* ttf = nullptr;
 	string strText = "";
 	ofFbo* fbo = nullptr;
-	vec2 getAnchorPos(float width, float height) const;
+	glm::vec2 getAnchorPos(float width, float height) const;
 	void updateInterpolatedPoints();
 
 	struct DrawSubsection {

@@ -4,7 +4,7 @@
 class MoveCircle : public MotionTransformBase {
 private:
 	float radianInit;
-	vec2 radius;
+	glm::vec2 radius;
 
 public:
 	void update(const float currentTime) {
@@ -21,7 +21,7 @@ public:
 		}
 	}
 
-	void startMoveCircle(float radian, vec2 radius, float duration, float delay, ofxeasing::function easing) {
+	void startMoveCircle(float radian, glm::vec2 radius, float duration, float delay, ofxeasing::function easing) {
 		radianInit = radian;
 		this->radius = radius;
 		parameter.startTime = currentTime + delay;
@@ -30,7 +30,7 @@ public:
 		parameter.state = RUNNING;
 	}
 
-	void startMoveCircle(vec2 pos, float radian, vec2 radius, float duration, float delay, ofxeasing::function easing) {
+	void startMoveCircle(glm::vec2 pos, float radian, glm::vec2 radius, float duration, float delay, ofxeasing::function easing) {
 		this->posInitial = pos;
 		radianInit = radian;
 		this->radius = radius;

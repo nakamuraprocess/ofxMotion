@@ -19,7 +19,7 @@ void ofApp::setup() {
 			int row = ((rectMoveArea.getWidth() - margin) / 10) * r + 175;
 			int col = ((rectMoveArea.getHeight() - margin) / 4) * c + 200;
 			int index = r + (c * 10);
-			posInit[index] = vec2(row, col);
+			posInit[index] = glm::vec2(row, col);
 			sizeInit[index] = 0.13;
 			if (ofRandomf() > 0.5) {
 				sizeInit[index] = 0.17;
@@ -33,21 +33,21 @@ void ofApp::setup() {
 		imageItems[i].resize(imageItems[i].getWidth() * sizeInit[i], imageItems[i].getHeight() * sizeInit[i]);
 		motions[i].setMotionTransformPtr(new MoveCurve());
 		motions[i].setMotionColorPtr(new DefaultColor());
-		motions[i].setup(ofxMotion::DrawMode::IMAGE, &imageItems[i], posInit[i], vec2(1.0, 1.0), imageItems[i].getWidth(), imageItems[i].getHeight(), 0.0f, ofxMotion::AnchorMode::ANCHOR_CENTER, 0, true);
+		motions[i].setup(ofxMotion::DrawMode::IMAGE, &imageItems[i], posInit[i], glm::vec2(1.0, 1.0), imageItems[i].getWidth(), imageItems[i].getHeight(), 0.0f, ofxMotion::AnchorMode::ANCHOR_CENTER, 0, true);
 	}
 
 	motionPanel.setMotionTransformPtr(new DefaultTransform());
 	motionPanel.setMotionColorPtr(new FadeInFadeOut());
-	motionPanel.setup(ofxMotion::DrawMode::IMAGE, &imagePanels[0], vec2(ofGetWidth() * 0.5, ofGetHeight() * 0.5), vec2(1.0, 1.0), imagePanels[0].getWidth() * 0.8, imagePanels[0].getHeight() * 0.8, 0.0f, ofxMotion::AnchorMode::ANCHOR_CENTER, 0);
+	motionPanel.setup(ofxMotion::DrawMode::IMAGE, &imagePanels[0], glm::vec2(ofGetWidth() * 0.5, ofGetHeight() * 0.5), glm::vec2(1.0, 1.0), imagePanels[0].getWidth() * 0.8, imagePanels[0].getHeight() * 0.8, 0.0f, ofxMotion::AnchorMode::ANCHOR_CENTER, 0);
 
 	motionModal.setMotionTransformPtr(new DefaultTransform());
 	motionModal.setMotionColorPtr(new FadeInFadeOut());
-	motionModal.setup(ofxMotion::DrawMode::RECT, vec2(0, 0), vec2(1.0, 1.0), ofGetWidth(), ofGetHeight(), 0.0f, ofColor(0), ofxMotion::AnchorMode::ANCHOR_TOP_LEFT, 0);
+	motionModal.setup(ofxMotion::DrawMode::RECT, glm::vec2(0, 0), glm::vec2(1.0, 1.0), ofGetWidth(), ofGetHeight(), 0.0f, ofColor(0), ofxMotion::AnchorMode::ANCHOR_TOP_LEFT, 0);
 
 	imageClose.load("close.png");
 	motionClose.setMotionTransformPtr(new DefaultTransform());
 	motionClose.setMotionColorPtr(new FadeInFadeOut());
-	motionClose.setup(ofxMotion::DrawMode::IMAGE, &imageClose, vec2(ofGetWidth() * 0.5 + 410, 130), vec2(1.0, 1.0), imageClose.getWidth(), imageClose.getHeight(), 0.0f, ofxMotion::AnchorMode::ANCHOR_CENTER, 0);
+	motionClose.setup(ofxMotion::DrawMode::IMAGE, &imageClose, glm::vec2(ofGetWidth() * 0.5 + 410, 130), glm::vec2(1.0, 1.0), imageClose.getWidth(), imageClose.getHeight(), 0.0f, ofxMotion::AnchorMode::ANCHOR_CENTER, 0);
 
 	for (int i = 0; i < itemMaxSize; i++) {
 		startMove(i, -1, 1, -1, 1);
@@ -122,7 +122,7 @@ void ofApp::draw(){
 void ofApp::startMove(int index, int xDirMin, int xDirMax, int yDirMin, int yDirMax) {
 	float x = ofRandom(xDirMin, xDirMax) * xCanMove;
 	float y = ofRandom(yDirMin, yDirMax) * yCanMove;
-	motions[index].getMotionTransform()->startMoveCurve(vec2(x, y), 100, 60.0, 0.0, ofxeasing::linear::easeNone);
+	motions[index].getMotionTransform()->startMoveCurve(glm::vec2(x, y), 100, 60.0, 0.0, ofxeasing::linear::easeNone);
 }
 
 //--------------------------------------------------------------

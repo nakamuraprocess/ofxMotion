@@ -15,7 +15,7 @@ public:
 		}
 	}
 
-	void startMoveLiner(vec2 distance, float duration, float delay, ofxeasing::function easing) {
+	void startMoveLiner(glm::vec2 distance, float duration, float delay, ofxeasing::function easing) {
 		posStart = pos;
 		posEnd = pos + distance;
 		parameter.startTime = currentTime + delay;
@@ -24,7 +24,7 @@ public:
 		parameter.state = RUNNING;
 	}
 
-	void startMoveLiner(vec2 posStart, vec2 posEnd, float duration, float delay, ofxeasing::function easing) {
+	void startMoveLiner(glm::vec2 posStart, glm::vec2 posEnd, float duration, float delay, ofxeasing::function easing) {
 		this->posStart = posStart;
 		this->posEnd = posEnd;
 		parameter.startTime = currentTime + delay;

@@ -24,7 +24,7 @@ public:
 		}
 	}
 
-	void startMoveLiner(vec2 distance, float duration, float delay, ofxeasing::function easing) {
+	void startMoveLiner(glm::vec2 distance, float duration, float delay, ofxeasing::function easing) {
 		parameter.state = RUNNING;
 		moveLiner.startMoveLiner(distance, duration, delay, easing);
 	}

@@ -10,8 +10,8 @@ void ofApp::setup(){
 
 	motion.setMotionTransformPtr(new MoveCurve());
 	motion.setMotionColorPtr(new DefaultColor());
-	motion.setup(ofxMotion::DrawMode::CIRCLE, vec2(500, 500), vec2(1.0, 1.0), 4, 4, 0.0f, ofColor(19, 20, 192), ofxMotion::AnchorMode::ANCHOR_CENTER, 0, true);
-	posHistory.push_back(vec2(500, 500));
+	motion.setup(ofxMotion::DrawMode::CIRCLE, glm::vec2(500, 500), glm::vec2(1.0, 1.0), 4, 4, 0.0f, ofColor(19, 20, 192), ofxMotion::AnchorMode::ANCHOR_CENTER, 0, true);
+	posHistory.push_back(glm::vec2(500, 500));
 }
 
 //--------------------------------------------------------------
@@ -50,16 +50,16 @@ void ofApp::keyPressed(int key){
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
 	if (key == '1') {
-		motion.getMotionTransform()->startMoveCurve(vec2(500, 500), vec2(1000, 500), 100, 1.0, 0.0, ofxeasing::quart::easeOut);
+		motion.getMotionTransform()->startMoveCurve(glm::vec2(500, 500), glm::vec2(1000, 500), 100, 1.0, 0.0, ofxeasing::quart::easeOut);
 	}
 	else if (key == '2') {
-		motion.getMotionTransform()->startMoveCurve(vec2(500, 500), vec2(500, 0), 100, 1.0, 0.0, ofxeasing::quart::easeOut);
+		motion.getMotionTransform()->startMoveCurve(glm::vec2(500, 500), glm::vec2(500, 0), 100, 1.0, 0.0, ofxeasing::quart::easeOut);
 	}
 	else if (key == '3') {
-		motion.getMotionTransform()->startMoveCurve(vec2(500, 500), vec2(0, 500), 100, 1.0, 0.0, ofxeasing::quart::easeOut);
+		motion.getMotionTransform()->startMoveCurve(glm::vec2(500, 500), glm::vec2(0, 500), 100, 1.0, 0.0, ofxeasing::quart::easeOut);
 	}
 	else if (key == '4') {
-		motion.getMotionTransform()->startMoveCurve(vec2(500, 500), vec2(500, 1000), 100, 1.0, 0.0, ofxeasing::quart::easeOut);
+		motion.getMotionTransform()->startMoveCurve(glm::vec2(500, 500), glm::vec2(500, 1000), 100, 1.0, 0.0, ofxeasing::quart::easeOut);
 	}
 }
 

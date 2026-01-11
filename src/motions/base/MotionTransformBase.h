@@ -2,40 +2,8 @@
 #include "ofMain.h"
 #include "ofxEasing.h"
 
-using namespace glm;
-
 class MotionTransformBase {
 public:
-	// Bounce
-	virtual void startBounce() {}
-
-	// MoveCircle
-	virtual void startMoveCircle(float radian, vec2 radius, float duration, float delay, ofxeasing::function easing) {}
-	virtual void startMoveCircle(vec2 pos, float radian, vec2 radius, float duration, float delay, ofxeasing::function easing) {}
-
-	// MoveLiner
-	virtual void startMoveLiner(vec2 distance, float duration, float delay, ofxeasing::function easing) {}
-	virtual void startMoveLiner(vec2 posStart, vec2 posEnd, float duration, float delay, ofxeasing::function easing) {}
-
-	// MoveRadial
-	virtual void startMoveRadial(float radian, vec2 radiusEnd, float duration, float delay, ofxeasing::function easing) {}
-	virtual void startMoveRadial(float radian, vec2 radiusStart, vec2 radiusEnd, float duration, float delay, ofxeasing::function easing) {}
-
-	// MoveCurve
-	virtual void startMoveCurve(vec2 distance, float radius, float duration, float delay, ofxeasing::function easing) {}
-	virtual void startMoveCurve(vec2 posStart, vec2 posEnd, float radius, float duration, float delay, ofxeasing::function easing) {}
-
-	// SignWaveNoise
-	virtual void startSignWaveNoise(vec2 radius, float velociry, vec2 posOffset, float duration) {}
-
-	// Rotate
-	virtual void startRotate(float degreesEnd, float anchorPosForRotation, float duration, ofxeasing::function easing) {}
-	virtual void startRotate(float start, float target, float anchorPosForRotation, float duration, ofxeasing::function easing) {}
-
-	// Scale
-	virtual void startScale(vec2 scaleEnd, float duration, float delay, ofxeasing::function easing) {}
-	virtual void startScale(vec2 start, vec2 target, float duration, float delay, ofxeasing::function easing) {}
-
 	enum MotionState {
 		IDLING = 0,
 		RUNNING = 1,
@@ -58,7 +26,7 @@ public:
 		return time;
 	}
 
-	void setup(vec2 pos, vec2 posInitial, vec2 scale, float width, float height, float widthInitial, float heightInitial, float degrees) {
+	void setup(glm::vec2 pos, glm::vec2 posInitial, glm::vec2 scale, float width, float height, float widthInitial, float heightInitial, float degrees) {
 		this->pos = pos;
 		this->posInitial = posInitial;
 		this->scale = scale;
@@ -70,23 +38,23 @@ public:
 		if (degrees != 0.0f) this->bRotate = true;
 	}
 
-	virtual void setup() {}
+	//virtual void setup() {}
 
 	virtual void update(const float currentTime) {}
 
-	vec2 getPos() {
+	glm::vec2 getPos() {
 		return pos;
 	}
 
-	vec2 getPosInitial() {
+	glm::vec2 getPosInitial() {
 		return posInitial;
 	}
 
-	vec2 getPosStart() {
+	glm::vec2 getPosStart() {
 		return posStart;
 	}
 
-	vec2 getPosEnd() {
+	glm::vec2 getPosEnd() {
 		return posEnd;
 	}
 
@@ -106,7 +74,7 @@ public:
 		return heightInitial;
 	}
 
-	vec2 getScale() const {
+	glm::vec2 getScale() const {
 		return scale;
 	}
 
@@ -130,15 +98,15 @@ public:
 		return parameter;
 	}
 
-	void setPos(vec2 pos) {
+	void setPos(glm::vec2 pos) {
 		this->pos = pos;
 	}
 
-	void setPosStart(vec2 pos) {
+	void setPosStart(glm::vec2 pos) {
 		posStart = pos;
 	}
 
-	void setPosEnd(vec2 pos) {
+	void setPosEnd(glm::vec2 pos) {
 		posEnd = pos;
 	}
 
@@ -160,23 +128,54 @@ public:
 	}
 
 
+	// Bounce
+	virtual void startBounce() {}
+
+	// MoveCircle
+	virtual void startMoveCircle(float radian, glm::vec2 radius, float duration, float delay, ofxeasing::function easing) {}
+	virtual void startMoveCircle(glm::vec2 pos, float radian, glm::vec2 radius, float duration, float delay, ofxeasing::function easing) {}
+
+	// MoveLiner
+	virtual void startMoveLiner(glm::vec2 distance, float duration, float delay, ofxeasing::function easing) {}
+	virtual void startMoveLiner(glm::vec2 posStart, glm::vec2 posEnd, float duration, float delay, ofxeasing::function easing) {}
+
+	// MoveRadial
+	virtual void startMoveRadial(float radian, glm::vec2 radiusEnd, float duration, float delay, ofxeasing::function easing) {}
+	virtual void startMoveRadial(float radian, glm::vec2 radiusStart, glm::vec2 radiusEnd, float duration, float delay, ofxeasing::function easing) {}
+
+	// MoveCurve
+	virtual void startMoveCurve(glm::vec2 distance, float radius, float duration, float delay, ofxeasing::function easing) {}
+	virtual void startMoveCurve(glm::vec2 posStart, glm::vec2 posEnd, float radius, float duration, float delay, ofxeasing::function easing) {}
+
+	// SignWaveNoise
+	virtual void startSignWaveNoise(glm::vec2 radius, float velociry, glm::vec2 posOffset, float duration) {}
+
+	// Rotate
+	virtual void startRotate(float degreesEnd, float anchorPosForRotation, float duration, ofxeasing::function easing) {}
+	virtual void startRotate(float start, float target, float anchorPosForRotation, float duration, ofxeasing::function easing) {}
+
+	// Scale
+	virtual void startScale(glm::vec2 scaleEnd, float duration, float delay, ofxeasing::function easing) {}
+	virtual void startScale(glm::vec2 start, glm::vec2 target, float duration, float delay, ofxeasing::function easing) {}
+
+
 protected:
 	float currentTime = 0.0;
 
 	// translate parameter
-	vec2 pos;
-	vec2 posInitial;
-	vec2 posStart;
-	vec2 posEnd;
+	glm::vec2 pos;
+	glm::vec2 posInitial;
+	glm::vec2 posStart;
+	glm::vec2 posEnd;
 
 	// scale parameter
 	float width;
 	float height;
 	float widthInitial;
 	float heightInitial;
-	vec2 scale;
-	vec2 scaleStart;
-	vec2 scaleEnd;
+	glm::vec2 scale;
+	glm::vec2 scaleStart;
+	glm::vec2 scaleEnd;
 
 	// rotate parameter
 	bool bRotate = false;

@@ -29,7 +29,7 @@ public:
 		}
 	}
 
-	void startMoveLiner(vec2 distance, float duration, float delay, ofxeasing::function easing) {
+	void startMoveLiner(glm::vec2 distance, float duration, float delay, ofxeasing::function easing) {
 		parameter.state = RUNNING;
 		moveLiner.startMoveLiner(distance, duration, delay, easing);
 	}
@@ -39,7 +39,7 @@ public:
 		rotateTo.startRotate(distance, anchorPosForRotation, duration, easing);
 	}
 
-	void startScale(vec2 scaleEnd, float duration, float delay, ofxeasing::function easing) {
+	void startScale(glm::vec2 scaleEnd, float duration, float delay, ofxeasing::function easing) {
 		parameter.state = RUNNING;
 		scaleTo.startScale(scaleEnd, duration, delay, easing);
 	}

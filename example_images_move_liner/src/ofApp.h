@@ -21,6 +21,6 @@ class ofApp : public ofBaseApp{
 		static const int fishMaxSize = 15;
 		ofImage imageFish[fishMaxSize];
 		ofxMotion motion[fishMaxSize];
-		vec2 posFish[fishMaxSize];
+		glm::vec2 posFish[fishMaxSize];
 		MoveDirection moveDirection[fishMaxSize];
 };

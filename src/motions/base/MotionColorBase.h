@@ -2,8 +2,6 @@
 #include "ofMain.h"
 #include "ofxEasing.h"
 
-using namespace glm;
-
 class MotionColorBase {
 public:
 	// ColorGradation

@@ -18,7 +18,7 @@ public:
 		}
 	}
 
-	void startScale(vec2 scaleEnd, float duration, float delay, ofxeasing::function easing) {
+	void startScale(glm::vec2 scaleEnd, float duration, float delay, ofxeasing::function easing) {
 		scaleStart = scale;
 		this->scaleEnd = scale + scaleEnd;
 		parameter.durationTime = duration;
@@ -27,7 +27,7 @@ public:
 		parameter.state = RUNNING;
 	}
 
-	void startScale(vec2 scaleStart, vec2 scaleEnd, float duration, float delay, ofxeasing::function easing) {
+	void startScale(glm::vec2 scaleStart, glm::vec2 scaleEnd, float duration, float delay, ofxeasing::function easing) {
 		this->scaleStart = scaleStart;
 		this->scaleEnd = scaleEnd;
 		parameter.durationTime = duration;

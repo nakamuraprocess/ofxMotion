@@ -19,14 +19,14 @@ public:
 			radian = ofxeasing::map_clamp(time, 0.0, parameter.durationTime, 0.0, PI, parameter.easing);
 
 			float theta = PI / 2.0;
-			vec2 targetDirection = normalize(posEnd - posStart);
-			vec2 normalizeDirection = vec2(targetDirection.x * cos(theta) - targetDirection.y * sin(theta), targetDirection.x * sin(theta) + targetDirection.y * cos(theta));
+			glm::vec2 targetDirection = normalize(posEnd - posStart);
+			glm::vec2 normalizeDirection = glm::vec2(targetDirection.x * cos(theta) - targetDirection.y * sin(theta), targetDirection.x * sin(theta) + targetDirection.y * cos(theta));
 			normalizeDirection = normalize(normalizeDirection);
 			pos += sin(radian) * radius * normalizeDirection;
 		}
 	}
 
-	void startMoveCurve(vec2 distance, float radius, float duration, float delay, ofxeasing::function easing) {
+	void startMoveCurve(glm::vec2 distance, float radius, float duration, float delay, ofxeasing::function easing) {
 		posStart = pos;
 		this->radius = radius;
 		posEnd = pos + distance;
@@ -36,7 +36,7 @@ public:
 		parameter.state = RUNNING;
 	}
 
-	void startMoveCurve(vec2 posStart, vec2 posEnd, float radius, float duration, float delay, ofxeasing::function easing) {
+	void startMoveCurve(glm::vec2 posStart, glm::vec2 posEnd, float radius, float duration, float delay, ofxeasing::function easing) {
 		this->posStart = posStart;
 		this->posEnd = posEnd;
 		this->radius = radius;

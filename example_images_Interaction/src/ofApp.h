@@ -20,7 +20,7 @@ class ofApp : public ofBaseApp{
 		ofxMotion motionPanel;
 		ofxMotion motionModal;
 		ofxMotion motionClose;
-		vec2 posInit[itemMaxSize];
+		glm::vec2 posInit[itemMaxSize];
 		float sizeInit[itemMaxSize];
 
 		ofRectangle rectMoveArea;

@@ -23,7 +23,7 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 
 		ofxMotion motion;
-		vector <vec2> posHistory;
+		vector <glm::vec2> posHistory;
 
 		float now, delta, fps;
 };

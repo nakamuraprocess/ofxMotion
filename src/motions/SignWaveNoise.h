@@ -4,10 +4,10 @@
 class SignWaveNoise : public MotionTransformBase {
 private:
 	float timeRecently;
-	vec2 radius;
+	glm::vec2 radius;
 	float velocity;
-	vec2 posOffset;
-	vec2 posNoiseCursor;
+	glm::vec2 posOffset;
+	glm::vec2 posNoiseCursor;
 
 public:
 	void update(const float currentTime) {
@@ -27,7 +27,7 @@ public:
 		}
 	}
 
-	void startSignWaveNoise(vec2 radius, float velociry, vec2 posOffset, float duration) {
+	void startSignWaveNoise(glm::vec2 radius, float velociry, glm::vec2 posOffset, float duration) {
 		posNoiseCursor = pos;
 		this->radius = radius;
 		velocity = velociry;

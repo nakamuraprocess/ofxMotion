@@ -4,9 +4,9 @@
 class MoveRadial : public MotionTransformBase {
 private:
 	float radian;
-	vec2 radius;
-	vec2 radiusStart;
-	vec2 radiusEnd;
+	glm::vec2 radius;
+	glm::vec2 radiusStart;
+	glm::vec2 radiusEnd;
 
 public:
 	void update(const float currentTime) {
@@ -24,7 +24,7 @@ public:
 		}
 	}
 
-	void startMoveRadial(float radian, vec2 radiusEnd, float duration, float delay, ofxeasing::function easing) {
+	void startMoveRadial(float radian, glm::vec2 radiusEnd, float duration, float delay, ofxeasing::function easing) {
 		this->radian = radian;
 		this->radiusStart = this->radius;
 		this->radiusEnd =  radiusEnd;
@@ -34,7 +34,7 @@ public:
 		parameter.state = RUNNING;;
 	}
 
-	void startMoveRadial(float radian, vec2 radiusStart, vec2 radiusEnd, float duration, float delay, ofxeasing::function easing) {
+	void startMoveRadial(float radian, glm::vec2 radiusStart, glm::vec2 radiusEnd, float duration, float delay, ofxeasing::function easing) {
 		this->radian = radian;
 		this->radiusStart = radiusStart;
 		this->radiusEnd = radiusEnd;
