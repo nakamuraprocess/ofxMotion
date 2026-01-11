@@ -18,7 +18,7 @@ public:
 		}
 	}
 
-	void startColorGradation(float duration, ofColor colorEnd, ofxeasing::function easing) {
+	void startColorGradation(ofColor colorEnd, float duration, ofxeasing::function easing) {
 		this->colorEnd = colorEnd;
 		colorStart = color;
 		parameter.durationTime = duration;
@@ -28,7 +28,7 @@ public:
 	}
 
 
-	void startColorGradation(float duration, ofColor colorStart, ofColor colorEnd, ofxeasing::function easing) {
+	void startColorGradation(ofColor colorStart, ofColor colorEnd, float duration, ofxeasing::function easing) {
 		this->colorStart = colorStart;
 		this->colorEnd = colorEnd;
 		parameter.durationTime = duration;

@@ -68,9 +68,7 @@ void ofxMotion::update(const float currentTime) {
 }
 
 void ofxMotion::draw() {
-	stateTransform = motionTransform->getState();
-	stateColor = motionColor->getState();
-	if (stateTransform == MotionTransformBase::RUNNING || stateColor == MotionColorBase::RUNNING || bStateDisplay) {
+	if (motionTransform->getState() == MotionTransformBase::RUNNING || motionColor->getState() == MotionColorBase::RUNNING || bStateDisplay) {
 		ofPushStyle();
 		if (drawMode == IMAGE || drawMode == TEXTURE || drawMode == FBO) {
 			ofSetColor(255, motionColor->getColor().a);

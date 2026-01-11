@@ -7,8 +7,8 @@ using namespace glm;
 class MotionColorBase {
 public:
 	// ColorGradation
-	virtual void startColorGradation(float duration, ofColor colorEnd, ofxeasing::function easing) {}
-	virtual void startColorGradation(float duration, ofColor colorStart, ofColor colorEnd, ofxeasing::function easing) {}
+	virtual void startColorGradation(ofColor colorEnd, float duration, ofxeasing::function easing) {}
+	virtual void startColorGradation(ofColor colorStart, ofColor colorEnd, float duration, ofxeasing::function easing) {}
 
 	// FadeInFadeOut
 	virtual void startFadeInFadeOut(int startAlpha, int targetAlpha, float durationFadeIn, float durationChroma, float durationfadeOut, ofxeasing::function easing) {}
@@ -56,11 +56,11 @@ public:
 		return colorInitial;
 	}
 
-	ofColor getcolorStart() const {
+	ofColor getColorStart() const {
 		return colorStart;
 	}
 
-	ofColor getcolorEnd() const {
+	ofColor getColorEnd() const {
 		return colorEnd;
 	}
 

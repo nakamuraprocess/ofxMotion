@@ -82,11 +82,11 @@ public:
 		return posInitial;
 	}
 
-	vec2 getposStart() {
+	vec2 getPosStart() {
 		return posStart;
 	}
 
-	vec2 getposEnd() {
+	vec2 getPosEnd() {
 		return posEnd;
 	}
 

@@ -162,7 +162,7 @@ void ofApp::timer(float now) {
 		motionMoveCurve[4].getMotionTransform()->startMoveCurve(vec2(100, 250), vec2(500, 250), 100, 1.0, 0, ofxeasing::exp::easeIn);
 		motionMoveCurve[5].getMotionTransform()->startMoveCurve(vec2(100, 300), vec2(500, 300), 100, 1.0, 0, ofxeasing::back::easeIn);
 
-		motionColor.getMotionColor()->startColorGradation(1.0, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxeasing::quart::easeOut);
+		motionColor.getMotionColor()->startColorGradation(ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), 1.0, ofxeasing::quart::easeOut);
 
 		motionRotate[0].getMotionTransform()->startRotate(5.0, 0.0, 0.5, ofxeasing::quart::easeOut);
 		motionRotate[1].getMotionTransform()->startRotate(30.0, 0.0, 0.5, ofxeasing::quart::easeOut);

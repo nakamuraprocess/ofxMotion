@@ -8,6 +8,7 @@
 #include "MoveLiner.h"
 #include "MoveCurve.h"
 #include "MoveRadial.h"
+#include "MoveLinerRotate.h"
 #include "MoveLinerRotateScale.h"
 #include "DefaultColor.h"
 #include "DefaultTransform.h"
@@ -41,12 +42,11 @@ public:
 		ofBackgroundGradient(ofColor(0, 0, 54), ofColor(0, 0, 198), OF_GRADIENT_LINEAR);
 	}
 
-
 }ofxMotionBackground;
 
 
 
-class ofxMotion  {
+class ofxMotion {
 public:
 	enum DrawMode {
 		RECT = 0,
@@ -113,8 +113,8 @@ public:
 private:
 	MotionTransformBase* motionTransform = nullptr;
 	MotionColorBase* motionColor = nullptr;
-	MotionTransformBase::MotionState stateTransform;
-	MotionColorBase::MotionState stateColor;
+	//MotionTransformBase::MotionState stateTransform;
+	//MotionColorBase::MotionState stateColor;
 	bool bStateDisplay = false;
 	bool bStateInside = true;
 	DrawMode drawMode;

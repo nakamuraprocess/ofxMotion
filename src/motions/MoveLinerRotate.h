@@ -2,28 +2,23 @@
 #include "MotionTransformBase.h"
 #include "MoveLiner.h"
 #include "Rotate.h"
-#include "Scale.h"
 
-class MoveLinerRotateScale : public MotionTransformBase {
+class MoveLinerRotate : public MotionTransformBase {
 public:
 	void setup() {
 		moveLiner.setup(pos, posInitial, scale, width, height, widthInitial, heightInitial, degrees);
 		rotateTo.setup(pos, posInitial, scale, width, height, widthInitial, heightInitial, degrees);
-		scaleTo.setup(pos, posInitial, scale, width, height, widthInitial, heightInitial, degrees);
 	}
 
 	void update(const float currentTime) {
 		moveLiner.update(currentTime);
 		rotateTo.update(currentTime);
-		scaleTo.update(currentTime);
-		
+
 		if (parameter.state == RUNNING) {
 			pos = moveLiner.getPos();
 			degrees = rotateTo.getDegrees();
-			width = widthInitial * scaleTo.getScale().x;
-			height = heightInitial * scaleTo.getScale().y;
 
-			if (moveLiner.getState() == DONE && rotateTo.getState() == DONE && scaleTo.getState() == DONE) {
+			if (moveLiner.getState() == DONE && rotateTo.getState() == DONE) {
 				parameter.state = DONE;
 			}
 		}
@@ -39,13 +34,7 @@ public:
 		rotateTo.startRotate(distance, anchorPosForRotation, duration, easing);
 	}
 
-	void startScale(vec2 scaleEnd, float duration, float delay, ofxeasing::function easing) {
-		parameter.state = RUNNING;
-		scaleTo.startScale(scaleEnd, duration, delay, easing);
-	}
-
 private:
 	MoveLiner moveLiner;
 	Rotate rotateTo;
-	Scale scaleTo;
 };
