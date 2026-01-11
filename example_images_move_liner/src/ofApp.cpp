@@ -32,7 +32,7 @@ void ofApp::setup(){
 	for (int i = 0; i < fishMaxSize; i++) {
 		motion[i].setMotionTransformPtr(new MoveLiner());
 		motion[i].setMotionColorPtr(new DefaultColor());
-		motion[i].setup(ofxMotion::DrawMode::IMAGE, &imageFish[i], posFish[i], glm::vec2(1.0, 1.0), imageFish[i].getWidth(), imageFish[i].getHeight(), 0.0f, ofxMotion::AnchorMode::ANCHOR_CENTER, 0);
+		motion[i].setup(ofxMotion2D::DrawMode::IMAGE, &imageFish[i], posFish[i], glm::vec2(1.0, 1.0), imageFish[i].getWidth(), imageFish[i].getHeight(), 0.0f, ofxMotion2D::AnchorMode::ANCHOR_CENTER, 0);
 		
 		auto itr = find(begin(groupLeft), end(groupLeft), i);
 		if (itr != end(groupLeft)) {
@@ -69,7 +69,7 @@ void ofApp::update(){
 	}
 
 	for (int i = 0; i < fishMaxSize; i++) {
-		if (motion[i].getStateMotionTransform() == MotionTransformBase::MotionState::DONE) {
+		if (motion[i].getStateMotionTransform() == MotionTransform2D::MotionState::DONE) {
 			if (moveDirection[i] == RIGHT) {
 				if (motion[i].getPos().x > ofGetWidth() + imageFish[i].getWidth() * 0.5) {
 					motion[i].setPos(glm::vec2(-imageFish[i].getWidth() * 0.5, motion[i].getPos().y));

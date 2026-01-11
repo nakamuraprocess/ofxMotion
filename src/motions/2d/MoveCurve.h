@@ -1,7 +1,7 @@
 #pragma once
-#include "MotionTransformBase.h"
+#include "MotionTransform2D.h"
 
-class MoveCurve : public MotionTransformBase {
+class MoveCurve : public MotionTransform2D {
 private:
 	float radius;
 	float radian = 0.0;

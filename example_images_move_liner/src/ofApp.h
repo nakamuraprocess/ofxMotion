@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxMotion.h"
+#include "ofxMotion2D.h"
 
 class ofApp : public ofBaseApp{
 
@@ -20,7 +20,7 @@ class ofApp : public ofBaseApp{
 
 		static const int fishMaxSize = 15;
 		ofImage imageFish[fishMaxSize];
-		ofxMotion motion[fishMaxSize];
+		ofxMotion2D motion[fishMaxSize];
 		glm::vec2 posFish[fishMaxSize];
 		MoveDirection moveDirection[fishMaxSize];
 };

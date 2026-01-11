@@ -1,7 +1,7 @@
 #pragma once
-#include "MotionColorBase.h"
+#include "MotionColor.h"
 
-class ColorGradation : public MotionColorBase {
+class ColorGradation : public MotionColor {
 public:
 	void update(const float currentTime) {
 		this->currentTime = currentTime;

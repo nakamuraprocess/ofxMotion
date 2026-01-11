@@ -1,7 +1,7 @@
 #pragma once
-#include "MotionTransformBase.h"
+#include "MotionTransform2D.h"
 
-class SignWaveNoise : public MotionTransformBase {
+class SignWaveNoise : public MotionTransform2D {
 private:
 	float timeRecently;
 	glm::vec2 radius;

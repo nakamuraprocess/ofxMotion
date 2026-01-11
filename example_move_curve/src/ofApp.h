@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxMotion.h"
+#include "ofxMotion2D.h"
 
 class ofApp : public ofBaseApp{
 
@@ -22,7 +22,7 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 
-		ofxMotion motion;
+		ofxMotion2D motion;
 		vector <glm::vec2> posHistory;
 
 		float now, delta, fps;

@@ -33,21 +33,21 @@ void ofApp::setup() {
 		imageItems[i].resize(imageItems[i].getWidth() * sizeInit[i], imageItems[i].getHeight() * sizeInit[i]);
 		motions[i].setMotionTransformPtr(new MoveCurve());
 		motions[i].setMotionColorPtr(new DefaultColor());
-		motions[i].setup(ofxMotion::DrawMode::IMAGE, &imageItems[i], posInit[i], glm::vec2(1.0, 1.0), imageItems[i].getWidth(), imageItems[i].getHeight(), 0.0f, ofxMotion::AnchorMode::ANCHOR_CENTER, 0, true);
+		motions[i].setup(ofxMotion2D::DrawMode::IMAGE, &imageItems[i], posInit[i], glm::vec2(1.0, 1.0), imageItems[i].getWidth(), imageItems[i].getHeight(), 0.0f, ofxMotion2D::AnchorMode::ANCHOR_CENTER, 0, true);
 	}
 
 	motionPanel.setMotionTransformPtr(new DefaultTransform());
 	motionPanel.setMotionColorPtr(new FadeInFadeOut());
-	motionPanel.setup(ofxMotion::DrawMode::IMAGE, &imagePanels[0], glm::vec2(ofGetWidth() * 0.5, ofGetHeight() * 0.5), glm::vec2(1.0, 1.0), imagePanels[0].getWidth() * 0.8, imagePanels[0].getHeight() * 0.8, 0.0f, ofxMotion::AnchorMode::ANCHOR_CENTER, 0);
+	motionPanel.setup(ofxMotion2D::DrawMode::IMAGE, &imagePanels[0], glm::vec2(ofGetWidth() * 0.5, ofGetHeight() * 0.5), glm::vec2(1.0, 1.0), imagePanels[0].getWidth() * 0.8, imagePanels[0].getHeight() * 0.8, 0.0f, ofxMotion2D::AnchorMode::ANCHOR_CENTER, 0);
 
 	motionModal.setMotionTransformPtr(new DefaultTransform());
 	motionModal.setMotionColorPtr(new FadeInFadeOut());
-	motionModal.setup(ofxMotion::DrawMode::RECT, glm::vec2(0, 0), glm::vec2(1.0, 1.0), ofGetWidth(), ofGetHeight(), 0.0f, ofColor(0), ofxMotion::AnchorMode::ANCHOR_TOP_LEFT, 0);
+	motionModal.setup(ofxMotion2D::DrawMode::RECT, glm::vec2(0, 0), glm::vec2(1.0, 1.0), ofGetWidth(), ofGetHeight(), 0.0f, ofColor(0), ofxMotion2D::AnchorMode::ANCHOR_TOP_LEFT, 0);
 
 	imageClose.load("close.png");
 	motionClose.setMotionTransformPtr(new DefaultTransform());
 	motionClose.setMotionColorPtr(new FadeInFadeOut());
-	motionClose.setup(ofxMotion::DrawMode::IMAGE, &imageClose, glm::vec2(ofGetWidth() * 0.5 + 410, 130), glm::vec2(1.0, 1.0), imageClose.getWidth(), imageClose.getHeight(), 0.0f, ofxMotion::AnchorMode::ANCHOR_CENTER, 0);
+	motionClose.setup(ofxMotion2D::DrawMode::IMAGE, &imageClose, glm::vec2(ofGetWidth() * 0.5 + 410, 130), glm::vec2(1.0, 1.0), imageClose.getWidth(), imageClose.getHeight(), 0.0f, ofxMotion2D::AnchorMode::ANCHOR_CENTER, 0);
 
 	for (int i = 0; i < itemMaxSize; i++) {
 		startMove(i, -1, 1, -1, 1);
@@ -68,38 +68,38 @@ void ofApp::update() {
 	for (int i = 0; i < itemMaxSize; i++) {
 		for (int k = 0; k < itemMaxSize; k++) {
 			if (i == k) continue;
-			if (motions[k].collision(motions[i].getPoint(ofxMotion::POINT_BOTTOM_RIGHT))) {
+			if (motions[k].collision(motions[i].getPoint(ofxMotion2D::POINT_BOTTOM_RIGHT))) {
 				startMove(i, -1, 0, -1, 0);
 				startMove(k, 0, 1, 0, 1);
 				break;
 			}
-			else if (motions[k].collision(motions[i].getPoint(ofxMotion::POINT_TOP_RIGHT))) {
+			else if (motions[k].collision(motions[i].getPoint(ofxMotion2D::POINT_TOP_RIGHT))) {
 				startMove(i, -1, 0, 0, 1);
 				startMove(k, 0, 1, -1, 0);
 				break;
 			}
-			else if (motions[k].collision(motions[i].getPoint(ofxMotion::POINT_TOP_LEFT))) {
+			else if (motions[k].collision(motions[i].getPoint(ofxMotion2D::POINT_TOP_LEFT))) {
 				startMove(i, 0, 1, 0, 1);
 				startMove(k, -1, 0, -1, 0);
 				break;
 			}
-			else if (motions[k].collision(motions[i].getPoint(ofxMotion::POINT_BOTTOM_LEFT))) {
+			else if (motions[k].collision(motions[i].getPoint(ofxMotion2D::POINT_BOTTOM_LEFT))) {
 				startMove(i, 0, 1, -1, 0);
 				startMove(k, -1, 0, 0, 1);
 				break;
 			}
 		}
 
-		if (motions[i].getPoint(ofxMotion::POINT_BOTTOM_RIGHT).x > rectMoveArea.getX() + rectMoveArea.getWidth()) {
+		if (motions[i].getPoint(ofxMotion2D::POINT_BOTTOM_RIGHT).x > rectMoveArea.getX() + rectMoveArea.getWidth()) {
 			startMove(i, -1, 0, -1, 1);
 		}
-		else if (motions[i].getPoint(ofxMotion::POINT_BOTTOM_RIGHT).y > rectMoveArea.getY() + rectMoveArea.getHeight()) {
+		else if (motions[i].getPoint(ofxMotion2D::POINT_BOTTOM_RIGHT).y > rectMoveArea.getY() + rectMoveArea.getHeight()) {
 			startMove(i, -1, 1, -1, 0);
 		}
-		else if (motions[i].getPoint(ofxMotion::POINT_TOP_LEFT).x < rectMoveArea.getX()) {
+		else if (motions[i].getPoint(ofxMotion2D::POINT_TOP_LEFT).x < rectMoveArea.getX()) {
 			startMove(i, 0, 1, -1, 1);
 		}
-		else if (motions[i].getPoint(ofxMotion::POINT_TOP_LEFT).y < rectMoveArea.getY()) {
+		else if (motions[i].getPoint(ofxMotion2D::POINT_TOP_LEFT).y < rectMoveArea.getY()) {
 			startMove(i, -1, 1, 0, 1);
 		}
 	}

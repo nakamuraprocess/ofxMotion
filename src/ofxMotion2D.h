@@ -1,22 +1,24 @@
 #pragma once
-#include "MotionTransformBase.h"
-#include "MotionColorBase.h"
-#include "Bounce.h"
-#include "ColorGradation.h"
-#include "FadeInFadeOut.h"
-#include "MoveCircle.h"
-#include "MoveLiner.h"
-#include "MoveCurve.h"
-#include "MoveRadial.h"
-#include "MoveLinerRotate.h"
-#include "MoveLinerRotateScale.h"
-#include "DefaultColor.h"
-#include "DefaultTransform.h"
-#include "SignWaveNoise.h"
-#include "Rotate.h"
-#include "Scale.h"
+#include "base/MotionTransform2D.h"
+#include "base/MotionColor.h"
 
-static class ofxMotionBackground {
+#include "color/DefaultColor.h"
+#include "color/ColorGradation.h"
+#include "color/FadeInFadeOut.h"
+
+#include "2d/DefaultTransform.h"
+#include "2d/Bounce.h"
+#include "2d/MoveCircle.h"
+#include "2d/MoveLiner.h"
+#include "2d/MoveCurve.h"
+#include "2d/MoveRadial.h"
+#include "2d/MoveLinerRotate.h"
+#include "2d/MoveLinerRotateScale.h"
+#include "2d/SignWaveNoise.h"
+#include "2d/Rotate.h"
+#include "2d/Scale.h"
+
+static class ofxMotion2DBackground {
 public:
 	static void grid(float width, float height, float margin) {
 		ofPushStyle();
@@ -41,13 +43,10 @@ public:
 	static void blueGradient() {
 		ofBackgroundGradient(ofColor(0, 0, 54), ofColor(0, 0, 198), OF_GRADIENT_LINEAR);
 	}
-
-}ofxMotionBackground;
-
+};
 
 
-class ofxMotion {
-
+class ofxMotion2D {
 public:
 	enum DrawMode {
 		RECT = 0,
@@ -77,8 +76,8 @@ public:
 		POINT_MAX_SIZE = 4
 	};
 
-	void setMotionTransformPtr(MotionTransformBase* ptr);
-	void setMotionColorPtr(MotionColorBase* ptr);
+	void setMotionTransformPtr(MotionTransform2D* ptr);
+	void setMotionColorPtr(MotionColor* ptr);
 
 	void setup(DrawMode drawMode, glm::vec2 pos, glm::vec2 scale, float width, float height, float degrees, ofColor color, AnchorMode anchor, int pointsInterpolatedMaxSize = 0, bool bStateDisplay = false);
 	void setup(DrawMode drawMode, ofImage* image, glm::vec2 pos, glm::vec2 scale, float width, float height, float degrees, AnchorMode anchor, int pointsInterpolatedMaxSize = 0, bool bStateDisplay = false);
@@ -90,14 +89,14 @@ public:
 
 	glm::vec2 getPos();
 	glm::vec2 getPoint(PointLocation point);
-	MotionTransformBase::MotionState getStateMotionTransform();
-	MotionColorBase::MotionState getStateMotionColor();
-	MotionTransformBase* getMotionTransform();
-	MotionColorBase* getMotionColor();
+	MotionTransform2D::MotionState getStateMotionTransform();
+	MotionColor::MotionState getStateMotionColor();
+	MotionTransform2D* getMotionTransform();
+	MotionColor* getMotionColor();
 	string getText();
 	vector <glm::vec2> getPointsInterpolated();
 	
-	void setStateMotionTransform(MotionTransformBase::MotionState state);
+	void setStateMotionTransform(MotionTransform2D::MotionState state);
 	void setPos(glm::vec2 pos);
 	void setMirrorMode(bool vertical, bool horizon);
 	void setAnchorMode(AnchorMode anchor);
@@ -112,8 +111,8 @@ public:
 	void setPointsInterpolatedSize(int size);
 
 private:
-	MotionTransformBase* motionTransform = nullptr;
-	MotionColorBase* motionColor = nullptr;
+	MotionTransform2D* motionTransform = nullptr;
+	MotionColor* motionColor = nullptr;
 	bool bStateDisplay = false;
 	bool bStateInside = true;
 	DrawMode drawMode;
@@ -136,5 +135,4 @@ private:
 		float width;
 		float height;
 	}drawSubsection;
-
 };

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxMotion.h"
+#include "ofxMotion2D.h"
 
 class ofApp : public ofBaseApp{
 
@@ -16,10 +16,10 @@ class ofApp : public ofBaseApp{
 		ofImage imageItems[itemMaxSize];
 		ofImage imagePanels[itemMaxSize];
 		ofImage imageClose;
-		ofxMotion motions[itemMaxSize];
-		ofxMotion motionPanel;
-		ofxMotion motionModal;
-		ofxMotion motionClose;
+		ofxMotion2D motions[itemMaxSize];
+		ofxMotion2D motionPanel;
+		ofxMotion2D motionModal;
+		ofxMotion2D motionClose;
 		glm::vec2 posInit[itemMaxSize];
 		float sizeInit[itemMaxSize];
 

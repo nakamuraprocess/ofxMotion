@@ -1,10 +1,10 @@
 #pragma once
-#include "MotionTransformBase.h"
+#include "MotionTransform2D.h"
 #include "MoveLiner.h"
 #include "Rotate.h"
 #include "Scale.h"
 
-class MoveLinerRotateScale : public MotionTransformBase {
+class MoveLinerRotateScale : public MotionTransform2D {
 public:
 	void setup() {
 		moveLiner.setup(pos, posInitial, scale, width, height, widthInitial, heightInitial, degrees);

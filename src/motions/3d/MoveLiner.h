@@ -1,7 +1,7 @@
 #pragma once
-#include "MotionTransformBase.h"
+#include "MotionTransform3D.h"
 
-class MoveLiner : public MotionTransformBase {
+class MoveLiner : public MotionTransform3D {
 public:
 	void update(const float currentTime) {
 		this->currentTime = currentTime;
@@ -12,10 +12,11 @@ public:
 
 			pos.x = ofxeasing::map_clamp(time, 0.0, parameter.durationTime, posStart.x, posEnd.x, parameter.easing);
 			pos.y = ofxeasing::map_clamp(time, 0.0, parameter.durationTime, posStart.y, posEnd.y, parameter.easing);
+			pos.z = ofxeasing::map_clamp(time, 0.0, parameter.durationTime, posStart.z, posEnd.z, parameter.easing);
 		}
 	}
 
-	void startMoveLiner(glm::vec2 distance, float duration, float delay, ofxeasing::function easing) {
+	void startMoveLiner(glm::vec3 distance, float duration, float delay, ofxeasing::function easing) {
 		posStart = pos;
 		posEnd = pos + distance;
 		parameter.startTime = currentTime + delay;
@@ -24,7 +25,7 @@ public:
 		parameter.state = RUNNING;
 	}
 
-	void startMoveLiner(glm::vec2 posStart, glm::vec2 posEnd, float duration, float delay, ofxeasing::function easing) {
+	void startMoveLiner(glm::vec3 posStart, glm::vec3 posEnd, float duration, float delay, ofxeasing::function easing) {
 		this->posStart = posStart;
 		this->posEnd = posEnd;
 		parameter.startTime = currentTime + delay;

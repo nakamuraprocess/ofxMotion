@@ -1,14 +1,14 @@
-#include "ofxMotion.h"
+#include "ofxMotion2D.h"
 
-void ofxMotion::setMotionTransformPtr(MotionTransformBase* ptr) {
+void ofxMotion2D::setMotionTransformPtr(MotionTransform2D* ptr) {
 	motionTransform = ptr;
 }
 
-void ofxMotion::setMotionColorPtr(MotionColorBase* ptr) {
+void ofxMotion2D::setMotionColorPtr(MotionColor* ptr) {
 	motionColor = ptr;
 }
 
-void ofxMotion::setup(DrawMode drawMode, glm::vec2 pos, glm::vec2 scale, float width, float height, float degrees, ofColor color, AnchorMode anchor, int pointsInterpolatedMaxSize, bool bStateDisplay) {
+void ofxMotion2D::setup(DrawMode drawMode, glm::vec2 pos, glm::vec2 scale, float width, float height, float degrees, ofColor color, AnchorMode anchor, int pointsInterpolatedMaxSize, bool bStateDisplay) {
 	this->drawMode = drawMode;
 	this->anchor = anchor;
 	this->bStateDisplay = bStateDisplay;
@@ -17,7 +17,7 @@ void ofxMotion::setup(DrawMode drawMode, glm::vec2 pos, glm::vec2 scale, float w
 	motionColor->setup(color, color);
 }
 
-void ofxMotion::setup(DrawMode drawMode, ofImage* image, glm::vec2 pos, glm::vec2 scale, float width, float height, float degrees, AnchorMode anchor, int pointsInterpolatedMaxSize, bool bStateDisplay) {
+void ofxMotion2D::setup(DrawMode drawMode, ofImage* image, glm::vec2 pos, glm::vec2 scale, float width, float height, float degrees, AnchorMode anchor, int pointsInterpolatedMaxSize, bool bStateDisplay) {
 	this->drawMode = drawMode;
 	this->image = image;
 	this->anchor = anchor;
@@ -27,7 +27,7 @@ void ofxMotion::setup(DrawMode drawMode, ofImage* image, glm::vec2 pos, glm::vec
 	motionColor->setup(ofColor(255), ofColor(255));
 }
 
-void ofxMotion::setup(DrawMode drawMode, ofTexture* texture, glm::vec2 pos, glm::vec2 scale, float width, float height, float degrees, AnchorMode anchor, int pointsInterpolatedMaxSize, bool bStateDisplay) {
+void ofxMotion2D::setup(DrawMode drawMode, ofTexture* texture, glm::vec2 pos, glm::vec2 scale, float width, float height, float degrees, AnchorMode anchor, int pointsInterpolatedMaxSize, bool bStateDisplay) {
 	this->drawMode = drawMode;
 	this->texture = texture;
 	this->anchor = anchor;
@@ -37,7 +37,7 @@ void ofxMotion::setup(DrawMode drawMode, ofTexture* texture, glm::vec2 pos, glm:
 	motionColor->setup(ofColor(255), ofColor(255));
 }
 
-void ofxMotion::setup(DrawMode drawMode, ofTrueTypeFont* ttf, string strText, glm::vec2 pos, glm::vec2 scale, float degrees, ofColor color, AnchorMode anchor, int pointsInterpolatedMaxSize, bool bStateDisplay) {
+void ofxMotion2D::setup(DrawMode drawMode, ofTrueTypeFont* ttf, string strText, glm::vec2 pos, glm::vec2 scale, float degrees, ofColor color, AnchorMode anchor, int pointsInterpolatedMaxSize, bool bStateDisplay) {
 	this->drawMode = drawMode;
 	this->ttf = ttf;
 	this->strText = strText;
@@ -49,21 +49,21 @@ void ofxMotion::setup(DrawMode drawMode, ofTrueTypeFont* ttf, string strText, gl
 	motionColor->setup(color, color);
 }
 
-void ofxMotion::setup(glm::vec2 pos, glm::vec2 scale, float width, float height) {
+void ofxMotion2D::setup(glm::vec2 pos, glm::vec2 scale, float width, float height) {
 	this->drawMode = NONE;
 	setPointsInterpolatedSize(0);
 	motionTransform->setup(pos, pos, scale, width, height, width, height, 0.0);
 	motionColor->setup(ofColor(0, 0), ofColor(0, 0));
 }
 
-void ofxMotion::update(const float currentTime) {
+void ofxMotion2D::update(const float currentTime) {
 	motionTransform->update(currentTime);
 	motionColor->update(currentTime);
 	updateInterpolatedPoints();
 }
 
-void ofxMotion::draw() {
-	if (motionTransform->getState() == MotionTransformBase::RUNNING || motionColor->getState() == MotionColorBase::RUNNING || bStateDisplay) {
+void ofxMotion2D::draw() {
+	if (motionTransform->getState() == MotionTransform2D::RUNNING || motionColor->getState() == MotionColor::RUNNING || bStateDisplay) {
 		ofPushStyle();
 		if (drawMode == IMAGE || drawMode == TEXTURE || drawMode == FBO) {
 			ofSetColor(255, motionColor->getColor().a);
@@ -141,7 +141,7 @@ void ofxMotion::draw() {
 	}
 }
 
-glm::vec2 ofxMotion::getAnchorPos(float width, float height) const {
+glm::vec2 ofxMotion2D::getAnchorPos(float width, float height) const {
 	glm::vec2 anchorPos = glm::vec2(0, 0);
 	if (anchor == ANCHOR_CENTER) {
 		anchorPos = glm::vec2(width * 0.5, height * 0.5);
@@ -164,11 +164,11 @@ glm::vec2 ofxMotion::getAnchorPos(float width, float height) const {
 	return anchorPos;
 }
 
-glm::vec2 ofxMotion::getPos() {
+glm::vec2 ofxMotion2D::getPos() {
 	return motionTransform->getPos();
 }
 
-glm::vec2 ofxMotion::getPoint(PointLocation pointLocation) {
+glm::vec2 ofxMotion2D::getPoint(PointLocation pointLocation) {
 	float width = motionTransform->getWidth();
 	float height = motionTransform->getHeight();
 	glm::vec2 anchorPos = getAnchorPos(width, height);
@@ -189,51 +189,51 @@ glm::vec2 ofxMotion::getPoint(PointLocation pointLocation) {
 	return point;
 }
 
-MotionTransformBase::MotionState ofxMotion::getStateMotionTransform() {
+MotionTransform2D::MotionState ofxMotion2D::getStateMotionTransform() {
 	return motionTransform->getState();
 }
 
-MotionColorBase::MotionState ofxMotion::getStateMotionColor() {
+MotionColor::MotionState ofxMotion2D::getStateMotionColor() {
 	return motionColor->getState();
 }
 
-MotionTransformBase* ofxMotion::getMotionTransform() {
+MotionTransform2D* ofxMotion2D::getMotionTransform() {
 	return motionTransform;
 }
 
-MotionColorBase* ofxMotion::getMotionColor() {
+MotionColor* ofxMotion2D::getMotionColor() {
 	return motionColor;
 }
 
-string ofxMotion::getText() {
+string ofxMotion2D::getText() {
 	return strText;
 }
 
-vector <glm::vec2> ofxMotion::getPointsInterpolated() {
+vector <glm::vec2> ofxMotion2D::getPointsInterpolated() {
 	return pointsInterpolated;
 }
 
-void ofxMotion::setStateMotionTransform(MotionTransformBase::MotionState state) {
+void ofxMotion2D::setStateMotionTransform(MotionTransform2D::MotionState state) {
 	motionTransform->setState(state);
 }
 
-void ofxMotion::setPos(glm::vec2 pos) {
+void ofxMotion2D::setPos(glm::vec2 pos) {
 	motionTransform->setPos(pos);
 }
 
-void ofxMotion::setMirrorMode(bool vertical, bool horizon) {
+void ofxMotion2D::setMirrorMode(bool vertical, bool horizon) {
 	image->mirror(vertical, horizon);
 }
 
-void ofxMotion::setAnchorMode(AnchorMode anchor) {
+void ofxMotion2D::setAnchorMode(AnchorMode anchor) {
 	this->anchor = anchor;
 }
 
-void ofxMotion::setImage(ofImage* image) {
+void ofxMotion2D::setImage(ofImage* image) {
 	this->image = image;
 }
 
-void ofxMotion::setDrawSubsection(float sx, float sy, float sw, float sh) {
+void ofxMotion2D::setDrawSubsection(float sx, float sy, float sw, float sh) {
 	drawSubsection.bState = true;
 	drawSubsection.x = sx;
 	drawSubsection.y = sy;
@@ -242,11 +242,11 @@ void ofxMotion::setDrawSubsection(float sx, float sy, float sw, float sh) {
 	motionTransform->setWidthHeight(sw, sh);
 }
 
-bool ofxMotion::insideRect(int x, int y) {
+bool ofxMotion2D::insideRect(int x, int y) {
 	return polyline.inside(x, y);
 }
 
-bool ofxMotion::insideCircle(int x, int y) {
+bool ofxMotion2D::insideCircle(int x, int y) {
 	if (!bStateInside) {
 		return false;
 	}
@@ -259,19 +259,19 @@ bool ofxMotion::insideCircle(int x, int y) {
 	return false;
 }
 
-bool ofxMotion::collision(glm::vec2 pos) {
+bool ofxMotion2D::collision(glm::vec2 pos) {
 	return polyline.inside(pos.x, pos.y);;
 }
 
-void ofxMotion::setStateInside(bool b) {
+void ofxMotion2D::setStateInside(bool b) {
 	bStateInside = b;
 }
 
-void ofxMotion::setStateDisplay(bool b) {
+void ofxMotion2D::setStateDisplay(bool b) {
 	bStateDisplay = b;
 }
 
-void ofxMotion::updateInterpolatedPoints() {
+void ofxMotion2D::updateInterpolatedPoints() {
 	polyline.clear();
 	for (int i = 0; i < POINT_MAX_SIZE; i++) {
 		PointLocation pointLocation = PointLocation(i);
@@ -293,11 +293,11 @@ void ofxMotion::updateInterpolatedPoints() {
 	}
 }
 
-void ofxMotion::setText(string text) {
+void ofxMotion2D::setText(string text) {
 	strText = text;
 }
 
-void ofxMotion::setPointsInterpolatedSize(int size) {
+void ofxMotion2D::setPointsInterpolatedSize(int size) {
 	int maxSize = size + (int)POINT_MAX_SIZE;
 	pointsInterpolated.assign(maxSize, glm::vec2(0, 0));
 }

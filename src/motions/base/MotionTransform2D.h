@@ -1,31 +1,10 @@
 #pragma once
 #include "ofMain.h"
 #include "ofxEasing.h"
+#include "MotionBase.h"
 
-class MotionTransformBase {
+class MotionTransform2D : public MotionBase {
 public:
-	enum MotionState {
-		IDLING = 0,
-		RUNNING = 1,
-		DONE = 2
-	};
-
-	struct MotionParameter {
-		float startTime;
-		float durationTime;
-		MotionState state = IDLING;
-		ofxeasing::function easing;
-	};
-
-	float timer(const float duration, const float currentTime, const float startTime, function<void()> const callback) {
-		float time = currentTime - startTime;
-		time = ofClamp(time, 0.0, duration);
-		if (time == duration) {
-			callback();
-		}
-		return time;
-	}
-
 	void setup(glm::vec2 pos, glm::vec2 posInitial, glm::vec2 scale, float width, float height, float widthInitial, float heightInitial, float degrees) {
 		this->pos = pos;
 		this->posInitial = posInitial;
@@ -37,8 +16,6 @@ public:
 		this->degrees = degreesStart = degrees;
 		if (degrees != 0.0f) this->bRotate = true;
 	}
-
-	//virtual void setup() {}
 
 	virtual void update(const float currentTime) {}
 
@@ -160,8 +137,6 @@ public:
 
 
 protected:
-	float currentTime = 0.0;
-
 	// translate parameter
 	glm::vec2 pos;
 	glm::vec2 posInitial;
@@ -183,7 +158,4 @@ protected:
 	float degreesStart;
 	float degreesEnd;
 	float anchorPosForRotation;
-
-	// for sub class.
-	MotionParameter parameter;
 };

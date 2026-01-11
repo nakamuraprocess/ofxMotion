@@ -1,7 +1,7 @@
 #pragma once
-#include "MotionTransformBase.h"
+#include "MotionTransform2D.h"
 
-class Rotate : public MotionTransformBase {
+class Rotate : public MotionTransform2D {
 public:
 	void update(const float currentTime) {
 		this->currentTime = currentTime;

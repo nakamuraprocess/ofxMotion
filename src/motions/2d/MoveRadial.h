@@ -1,7 +1,7 @@
 #pragma once
-#include "MotionTransformBase.h"
+#include "MotionTransform2D.h"
 
-class MoveRadial : public MotionTransformBase {
+class MoveRadial : public MotionTransform2D {
 private:
 	float radian;
 	glm::vec2 radius;

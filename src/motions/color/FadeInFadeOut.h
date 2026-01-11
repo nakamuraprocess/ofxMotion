@@ -1,7 +1,7 @@
 #pragma once
-#include "MotionColorBase.h"
+#include "MotionColor.h"
 
-class FadeInFadeOut : public MotionColorBase {
+class FadeInFadeOut : public MotionColor {
 private:
 	float durationFadeIn = 0.0f;
 	float durationChroma = 0.0f;

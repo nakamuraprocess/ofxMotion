@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxMotion.h"
+#include "ofxMotion2D.h"
 
 class ofApp : public ofBaseApp{
 
@@ -27,6 +27,6 @@ class ofApp : public ofBaseApp{
 		ofPixels pixels;
 		ofTexture texture;
 
-		ofxMotion motion[6];
+		ofxMotion2D motion[6];
 		float now, delta, fps;
 };
