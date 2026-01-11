@@ -113,8 +113,6 @@ public:
 private:
 	MotionTransformBase* motionTransform = nullptr;
 	MotionColorBase* motionColor = nullptr;
-	//MotionTransformBase::MotionState stateTransform;
-	//MotionColorBase::MotionState stateColor;
 	bool bStateDisplay = false;
 	bool bStateInside = true;
 	DrawMode drawMode;
