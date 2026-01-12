@@ -10,7 +10,7 @@ void ofApp::setup(){
 	ofSetCircleResolution(48);
 
 	for (int i = 0; i < 6; i++) {
-		motion[i].setMotionTransformPtr(new MoveLiner());
+		motion[i].setMotionTransformPtr(new OFX_MOTION_2D::MoveLiner());
 		motion[i].setMotionColorPtr(new DefaultColor());
 	}
 

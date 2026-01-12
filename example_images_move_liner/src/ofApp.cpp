@@ -30,7 +30,7 @@ void ofApp::setup(){
 	int groupLeft[9] = { 0, 1, 2, 3, 4, 5, 9, 10, 11 };
 
 	for (int i = 0; i < fishMaxSize; i++) {
-		motion[i].setMotionTransformPtr(new MoveLiner());
+		motion[i].setMotionTransformPtr(new OFX_MOTION_2D::MoveLiner());
 		motion[i].setMotionColorPtr(new DefaultColor());
 		motion[i].setup(ofxMotion2D::DrawMode::IMAGE, &imageFish[i], posFish[i], glm::vec2(1.0, 1.0), imageFish[i].getWidth(), imageFish[i].getHeight(), 0.0f, ofxMotion2D::AnchorMode::ANCHOR_CENTER, 0);
 		

@@ -8,7 +8,7 @@ void ofApp::setup(){
 	delta = 1.0f / fps;
 	ofBackground(255);
 
-	motion.setMotionTransformPtr(new MoveCurve());
+	motion.setMotionTransformPtr(new OFX_MOTION_2D::MoveCurve());
 	motion.setMotionColorPtr(new DefaultColor());
 	motion.setup(ofxMotion2D::DrawMode::CIRCLE, glm::vec2(500, 500), glm::vec2(1.0, 1.0), 4, 4, 0.0f, ofColor(19, 20, 192), ofxMotion2D::AnchorMode::ANCHOR_CENTER, 0, true);
 	posHistory.push_back(glm::vec2(500, 500));

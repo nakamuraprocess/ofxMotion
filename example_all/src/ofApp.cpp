@@ -10,45 +10,45 @@ void ofApp::setup(){
 	ofSetCircleResolution(48);
 
 	for (int i = 0; i < 6; i++) {
-		motionMoveLiner[i].setMotionTransformPtr(new MoveLiner());
+		motionMoveLiner[i].setMotionTransformPtr(new OFX_MOTION_2D::MoveLiner());
 		motionMoveLiner[i].setMotionColorPtr(new DefaultColor());
 		motionMoveLiner[i].setup(ofxMotion2D::DrawMode::RECT, glm::vec2(100, i * 50 + 50), glm::vec2(1.0, 1.0), 25, 25, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion2D::AnchorMode::ANCHOR_CENTER, 0, true);
 	}
 
 	for (int i = 0; i < 6; i++) {
-		motionMoveCurve[i].setMotionTransformPtr(new MoveCurve());
+		motionMoveCurve[i].setMotionTransformPtr(new OFX_MOTION_2D::MoveCurve());
 		motionMoveCurve[i].setMotionColorPtr(new DefaultColor());
 		motionMoveCurve[i].setup(ofxMotion2D::DrawMode::CIRCLE, glm::vec2(100, i * 50 + 50), glm::vec2(1.0, 1.0), 10, 10, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion2D::AnchorMode::ANCHOR_CENTER, 0, true);
 	}
 
-	motionColor.setMotionTransformPtr(new DefaultTransform());
+	motionColor.setMotionTransformPtr(new OFX_MOTION_2D::DefaultTransform());
 	motionColor.setMotionColorPtr(new ColorGradation());
 	motionColor.setup(ofxMotion2D::DrawMode::RECT, glm::vec2(560, 37), glm::vec2(1.0, 1.0), 15, 275, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion2D::AnchorMode::ANCHOR_TOP_LEFT, 0, true);
 
 	for (int i = 0; i < 5; i++) {
-		motionSignedNoise[i].setMotionTransformPtr(new SignWaveNoise());
+		motionSignedNoise[i].setMotionTransformPtr(new OFX_MOTION_2D::SignWaveNoise());
 		motionSignedNoise[i].setMotionColorPtr(new DefaultColor());
 		motionSignedNoise[i].setup(ofxMotion2D::DrawMode::RECT, glm::vec2(ofRandom(0, 5), ofRandom(0, 5)), glm::vec2(1.0, 1.0), 100, 10, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion2D::AnchorMode::ANCHOR_CENTER);
 		motionSignedNoise[i].getMotionTransform()->startSignWaveNoise(glm::vec2(275, 275), 0.425, glm::vec2(960, 200), 9999.0);
 	}
 
 	for (int i = 0; i < 3; i++) {
-		motionRotate[i].setMotionTransformPtr(new Rotate());
+		motionRotate[i].setMotionTransformPtr(new OFX_MOTION_2D::Rotate());
 		motionRotate[i].setMotionColorPtr(new DefaultColor());
 		motionRotate[i].setup(ofxMotion2D::DrawMode::RECT, glm::vec2(1550, 170), glm::vec2(1.0, 1.0), 250, 10, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion2D::AnchorMode::ANCHOR_CENTER, 0, true);
 	}
 
-	motionRotate[3].setMotionTransformPtr(new Rotate());
+	motionRotate[3].setMotionTransformPtr(new OFX_MOTION_2D::Rotate());
 	motionRotate[3].setMotionColorPtr(new DefaultColor());
 	motionRotate[3].setup(ofxMotion2D::DrawMode::TRIANGLE, glm::vec2(1550, 170), glm::vec2(1.0, 1.0), 30, 30, ofRandom(0.1, 180.0), ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion2D::AnchorMode::ANCHOR_TOP_LEFT, 0, true);
 
-	motionRotate[4].setMotionTransformPtr(new Rotate());
+	motionRotate[4].setMotionTransformPtr(new OFX_MOTION_2D::Rotate());
 	motionRotate[4].setMotionColorPtr(new DefaultColor());
 	motionRotate[4].setup(ofxMotion2D::DrawMode::TRIANGLE, glm::vec2(1550, 170), glm::vec2(1.0, 1.0), 22, 22, ofRandom(0.1, 180.0), ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion2D::AnchorMode::ANCHOR_TOP_LEFT, 0, true);
 
-	motionScale[0].setMotionTransformPtr(new Scale());
-	motionScale[1].setMotionTransformPtr(new Bounce());
-	motionScale[2].setMotionTransformPtr(new Bounce());
+	motionScale[0].setMotionTransformPtr(new OFX_MOTION_2D::Scale());
+	motionScale[1].setMotionTransformPtr(new OFX_MOTION_2D::Bounce());
+	motionScale[2].setMotionTransformPtr(new OFX_MOTION_2D::Bounce());
 	for (int i = 0; i < 3; i++) {
 		motionScale[i].setMotionColorPtr(new DefaultColor());
 	}
@@ -57,19 +57,19 @@ void ofApp::setup(){
 	motionScale[2].setup(ofxMotion2D::DrawMode::CIRCLE, glm::vec2(300, 600), glm::vec2(1.0, 1.0), 60, 30, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion2D::AnchorMode::ANCHOR_CENTER, 0, true);
 
 	for (int i = 0; i < 10; i++) {
-		motionMoveRadial[i].setMotionTransformPtr(new MoveRadial());
+		motionMoveRadial[i].setMotionTransformPtr(new OFX_MOTION_2D::MoveRadial());
 		motionMoveRadial[i].setMotionColorPtr(new DefaultColor());
 		motionMoveRadial[i].setup(ofxMotion2D::DrawMode::CIRCLE, glm::vec2(300, 600), glm::vec2(1.0, 1.0), 14, 14, 0.0f, ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)), ofxMotion2D::AnchorMode::ANCHOR_CENTER, 0, false);
 	}
 
 	image.load("image_fx_1.jpg");
-	motionImage.setMotionTransformPtr(new DefaultTransform());
+	motionImage.setMotionTransformPtr(new OFX_MOTION_2D::DefaultTransform());
 	motionImage.setMotionColorPtr(new FadeInFadeOut());
 	motionImage.setup(ofxMotion2D::DrawMode::IMAGE, &image, glm::vec2(960, 600), glm::vec2(1.0, 1.0), image.getWidth() * 0.3, image.getHeight() * 0.3, 0.0f, ofxMotion2D::AnchorMode::ANCHOR_CENTER);
 
 	font.load("NotoSansCJKjp-Regular.otf", 20);
 	for (int i = 0; i < 10; i++) {
-		motionText[i].setMotionTransformPtr(new MoveCircle());
+		motionText[i].setMotionTransformPtr(new OFX_MOTION_2D::MoveCircle());
 		motionText[i].setMotionColorPtr(new DefaultColor());
 		string text = ofToString(100001 + i);
 		motionText[i].setup(ofxMotion2D::DrawMode::TEXT, &font, text, glm::vec2(1550, 600), glm::vec2(1.0, 1.0), 0.0, ofColor(65, 56, 56, 200), ofxMotion2D::AnchorMode::ANCHOR_CENTER, 0, true);

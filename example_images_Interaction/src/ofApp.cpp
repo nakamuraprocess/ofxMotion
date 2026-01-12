@@ -31,21 +31,21 @@ void ofApp::setup() {
 		imageItems[i].load("image_fx_" + ofToString(i + 1) + ".jpg");
 		imagePanels[i] = imageItems[i];
 		imageItems[i].resize(imageItems[i].getWidth() * sizeInit[i], imageItems[i].getHeight() * sizeInit[i]);
-		motions[i].setMotionTransformPtr(new MoveCurve());
+		motions[i].setMotionTransformPtr(new OFX_MOTION_2D::MoveCurve());
 		motions[i].setMotionColorPtr(new DefaultColor());
 		motions[i].setup(ofxMotion2D::DrawMode::IMAGE, &imageItems[i], posInit[i], glm::vec2(1.0, 1.0), imageItems[i].getWidth(), imageItems[i].getHeight(), 0.0f, ofxMotion2D::AnchorMode::ANCHOR_CENTER, 0, true);
 	}
 
-	motionPanel.setMotionTransformPtr(new DefaultTransform());
+	motionPanel.setMotionTransformPtr(new OFX_MOTION_2D::DefaultTransform());
 	motionPanel.setMotionColorPtr(new FadeInFadeOut());
 	motionPanel.setup(ofxMotion2D::DrawMode::IMAGE, &imagePanels[0], glm::vec2(ofGetWidth() * 0.5, ofGetHeight() * 0.5), glm::vec2(1.0, 1.0), imagePanels[0].getWidth() * 0.8, imagePanels[0].getHeight() * 0.8, 0.0f, ofxMotion2D::AnchorMode::ANCHOR_CENTER, 0);
 
-	motionModal.setMotionTransformPtr(new DefaultTransform());
+	motionModal.setMotionTransformPtr(new OFX_MOTION_2D::DefaultTransform());
 	motionModal.setMotionColorPtr(new FadeInFadeOut());
 	motionModal.setup(ofxMotion2D::DrawMode::RECT, glm::vec2(0, 0), glm::vec2(1.0, 1.0), ofGetWidth(), ofGetHeight(), 0.0f, ofColor(0), ofxMotion2D::AnchorMode::ANCHOR_TOP_LEFT, 0);
 
 	imageClose.load("close.png");
-	motionClose.setMotionTransformPtr(new DefaultTransform());
+	motionClose.setMotionTransformPtr(new OFX_MOTION_2D::DefaultTransform());
 	motionClose.setMotionColorPtr(new FadeInFadeOut());
 	motionClose.setup(ofxMotion2D::DrawMode::IMAGE, &imageClose, glm::vec2(ofGetWidth() * 0.5 + 410, 130), glm::vec2(1.0, 1.0), imageClose.getWidth(), imageClose.getHeight(), 0.0f, ofxMotion2D::AnchorMode::ANCHOR_CENTER, 0);
 

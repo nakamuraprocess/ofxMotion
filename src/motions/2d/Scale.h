@@ -1,38 +1,40 @@
 #pragma once
 #include "MotionTransform2D.h"
 
-class Scale : public MotionTransform2D {
-public:
-	void update(const float currentTime) {
-		this->currentTime = currentTime;
-		if (parameter.state == RUNNING) {
-			float time = timer(parameter.durationTime, currentTime, parameter.startTime, [&]() {
-				parameter.state = DONE;
-				});
+namespace OFX_MOTION_2D {
+	class Scale : public MotionTransform2D {
+	public:
+		void update(const float currentTime) {
+			this->currentTime = currentTime;
+			if (parameter.state == RUNNING) {
+				float time = timer(parameter.durationTime, currentTime, parameter.startTime, [&]() {
+					parameter.state = DONE;
+					});
 
-			scale.x = ofxeasing::map_clamp(time, 0.0, parameter.durationTime, scaleStart.x, scaleEnd.x, parameter.easing);
-			scale.y = ofxeasing::map_clamp(time, 0.0, parameter.durationTime, scaleStart.y, scaleEnd.y, parameter.easing);
+				scale.x = ofxeasing::map_clamp(time, 0.0, parameter.durationTime, scaleStart.x, scaleEnd.x, parameter.easing);
+				scale.y = ofxeasing::map_clamp(time, 0.0, parameter.durationTime, scaleStart.y, scaleEnd.y, parameter.easing);
 
-			width = widthInitial * scale.x;
-			height = heightInitial * scale.y;
+				width = widthInitial * scale.x;
+				height = heightInitial * scale.y;
+			}
 		}
-	}
 
-	void startScale(glm::vec2 scaleEnd, float duration, float delay, ofxeasing::function easing) {
-		scaleStart = scale;
-		this->scaleEnd = scale + scaleEnd;
-		parameter.durationTime = duration;
-		parameter.startTime = currentTime + delay;
-		parameter.easing = easing;
-		parameter.state = RUNNING;
-	}
+		void startScale(glm::vec2 scaleEnd, float duration, float delay, ofxeasing::function easing) {
+			scaleStart = scale;
+			this->scaleEnd = scale + scaleEnd;
+			parameter.durationTime = duration;
+			parameter.startTime = currentTime + delay;
+			parameter.easing = easing;
+			parameter.state = RUNNING;
+		}
 
-	void startScale(glm::vec2 scaleStart, glm::vec2 scaleEnd, float duration, float delay, ofxeasing::function easing) {
-		this->scaleStart = scaleStart;
-		this->scaleEnd = scaleEnd;
-		parameter.durationTime = duration;
-		parameter.startTime = currentTime + delay;
-		parameter.easing = easing;
-		parameter.state = RUNNING;
-	}
-};
+		void startScale(glm::vec2 scaleStart, glm::vec2 scaleEnd, float duration, float delay, ofxeasing::function easing) {
+			this->scaleStart = scaleStart;
+			this->scaleEnd = scaleEnd;
+			parameter.durationTime = duration;
+			parameter.startTime = currentTime + delay;
+			parameter.easing = easing;
+			parameter.state = RUNNING;
+		}
+	};
+}
